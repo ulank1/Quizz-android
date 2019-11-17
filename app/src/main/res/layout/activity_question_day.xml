@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+    <LinearLayout
+        android:id="@+id/line_quiz"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_alignParentRight="true"
+            android:text="00:00"
+            android:id="@+id/time"
+            android:layout_gravity="center"
+            android:textColor="@color/colorPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:id="@+id/test_number"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+        <View
+            android:background="#888"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <WebView
+            android:id="@+id/question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/line_a"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="WebViewLayout">
+
+            <TextView
+                android:id="@+id/choose_a"
+                android:layout_gravity="center"
+                android:background="@drawable/gray_stroke_1dp_circle"
+                android:gravity="center"
+                android:text="A"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+
+            <WebView
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:id="@+id/a"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/line_b"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="WebViewLayout">
+
+            <TextView
+                android:id="@+id/choose_b"
+                android:background="@drawable/gray_stroke_1dp_circle"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Б"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+
+            <WebView
+                android:layout_marginStart="5dp"
+                android:layout_gravity="center"
+                android:id="@+id/b"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/line_c"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/choose_c"
+                android:background="@drawable/gray_stroke_1dp_circle"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:text="В"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+
+            <WebView
+                android:layout_marginStart="5dp"
+                android:id="@+id/c"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="WebViewLayout" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/line_d"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/choose_d"
+                android:background="@drawable/gray_stroke_1dp_circle"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Г"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+
+            <WebView
+                android:layout_marginStart="5dp"
+                android:layout_gravity="center"
+                android:id="@+id/d"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="WebViewLayout" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/line_e"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/choose_e"
+                android:background="@drawable/gray_stroke_1dp_circle"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Д"
+                android:layout_width="40dp"
+                android:layout_height="40dp"/>
+
+
+            <WebView
+                android:layout_marginStart="5dp"
+                android:id="@+id/e"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="WebViewLayout" />
+
+
+        </LinearLayout>
+
+
+
+        <Button
+
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/blue_5dp"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:text="Далее"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_below="@+id/app_bar"
+        android:visibility="gone"
+        android:id="@+id/line_result"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fff"
+        android:orientation="vertical">
+        <android.support.v7.widget.RecyclerView
+            android:layout_gravity="center"
+            android:id="@+id/rv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/result"
+            android:textColor="#000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="30"
+            android:textColor="#00C2B2"
+            android:textSize="32dp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/blue_5dp"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp"
+            android:text="@string/dalee"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:id="@+id/line_no_one"
+        android:background="#DCDCDC"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_margin="15dp"
+            android:id="@+id/quote"
+            android:layout_centerInParent="true"
+            android:textColor="#000"
+            android:textSize="19sp"
+            android:text="Задач нет"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+</RelativeLayout>

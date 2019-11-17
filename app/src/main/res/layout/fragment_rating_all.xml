@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground"
+    tools:context=".ui.main.game.GameFragment">
+
+    <LinearLayout
+        android:id="@+id/first"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/silver_medal"
+                android:layout_gravity="center"
+                android:id="@+id/image2"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+
+            <TextView
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="#686968"
+                android:id="@+id/name2"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/image2"
+                android:text="...." />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/gold_medal"
+                android:layout_gravity="center"
+                android:id="@+id/image1"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+
+            <TextView
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="#FF9800"
+                android:id="@+id/name1"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/image2"
+                android:text="...." />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/bronze_medal"
+                android:layout_gravity="center"
+                android:id="@+id/image3"
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
+
+            <TextView
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:textColor="#6B2020"
+                android:id="@+id/name3"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/image2"
+                android:text="...." />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <View
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/first"
+        android:background="#888"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="70dp"
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/first" />
+
+    <RelativeLayout
+        android:elevation="3dp"
+        android:background="@drawable/shadow"
+        android:id="@+id/line1"
+        android:layout_marginTop="2dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="68dp">
+        <TextView
+            android:textSize="19sp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:layout_marginStart="10dp"
+            android:text="1"
+            android:layout_width="wrap_content"
+            android:id="@+id/rating"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:textStyle="bold"
+            android:layout_toStartOf="@+id/point"
+            android:layout_marginStart="15dp"
+            android:layout_toEndOf="@+id/rating"
+            android:id="@+id/name"
+            android:layout_centerVertical="true"
+            android:textSize="19sp"
+            android:textColor="#000"
+            android:text="test 1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#23681F"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp"
+            android:layout_alignParentEnd="true"
+            android:text="123"
+            android:id="@+id/point"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+
+    <View
+        android:visibility="gone"
+        android:layout_above="@+id/line1"
+        android:background="#888"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+</RelativeLayout>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+
+        android:id="@+id/first_bottom_nav"
+        android:icon="@drawable/ic_profile_24dp"
+        android:title="@string/menu_profile"/>
+    <item
+        android:id="@+id/second_bottom_nav"
+        android:icon="@drawable/ic_swords"
+        android:title="@string/games"/>
+    <item
+        android:id="@+id/third"
+        android:icon="@drawable/ic_zadacha_dnya"
+        android:title="@string/day_quiz"/>
+    <item
+        android:id="@+id/forth"
+        android:icon="@drawable/ic_rating"
+        android:title="Рейтинг"/>
+</menu>

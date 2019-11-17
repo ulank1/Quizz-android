@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimaryDark">#B23121</color>
+    <color name="colorPrimaryDarkTransparent">#33B23121</color>
+    <color name="colorPrimary">#B92322</color>
+    <color name="colorStatusBar">#B92322</color>
+    <color name="colorAppBar">#D44638</color>
+    <color name="colorBackground">#DCDCDC</color>
+    <color name="colorBackgroundLayout">#FFFFFF</color>
+    <color name="colorYellow">#E9FF2B</color>
+    <color name="colorTextGrey">#424242</color>
+    <color name="colorTextWhite">#FFFFFF</color>
+    <color name="colorSplashScreen">#B23121</color>
+    <color name="colorRed">#E0004D</color>
+    <color name="colorGreen">#D44638</color>
+    <color name="colorTextInButton">#37003C</color>
+    <color name="colorPurpleForButton">#531E59</color>
+    <color name="green">#02BBBB</color>
+    <color name="white">#FFFFFF</color>
+    <color name="colorAccent">#03A9F4</color>
+</resources>

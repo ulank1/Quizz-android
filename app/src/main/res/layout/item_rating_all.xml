@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:padding="5dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_centerVertical="true"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:layout_marginStart="10dp"
+        android:text="1"
+        android:layout_width="wrap_content"
+        android:id="@+id/rating"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_toStartOf="@+id/point"
+        android:layout_marginStart="15dp"
+        android:layout_toEndOf="@+id/rating"
+        android:id="@+id/name"
+        android:layout_centerVertical="true"
+        android:textSize="17sp"
+        android:textColor="#000"
+        android:text="test 1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:textColor="#23681F"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="15dp"
+        android:layout_alignParentEnd="true"
+        android:text="123"
+        android:id="@+id/point"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:layout_marginTop="7dp"
+        android:background="#777"
+        android:layout_below="@+id/rating"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+</RelativeLayout>

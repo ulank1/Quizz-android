@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.about_us.AboutUsActivity">
+
+
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_margin="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:src="@drawable/logo"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"/>
+        <TextView
+            android:layout_marginTop="20dp"
+            android:text="Synak time –это социальный проект.\n\n
+
+Цель Synak time – оказание помощи для успешной сдачи ОРТ и поступлении в лучшие Высшие учебные заведения.\n\n
+
+Вы поддержите наш проект, просматривая рекламу, и обогатите наш контент, присылая свои вопросы. Благодарим Вас за понимание!\n\n
+
+При разработке разделов «Подготовка к ОРТ» и «Инфо» были использованы данные с сайта http://testing.kg/kg/ , «Университеты» - с сайта Министерства образовании и науки КР http://www.university.edu.gov.kg/. "
+            android:textSize="16sp"
+            android:textColor="#000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <Button
+            android:id="@+id/rate_us"
+            android:layout_marginTop="30dp"
+            android:textAllCaps="false"
+            android:text="Оцените Нас"
+            android:textColor="@color/white"
+            android:textSize="21sp"
+            android:background="@drawable/blue_5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:textSize="16sp"
+            android:textColor="#2E5E05"
+            android:layout_marginTop="15dp"
+            android:text="Подписывайтесь на наши соц. страницы:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+
+        <LinearLayout
+            android:layout_marginBottom="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_weight="1"
+                android:id="@+id/btn_send_facebook"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_ads_facebook"
+                android:text="@string/btn_send"
+                android:textColor="@color/white" />
+
+            <ImageView
+                android:layout_weight="1"
+                android:id="@+id/btn_send_instagram"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_ads_instagram"
+                android:text="@string/btn_send"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="35dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:padding="5dp"
+                android:layout_weight="1"
+                android:id="@+id/btn_send"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/gmail"
+                android:text="@string/btn_send"
+                android:textColor="@color/white" />
+
+            <ImageView
+                android:layout_weight="1"
+                android:id="@+id/btn_send_facebook"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_ads_facebook"
+                android:text="@string/btn_send"
+                android:textColor="@color/white" />
+
+            <ImageView
+                android:layout_weight="1"
+                android:id="@+id/btn_send_instagram"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="15dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_ads_instagram"
+                android:text="@string/btn_send"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:textColor="#000"
+            android:textSize="17sp"
+            android:layout_marginTop="20dp"
+            android:text="В случае выявления каких-либо ошибок в вопросах и ответах, просим Вас сообщить нам, указывая категорию, вариант и номер вопроса. Пример:  Основной тест, Математика 1 часть, 1-вариант, 5й вопрос.\n\n
+
+Вы также можете поддержать и внести свой вклад в развитие нашего социального проекта. Присылайте интересные вопросы с ответами, и после тщательной проверки, мы обязательно опубликуем их, подписав их вашим никнеймом. \n\n
+
+Мы глубоко ценим ваше мнение о нашем проекте. Вы можете оставить отзыв при выявлении каких-либо неполадок и недоработок в приложении.  "
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+</ScrollView>

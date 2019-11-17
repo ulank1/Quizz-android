@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <FrameLayout
+            android:id="@+id/toolbar_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:title="Example" />
+
+            <com.ferfalk.simplesearchview.SimpleSearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary" />
+        </FrameLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <EditText
+        android:inputType="text"
+        android:paddingEnd="5dp"
+        android:layout_margin="5dp"
+        android:drawableEnd="@drawable/ic_search_black_24dp"
+        android:id="@+id/search"
+        android:layout_below="@+id/appbar"
+        android:background="@drawable/black_stroke_1dp_circle"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_below="@+id/search"
+        android:layout_margin="10dp"
+        android:layout_above="@+id/share"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <Button
+        android:text="Пригласить друзей"
+        android:textColor="@color/white"
+        android:layout_margin="5dp"
+        android:layout_above="@+id/random"
+        android:id="@+id/share"
+        android:background="@drawable/blue_5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:text="Случайный"
+        android:textColor="@color/white"
+        android:layout_margin="5dp"
+        android:id="@+id/random"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/blue_5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>
