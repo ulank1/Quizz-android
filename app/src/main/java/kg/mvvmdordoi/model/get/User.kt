@@ -11,5 +11,6 @@ data class User (
 	@SerializedName("birth_date") val birth_date : String,
 	@SerializedName("place") val place : String,
 	@SerializedName("password") val password : String,
-	@SerializedName("avatar") val avatar : String
+	@SerializedName("avatar") val avatar : String,
+	@SerializedName("is_notification") val is_notification : Boolean
 )

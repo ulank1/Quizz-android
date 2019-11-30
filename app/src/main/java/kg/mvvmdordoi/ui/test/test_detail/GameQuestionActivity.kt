@@ -27,6 +27,7 @@ import kg.mvvmdordoi.network.UserToken
 import kg.mvvmdordoi.ui.game.users.Shared
 import kg.mvvmdordoi.utils.URL1
 import kg.mvvmdordoi.utils.extension.toast
+import kotlinx.android.synthetic.main.activity_question.*
 import kotlinx.android.synthetic.main.activity_question_owner.*
 import kotlinx.android.synthetic.main.activity_question_owner.a
 import kotlinx.android.synthetic.main.activity_question_owner.b
@@ -160,7 +161,7 @@ class GameQuestionActivity : AppCompatActivity(), NumerationListener, View.OnCli
         if (line_preview.visibility == View.VISIBLE){
             finish()
         }else{
-            toast("Вы не можете выйти пока не закончите дуэль")
+            toast(getString(R.string.cant_finish))
         }
 
     }
@@ -325,9 +326,9 @@ class GameQuestionActivity : AppCompatActivity(), NumerationListener, View.OnCli
 
 
         if (currentPosition == quizzes.size - 1) {
-            next.text = "Завершить"
+            next.text = getString(R.string.comlete)
         } else {
-            next.text = "Далее"
+            next.text = getString(R.string.dalee)
         }
         test_number.text = "Вопрос: ${currentPosition + 1}/${quizzes.size}"
         choose_a.setBackgroundResource(R.drawable.gray_stroke_1dp_circle)
@@ -341,6 +342,9 @@ class GameQuestionActivity : AppCompatActivity(), NumerationListener, View.OnCli
 
         if (quiz.answer_e.isNullOrEmpty()) {
             line_e.gone()
+        }
+        if (quiz.answer_d.isNullOrEmpty()){
+            line_d.gone()
         }
         question.settings.javaScriptEnabled = true
 

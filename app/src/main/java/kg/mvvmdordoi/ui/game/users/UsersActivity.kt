@@ -45,7 +45,7 @@ class UsersActivity : AppCompatActivity(),TextWatcher {
         setSupportActionBar(toolbar)
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.title = "Выберите игрока"
+        supportActionBar!!.title = getString(R.string.choose_user)
 
 
 

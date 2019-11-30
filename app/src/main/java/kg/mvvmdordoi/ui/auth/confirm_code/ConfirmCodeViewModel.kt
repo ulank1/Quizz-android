@@ -17,6 +17,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kg.mvvmdordoi.App
 import kg.mvvmdordoi.App.Companion.activity
+import kg.mvvmdordoi.R
 import kg.mvvmdordoi.base.BaseViewModel
 import kg.mvvmdordoi.network.PostApi
 import kg.mvvmdordoi.ui.auth.confirm_code.new_password.NewPasswordActivity
@@ -52,7 +53,7 @@ class ConfirmCodeViewModel : BaseViewModel() {
 
             Log.e(TAG, "onVerificationFailed", e)
             if (e is FirebaseAuthInvalidCredentialsException) {
-                activity?.toast("Формат телефонного номера введен неправильно.")
+                activity?.toast(activity!!.getString(R.string.phone_incorrect))
             } else if (e is FirebaseTooManyRequestsException) {
 
             }
@@ -140,7 +141,7 @@ class ConfirmCodeViewModel : BaseViewModel() {
         if (code.isNotEmpty()) {
             verifyPhoneNumberWithCode(code)
         } else {
-            activity?.toast("Наберите Код")
+            activity?.toast(activity!!.getString(R.string.enter_code))
         }
     }
 

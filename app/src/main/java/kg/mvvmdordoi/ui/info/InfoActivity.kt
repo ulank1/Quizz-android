@@ -23,7 +23,7 @@ class InfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.title = "Инфо"
+        supportActionBar!!.title = getString(R.string.info)
         App.activity = this
 
         var it = intent.getSerializableExtra("info") as Info

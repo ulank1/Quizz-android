@@ -8,11 +8,13 @@ import kotlinx.android.synthetic.main.activity_settings.*
 import android.R.string
 import android.app.Activity
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.content.res.Configuration
 import android.view.MenuItem
 import kg.mvvmdordoi.ui.notification.NotificationViewModel
 import java.util.*
 import kg.mvvmdordoi.injection.ViewModelFactory
+import kg.mvvmdordoi.ui.auth.redactorProfile.RedactorProfileActivity
 
 
 class SettingsActivity : AppCompatActivity() {
@@ -23,7 +25,7 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_settings)
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.title = "Настройки"
+        supportActionBar!!.title = getString(R.string.setttings)
         val lang = Lang.get(this)
         viewModel = ViewModelProviders.of(this, ViewModelFactory()).get(NotificationViewModel::class.java)
 
@@ -56,17 +58,23 @@ class SettingsActivity : AppCompatActivity() {
 
             }
 
+            viewModel.putNot(switch_notification.isChecked)
             setResult(Activity.RESULT_OK)
             finish()
+
 
         }
 
         viewModel.getUser()
         viewModel.user.observe(this,android.arch.lifecycle.Observer {
 
-
+            if (it != null) {
+                switch_notification.isChecked = it.is_notification
+            }
 
         })
+
+        btn_edit_profile.setOnClickListener { startActivity(Intent(this,RedactorProfileActivity::class.java)) }
 
     }
 

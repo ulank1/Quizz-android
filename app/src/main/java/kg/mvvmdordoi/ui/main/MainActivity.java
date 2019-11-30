@@ -47,7 +47,9 @@ import kg.mvvmdordoi.ui.main.rating_all.RatingFragment;
 import kg.mvvmdordoi.ui.main.send_message.SendMessageActivity;
 import kg.mvvmdordoi.ui.notification.NotificationActivity;
 import kg.mvvmdordoi.ui.settings.SettingsActivity;
+import kg.mvvmdordoi.ui.test.EmpActivity;
 import kg.mvvmdordoi.ui.test.TestActivity;
+import kg.mvvmdordoi.ui.test.TestAddActivity;
 import kg.mvvmdordoi.ui.university.UniversityListActivity;
 
 public class MainActivity extends AppCompatActivity
@@ -64,7 +66,7 @@ public class MainActivity extends AppCompatActivity
     ArrayList<Category> category = new ArrayList<>();
     TextView notCount;
     ImageView notImage;
-
+    BottomNavigationView bottomNavView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +96,7 @@ public class MainActivity extends AppCompatActivity
         notImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, NotificationActivity.class));
+                startActivityForResult(new Intent(MainActivity.this, NotificationActivity.class),406);
             }
         });
 
@@ -108,7 +110,6 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
-
 
         viewModel.getCategory().observe(this, new Observer<List<Category>>() {
             @Override
@@ -130,10 +131,13 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        BottomNavigationView bottomNavView = findViewById(R.id.bottom_navigation);
+        bottomNavView = findViewById(R.id.bottom_navigation);
         bottomNavView.setOnNavigationItemSelectedListener(navListener);
 
         showProfile();
+        if (getIntent().getBooleanExtra("is_duel",false)){
+            bottomNavView.setSelectedItemId(R.id.second_bottom_nav);
+        }
 
         // get the listview
         expListView = (ExpandableListView) findViewById(R.id.lvExp);
@@ -214,7 +218,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     private void setExpandable() {
-
+        Log.e("GANDON","GANDON"+category);
         int last_id = 1;
         ArrayList<Category> currentCategory = new ArrayList<>();
         listDataChild = new HashMap<String, List<Category>>();
@@ -234,20 +238,20 @@ public class MainActivity extends AppCompatActivity
                     listDataChild.put(getHeader(last_id), getListChild(currentCategory));
                     Log.e("DDDSSAD",currentCategory.toString());
                     currentCategory.clear();
-                    last_id = category.get(i).getId();
+                    last_id = category.get(i).getMain_category();
                 } else {
 
                     currentCategory.add(new Category(last_id, "Инфо", "", last_id,null,null));
                     listDataChild.put(getHeader(last_id), getListChild(currentCategory));
                     currentCategory.clear();
 
-                    last_id = category.get(i).getId();
+                    last_id = category.get(i).getMain_category();
                     currentCategory.add(category.get(i));
                     currentCategory.add(new Category(last_id, "Инфо", "", last_id,null,null));
                     listDataChild.put(getHeader(last_id), getListChild(currentCategory));
                 }
             }else {
-
+                Log.e("asdasd",last_id+" "+category.get(i).getMain_category());
                 if (last_id == category.get(i).getMain_category()) {
 
                     currentCategory.add(category.get(i));
@@ -256,6 +260,9 @@ public class MainActivity extends AppCompatActivity
                     currentCategory.add(new Category(last_id, "Инфо", "", last_id,null,null));
                     listDataChild.put(getHeader(last_id), getListChild(currentCategory));
                     currentCategory.clear();
+
+                    Log.e("dsfsdfdssfd",listDataChild.get(getHeader(last_id)).toString());
+
                     last_id = category.get(i).getMain_category();
                     currentCategory.add(category.get(i));
                 }
@@ -270,8 +277,8 @@ public class MainActivity extends AppCompatActivity
         mainCategory.add(new Category(-1,getString(R.string.univer),"",-1,null,R.drawable.university));
         mainCategory.add(new Category(-1,getString(R.string.ort),"",-1,null,R.drawable.podgotovka));
         mainCategory.add(new Category(-1,getString(R.string.news),"",-1,null,R.drawable.news));
-        mainCategory.add(new Category(-1,"Напишите нам","",-1,null,R.drawable.napishite_nam));
-        mainCategory.add(new Category(-1,"О нас","",-1,null,R.drawable.o_nas));
+        mainCategory.add(new Category(-1,getString(R.string.send_message),"",-1,null,R.drawable.napishite_nam));
+        mainCategory.add(new Category(-1,getString(R.string.about_us),"",-1,null,R.drawable.o_nas));
         Log.e("STrasd",mainCategory+" "+listDataChild);
         listAdapter = new CustomExpandableListAdapter(this, mainCategory, listDataChild);
         expListView.setAdapter(listAdapter);
@@ -343,10 +350,11 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_logOut) {
-            Intent intent = new Intent(this, SplashScreen.class);
+          /*  Intent intent = new Intent(this, SplashScreen.class);
             startActivity(intent);
             UserToken.INSTANCE.clearToken(this);
-            finish();
+            finish();*/
+          startActivity(new Intent(this, EmpActivity.class));
         }else if (id == R.id.action_lang){
           //  Toast.makeText(this, "Язык", Toast.LENGTH_SHORT).show();
             startActivityForResult(new Intent(MainActivity.this, SettingsActivity.class),407);
@@ -371,6 +379,8 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
             finish();
 
+        }else if (RESULT_OK==resultCode&&requestCode==406){
+            bottomNavView.setSelectedItemId(R.id.second_bottom_nav);
         }
 
     }

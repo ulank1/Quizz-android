@@ -25,7 +25,7 @@ class InfoListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_users)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.title = "Инфо"
+        supportActionBar!!.title = getString(R.string.info)
         App.activity = this
 
         setupRv()

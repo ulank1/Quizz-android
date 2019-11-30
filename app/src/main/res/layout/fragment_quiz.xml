@@ -68,7 +68,7 @@
             android:id="@+id/next"
             android:background="#02BBBB"
             android:textColor="@color/white"
-            android:text="Далее"
+            android:text="@string/dalee"
             android:paddingStart="30dp"
             android:paddingEnd="30dp"
             android:layout_marginTop="20dp"

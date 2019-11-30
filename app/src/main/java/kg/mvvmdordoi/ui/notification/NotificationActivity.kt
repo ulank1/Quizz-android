@@ -25,7 +25,7 @@ class NotificationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_users)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.title = "Уведомления"
+        supportActionBar!!.title = getString(R.string.notification)
         App.activity = this
         viewModel = ViewModelProviders.of(this, ViewModelFactory()).get(NotificationViewModel::class.java)
         setupRv()

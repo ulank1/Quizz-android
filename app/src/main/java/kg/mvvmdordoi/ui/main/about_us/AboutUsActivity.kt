@@ -73,7 +73,7 @@ class AboutUsActivity : AppCompatActivity() {
                 )
             }
         } else {
-            this.toast("Нет инстаграмма")
+            this.toast(getString(R.string.no_instagram))
         }
     }
 }

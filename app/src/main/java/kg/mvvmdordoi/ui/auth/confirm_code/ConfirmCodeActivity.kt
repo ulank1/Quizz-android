@@ -16,7 +16,7 @@ class ConfirmCodeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        supportActionBar!!.title = "Подтверждение кода"
+        supportActionBar!!.title = getString(R.string.confirm_code)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         setContentView(R.layout.activity_confirm_code)
 

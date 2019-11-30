@@ -41,8 +41,8 @@ class LoginActivity : AppCompatActivity() {
             Log.e("Boolean",it.toString())
             if (it != null) {
                 when {
-                    it.isEmpty() -> login.error = "Такого аккаунта не существует"
-                    it[0].password.trim()!=password.text.toString().trim() -> password.error = "Пароль неверный"
+                    it.isEmpty() -> login.error = getString(R.string.accont_not_exist)
+                    it[0].password.trim()!=password.text.toString().trim() -> password.error = getString(R.string.no_password)
                     else -> {
                         UserToken.saveToken(it[0].id.toString(), this)
                         viewModel.postDevice(it[0].id)
@@ -70,12 +70,12 @@ class LoginActivity : AppCompatActivity() {
 
         if (login.text.toString().length < 5) {
             boolean = false
-            login.error = "Номер введен неверно"
+            login.error = getString(R.string.phone_incorrect)
         }
 
         if (password.text.toString().isEmpty()) {
             boolean = false
-            password.error = "Пароль не может быть пустым"
+            password.error = getString(R.string.empty_password)
         }
 
         return boolean

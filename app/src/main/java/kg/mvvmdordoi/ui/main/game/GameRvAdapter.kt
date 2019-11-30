@@ -76,9 +76,9 @@ class GameRvAdapter(val context: Context) : RecyclerView.Adapter<GameRvAdapter.A
                     text.visible()
                     startButton.invisible()
                     if (is_owner) {
-                        text.text = "Вы выиграли!"
+                        text.text = context.getString(R.string.you_win)
                     }else{
-                        text.text = "Вы проиграли!"
+                        text.text = context.getString(R.string.you_lose)
                     }
                 } else if(point_owner<point_outer) {
                     winnerOuter.visible()
@@ -86,14 +86,14 @@ class GameRvAdapter(val context: Context) : RecyclerView.Adapter<GameRvAdapter.A
                     text.visible()
                     startButton.invisible()
                     if (!is_owner) {
-                        text.text = "Вы выиграли!"
+                        text.text = context.getString(R.string.you_win)
                     }else{
-                        text.text = "Вы проиграли!"
+                        text.text = context.getString(R.string.you_lose)
                     }
                 }else{
                     winnerOwner.gone()
                     winnerOuter.gone()
-                    text.text = "Ничья!"
+                    text.text = context.getString(R.string.draw)
                     text.visible()
                     startButton.invisible()
                 }
@@ -101,7 +101,7 @@ class GameRvAdapter(val context: Context) : RecyclerView.Adapter<GameRvAdapter.A
 
             else if (point_outer == -1) {
                 if (is_owner) {
-                    text.text = "Ожидание соперника ..."
+                    text.text = context.getString(R.string.waiting_opponent)
                     winnerOwner.gone()
                     winnerOuter.gone()
                     text.visible()
@@ -121,7 +121,7 @@ class GameRvAdapter(val context: Context) : RecyclerView.Adapter<GameRvAdapter.A
                     startButton.visible()
                     text.gone()
                 } else {
-                    text.text = "Ожидание соперника ..."
+                    text.text = context.getString(R.string.waiting_opponent)
                     winnerOwner.gone()
                     winnerOuter.gone()
                     text.visible()

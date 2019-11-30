@@ -87,7 +87,7 @@ class SendMessageActivity : AppCompatActivity() {
                 )
             }
         } else {
-            this.toast("Нет инстаграмма")
+            this.toast(getString(R.string.no_instagram))
         }
     }
 

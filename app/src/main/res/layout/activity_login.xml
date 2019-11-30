@@ -44,7 +44,7 @@
     <TextView
         android:gravity="center"
         android:id="@+id/forgot_password"
-        android:text="Забыли пароль?"
+        android:text="@string/forgot_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 </LinearLayout>

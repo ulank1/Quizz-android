@@ -75,7 +75,7 @@ class RegisterActivity : ImagePickerHelper(),DatePickerDialog.OnDateSetListener 
                 if (it) {
                     register()
                 }else{
-                    toast("Такой пользователь уже зарегистрирован")
+                    toast(getString(R.string.account_registered))
                 }
             }
         })
@@ -126,22 +126,22 @@ class RegisterActivity : ImagePickerHelper(),DatePickerDialog.OnDateSetListener 
 
         if (login.text.toString().length < 10) {
             boolean = false
-            login.error = "Номер введен неверно"
+            login.error = getString(R.string.phone_incorrect)
         }
 
         if (password.text.toString().isEmpty()) {
             boolean = false
-            password.error = "Пароль не может быть пустым"
+            password.error = getString(R.string.empty_password)
         }
 
         if (password.text.toString() != repeat_password.text.toString()) {
             boolean = false
-            repeat_password.error = "Пароли не совпадают"
+            repeat_password.error = getString(R.string.no_password)
         }
 
         if (birth_date.text.toString().isEmpty()){
             boolean = false
-            birth_date.error = "Выберите дату рождения"
+            birth_date.error = getString(R.string.date_incorrect)
         }
 
         return boolean

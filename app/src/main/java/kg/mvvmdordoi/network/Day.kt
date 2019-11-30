@@ -24,6 +24,7 @@ object Day{
 
     fun get(context: Context): String? {
         mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+        Log.e("DATEEEE",mSettings!!.getString(TOKEN, "0"))
         return mSettings!!.getString(TOKEN, "0")
     }
 

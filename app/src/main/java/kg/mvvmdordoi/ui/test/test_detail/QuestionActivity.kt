@@ -30,8 +30,10 @@ import kotlinx.android.synthetic.main.activity_question.question
 import android.os.CountDownTimer
 import android.util.Log
 import android.widget.Toast
+import com.google.android.gms.ads.MobileAds
 import kg.mvvmdordoi.utils.URL1
 import kg.mvvmdordoi.utils.extension.toast
+import kotlinx.android.synthetic.main.activity_question.back
 import kotlinx.android.synthetic.main.activity_question.choose_a
 import kotlinx.android.synthetic.main.activity_question.choose_b
 import kotlinx.android.synthetic.main.activity_question.choose_c
@@ -49,6 +51,8 @@ import kotlinx.android.synthetic.main.activity_question.result
 import kotlinx.android.synthetic.main.activity_question.rv
 import kotlinx.android.synthetic.main.activity_question.test_number
 import kotlinx.android.synthetic.main.activity_question.time
+import kotlinx.android.synthetic.main.activity_question.toolbar
+import kotlinx.android.synthetic.main.activity_question_owner.*
 
 
 class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickListener {
@@ -67,7 +71,6 @@ class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickLi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_question)
-
         setSupportActionBar(toolbar)
         back.setOnClickListener {
             if (line_result.visibility == View.VISIBLE) {
@@ -85,6 +88,7 @@ class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickLi
             ViewModelProviders.of(this, ViewModelFactory()).get(QuestionViewModel::class.java)
 
         setupRv()
+        setEditWeb()
 
         viewModel.tests.observe(this, Observer {
             getTime(it as ArrayList<Quiz>)
@@ -149,6 +153,33 @@ class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickLi
             }
         }
         cT.start()
+    }
+
+    fun setEditWeb(){
+        a.setOnTouchListener { v, event ->
+            Log.e("sadsa","dssdsd")
+            return@setOnTouchListener true
+        }
+        b.setOnTouchListener { v, event ->
+            Log.e("sadsa","dssdsd")
+            return@setOnTouchListener true
+        }
+        c.setOnTouchListener { v, event ->
+            Log.e("sadsa","dssdsd")
+            return@setOnTouchListener true
+        }
+        d.setOnTouchListener { v, event ->
+            Log.e("sadsa","dssdsd")
+            return@setOnTouchListener true
+        }
+        e.setOnTouchListener { v, event ->
+            Log.e("sadsa","dssdsd")
+            return@setOnTouchListener true
+        }
+        question.setOnTouchListener { v, event ->
+            Log.e("sadsa","dssdsd")
+            return@setOnTouchListener true
+        }
     }
 
     override fun onClick(v: View?) {
@@ -244,7 +275,7 @@ class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickLi
             }
         }
 
-        true_quiz.text = "Правильно: $trues/${quizzes.size}"
+        true_quiz.text = getString(R.string.truesd) + trues + "/" + quizzes.size
 
         var percent: Double = ((trues.toDouble() / quizzes.size.toDouble()).toDouble())
 
@@ -252,16 +283,16 @@ class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickLi
 
         if (percent > 80) {
             image_status.setImageResource(R.drawable.happy)
-            text_status.text = "Отлично!"
+            text_status.text = getString(R.string.excelent)
         } else if (percent > 60) {
             image_status.setImageResource(R.drawable.wink)
-            text_status.text = "Хорошо!"
+            text_status.text = getString(R.string.good)
         } else if (percent > 40) {
             image_status.setImageResource(R.drawable.sad)
-            text_status.text = "Удовлетворительно!"
+            text_status.text = getString(R.string.not_bad)
         } else {
             image_status.setImageResource(R.drawable.crying)
-            text_status.text = "Плохо!"
+            text_status.text = getString(R.string.bad)
         }
 
 
@@ -278,13 +309,13 @@ class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickLi
     @SuppressLint("SetJavaScriptEnabled", "SetTextI18n")
     private fun setQuestion() {
 
-
         if (currentPosition == quizzes.size - 1) {
-            next.text = "Далее"
+            next.text = getString(R.string.comlete)
         } else {
-            next.text = "Далее"
+            next.text = getString(R.string.dalee)
         }
-        test_number.text = "Вопрос: ${currentPosition + 1}/${quizzes.size}"
+
+        test_number.text = getString(R.string.question)  + (currentPosition + 1) + "/" + quizzes.size
         choose_a.setBackgroundResource(R.drawable.gray_stroke_1dp_circle)
         choose_b.setBackgroundResource(R.drawable.gray_stroke_1dp_circle)
         choose_c.setBackgroundResource(R.drawable.gray_stroke_1dp_circle)
@@ -296,6 +327,9 @@ class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickLi
 
         if (quiz.answer_e.isNullOrEmpty()) {
             line_e.gone()
+        }
+        if (quiz.answer_d.isNullOrEmpty()){
+            line_d.gone()
         }
         question.settings.javaScriptEnabled = true
 

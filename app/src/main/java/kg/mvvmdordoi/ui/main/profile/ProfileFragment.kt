@@ -30,8 +30,6 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import kg.mvvmdordoi.App
 
-import java.util.ArrayList
-
 import kg.mvvmdordoi.R
 import kg.mvvmdordoi.injection.ViewModelFactory
 import kg.mvvmdordoi.model.get.GameOuter
@@ -53,6 +51,7 @@ import lecho.lib.hellocharts.model.Line
 import lecho.lib.hellocharts.model.LineChartData
 import lecho.lib.hellocharts.model.PointValue
 import lecho.lib.hellocharts.view.LineChartView
+import java.util.*
 import kotlin.math.max
 import kotlin.math.min
 
@@ -160,7 +159,8 @@ class ProfileFragment : Fragment() {
     @SuppressLint("SetTextI18n")
     private fun setupTotals(ratings: ArrayList<Rating>) {
 
-        total_point.text = getSummPoints(ratings).toString()
+        total_point.text = kg.mvvmdordoi.ui.main.profile.Shared.rating_all.toString()
+        getSummPoints(ratings).toString()
         var total_quiz =todayFalse+todayTrue
         today_point.text = todayPoint.toString()
         today_quiz.text = (total_quiz).toString()
@@ -207,7 +207,7 @@ class ProfileFragment : Fragment() {
 
     private fun setupChart(ratings:ArrayList<Rating>) {
         if (ratings.size>1) {
-            date1.text = ratings[0].created_at
+            date1.text = ratings[max(0,ratings.size-1-max_sixe)].created_at
             date2.text = ratings[ratings.size - 1].created_at
         }
 
@@ -216,10 +216,24 @@ class ProfileFragment : Fragment() {
 
             val entries = ArrayList<Entry>()
 
-            var lastSum:Float = 0F
-            for (i in 0 until min(ratings.size, max_sixe)) {
-                lastSum+=ratings[i].rating.toFloat()
-                entries.add(Entry(i.toFloat(), lastSum))
+            var lastSum:Int = kg.mvvmdordoi.ui.main.profile.Shared.rating_all
+
+            var rat:ArrayList<Rating> = ArrayList()
+
+            for (i in ratings.size-1 downTo max(0,ratings.size-max_sixe) ){
+                var rating = ratings[i].copy()
+                Log.e("RATIGGGGG",rating.toString())
+                var rattt = rating.rating
+                rating.rating = lastSum
+                lastSum-=rattt
+                rat.add(rating)
+
+            }
+
+            rat.reverse()
+
+            for (i in 0 until min(rat.size, max_sixe)) {
+                entries.add(Entry(i.toFloat(), rat[i].rating.toFloat()))
             }
 
             val dataSet = LineDataSet(entries, "")

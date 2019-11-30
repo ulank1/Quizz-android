@@ -23,7 +23,32 @@ import kg.mvvmdordoi.ui.test.test_detail.NumerationListener
 import kg.mvvmdordoi.ui.test.test_detail.NumerationRvAdapter
 import kg.mvvmdordoi.utils.URL1
 import kg.mvvmdordoi.utils.extension.getTodayDateDot
+import kotlinx.android.synthetic.main.activity_question.*
 import kotlinx.android.synthetic.main.activity_question_day.*
+import kotlinx.android.synthetic.main.activity_question_day.a
+import kotlinx.android.synthetic.main.activity_question_day.b
+import kotlinx.android.synthetic.main.activity_question_day.c
+import kotlinx.android.synthetic.main.activity_question_day.choose_a
+import kotlinx.android.synthetic.main.activity_question_day.choose_b
+import kotlinx.android.synthetic.main.activity_question_day.choose_c
+import kotlinx.android.synthetic.main.activity_question_day.choose_d
+import kotlinx.android.synthetic.main.activity_question_day.choose_e
+import kotlinx.android.synthetic.main.activity_question_day.d
+import kotlinx.android.synthetic.main.activity_question_day.e
+import kotlinx.android.synthetic.main.activity_question_day.line_a
+import kotlinx.android.synthetic.main.activity_question_day.line_b
+import kotlinx.android.synthetic.main.activity_question_day.line_c
+import kotlinx.android.synthetic.main.activity_question_day.line_d
+import kotlinx.android.synthetic.main.activity_question_day.line_e
+import kotlinx.android.synthetic.main.activity_question_day.line_quiz
+import kotlinx.android.synthetic.main.activity_question_day.line_result
+import kotlinx.android.synthetic.main.activity_question_day.next
+import kotlinx.android.synthetic.main.activity_question_day.ok
+import kotlinx.android.synthetic.main.activity_question_day.question
+import kotlinx.android.synthetic.main.activity_question_day.result
+import kotlinx.android.synthetic.main.activity_question_day.rv
+import kotlinx.android.synthetic.main.activity_question_day.test_number
+import kotlinx.android.synthetic.main.activity_question_day.time
 import java.lang.Exception
 
 
@@ -72,17 +97,18 @@ class DayQuestionActivity : Fragment(), NumerationListener, View.OnClickListener
                 quizzes = it
                 currentPosition = 0
                 setQuestion()
-                Day.save(getTodayDateDot(),context!!)
             }else{
                 line_no_one.visible()
             }
         })
         if (Day.get(context!!) != getTodayDateDot()) {
+            Log.e("Today", getTodayDateDot())
             viewModel.getTestsDay()
-
         }else{
             line_no_one.visible()
         }
+
+       // viewModel.getTestsDay()
         setOnclickListeners()
     }
 
@@ -177,10 +203,12 @@ class DayQuestionActivity : Fragment(), NumerationListener, View.OnClickListener
                         line_result.visible()
                         result.text = sum.toString()
                         //setResultRV()
+                        Day.save(getTodayDateDot(),context!!)
+                        viewModel.getRating(sum)
+
                     }
                 }
                 R.id.ok -> {
-                    viewModel.getRating(sum)
                     line_no_one.visible()
                 }
             }
@@ -210,9 +238,9 @@ class DayQuestionActivity : Fragment(), NumerationListener, View.OnClickListener
 
 
         if (currentPosition == quizzes.size - 1) {
-            next.text = "Завершить"
+            next.text = getString(R.string.comlete)
         } else {
-            next.text = "Далее"
+            next.text = getString(R.string.dalee)
         }
         test_number.text = "Вопрос: ${currentPosition+1}/${quizzes.size}"
         choose_a.setBackgroundResource(R.drawable.gray_stroke_1dp_circle)
@@ -227,6 +255,11 @@ class DayQuestionActivity : Fragment(), NumerationListener, View.OnClickListener
         if (quiz.answer_e.isNullOrEmpty()) {
             line_e.gone()
         }
+
+        if (quiz.answer_d.isNullOrEmpty()){
+            line_d.gone()
+        }
+
         question.settings.javaScriptEnabled = true
 
         question.loadData(
@@ -319,6 +352,11 @@ class DayQuestionActivity : Fragment(), NumerationListener, View.OnClickListener
         }catch (e:Exception){
 
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.e("ONSTART","llll")
     }
 
     private fun getTrueAnswer(position: Int): TextView {

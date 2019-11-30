@@ -94,7 +94,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:text="Выигравший"
+            android:text="@string/win"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -113,7 +113,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:text="Проигравший"
+            android:text="@string/lose"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -130,7 +130,7 @@
         android:background="@drawable/blue_5dp"
         android:textColor="@color/white"
         android:layout_gravity="center"
-        android:text="Начать"
+        android:text="@string/start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

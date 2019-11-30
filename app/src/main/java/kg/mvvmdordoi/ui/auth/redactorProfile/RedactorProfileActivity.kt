@@ -135,13 +135,13 @@ class RedactorProfileActivity : ImagePickerHelper(),DatePickerDialog.OnDateSetLi
 
         if (login.text.toString().length < 10) {
             boolean = false
-            login.error = "Номер введен неверно"
+            login.error = getString(R.string.phone_incorrect)
         }
 
 
         if (birth_date.text.toString().isEmpty()){
             boolean = false
-            birth_date.error = "Выберите дату рождения"
+            birth_date.error = getString(R.string.date_incorrect)
         }
 
         return boolean

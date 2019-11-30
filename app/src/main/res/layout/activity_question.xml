@@ -56,7 +56,7 @@
 
                         <TextView
                             android:layout_gravity="center"
-                            android:text="Читать текст"
+                            android:text="@string/read_text"
                             android:textColor="#fff"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -266,7 +266,7 @@
                 android:background="@drawable/blue_5dp"
                 android:paddingStart="30dp"
                 android:paddingEnd="30dp"
-                android:text="Завершить"
+                android:text="@string/dalee"
                 android:textColor="@color/white" />
         </LinearLayout>
 
@@ -354,7 +354,7 @@
                 android:background="@drawable/blue_5dp"
                 android:paddingStart="30dp"
                 android:paddingEnd="30dp"
-                android:text="Далее"
+                android:text="@string/comlete"
                 android:textColor="@color/white" />
         </LinearLayout>
     </RelativeLayout>

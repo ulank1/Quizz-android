@@ -92,21 +92,21 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="неделя" />
+                            android:text="@string/week" />
 
                         <Button
                             android:id="@+id/month"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="месяц" />
+                            android:text="@string/mnth" />
 
                         <Button
                             android:id="@+id/year"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="год" />
+                            android:text="@string/year" />
 
                     </LinearLayout>
 
@@ -179,7 +179,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Количество тестов за сегодня :"
+                            android:text="@string/test_count_day"
                             android:textColor="#000"
                             android:textSize="16sp" />
 
@@ -204,7 +204,7 @@
                         android:textSize="17sp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Из них:"
+                        android:text="@string/aaaa"
                         android:textColor="#000" />
 
 
@@ -219,7 +219,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Правильно: "
+                            android:text="@string/true_f"
                             android:textColor="#000"
                             android:textSize="16sp" />
 
@@ -251,7 +251,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Неправильно: "
+                            android:text="@string/false_f"
                             android:textColor="#000"
                             android:textSize="16sp" />
 
@@ -292,7 +292,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Выигрыш: "
+                            android:text="@string/win_f"
                             android:textColor="#000"
                             android:textSize="16sp" />
 
@@ -324,7 +324,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Ничья: "
+                            android:text="@string/draw_"
                             android:textColor="#000"
                             android:textSize="16sp" />
 
@@ -355,7 +355,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Проигрыш: "
+                            android:text="@string/lose_f"
                             android:textColor="#000"
                             android:textSize="16sp" />
 

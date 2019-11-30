@@ -62,7 +62,7 @@
         <TextView
             android:layout_marginTop="10dp"
             android:textColor="#000"
-            android:text="Какие языки вы знаете?:"
+            android:text="@string/lang_you_know"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
@@ -76,7 +76,7 @@
         <CheckBox
             android:checked="true"
             android:id="@+id/kg"
-            android:text="Кыргызский"
+            android:text="Кыргызча"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
@@ -86,7 +86,7 @@
         android:id="@+id/btn_sign_up"
         android:background="#02BBBB"
         android:textColor="@color/white"
-        android:text="@string/btn_register"
+        android:text="@string/save"
         android:paddingStart="30dp"
         android:paddingEnd="30dp"
         android:layout_marginBottom="20dp"

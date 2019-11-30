@@ -145,6 +145,14 @@ interface PostApi {
 
     ): Observable<Response<Any>>
 
+    @FormUrlEncoded
+    @PATCH("users/{id}/")
+    fun putNotification(
+        @Path("id") id: String,
+        @Field("is_notification") password:Boolean
+
+    ): Observable<Response<Any>>
+
 
     @FormUrlEncoded
     @POST("device")

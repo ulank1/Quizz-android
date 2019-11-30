@@ -91,4 +91,27 @@ class NotificationViewModel() : BaseViewModel() {
                 )
         )
     }
+
+    fun putNot(notif:Boolean) {
+
+        subscription.add(
+            postApi.putNotification(UserToken.getToken(App.activity!!).toString(),notif)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { showProgress() }
+                .doOnTerminate { hideProgress() }
+                .subscribe(
+                    { result -> hideProgress()
+                        if (result.isSuccessful) {
+                            Log.e("RATINGS",result.body().toString())
+                        }else{
+                            Log.e("ERROR", result.errorBody()?.string())
+                        }
+                    },
+                    { hideProgress()
+                        Log.e("Errdasdasor",it.toString())
+                    }
+                )
+        )
+    }
 }

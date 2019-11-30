@@ -26,7 +26,7 @@ class NewsListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_users)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.title = "Новости"
+        supportActionBar!!.title = getString(R.string.news)
         App.activity = this
 
         setupRv()

@@ -23,7 +23,7 @@ class UniversityListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_users)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.title = "Университеты"
+        supportActionBar!!.title = getString(R.string.university)
         App.activity = this
         viewModel = ViewModelProviders.of(this, ViewModelFactory()).get(UniversityViewModel::class.java)
         setupRv()

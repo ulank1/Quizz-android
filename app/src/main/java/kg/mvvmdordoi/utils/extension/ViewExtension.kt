@@ -7,6 +7,7 @@ import android.content.ContextWrapper
 import android.support.annotation.StringRes
 import android.support.design.widget.TextInputEditText
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -91,4 +92,16 @@ fun Activity.hideKeyboard(){
 fun hideKeyboardFrom(context: Context, view: View) {
     val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(view.windowToken, 0)
+}
+
+@SuppressLint("SimpleDateFormat")
+fun formatDateNotification(date:String):String{
+
+    var date1 = date.substring(0,date.indexOf("."))
+    Log.e("DATEEEE",date1)
+    val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+    var date2 = sdf.parse(date1)
+    val sdf1 = SimpleDateFormat("yyyy-MM-dd HH:mm")
+
+    return sdf1.format(date2)
 }

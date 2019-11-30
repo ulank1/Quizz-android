@@ -57,6 +57,7 @@ class ProfileViewModel() : BaseViewModel() {
 
                             for ((i,rat)in rating.withIndex()){
                                 if (rat.created_at=="all"){
+                                    Shared.rating_all = rat.rating
                                     rating.removeAt(i)
                                     break
                                 }

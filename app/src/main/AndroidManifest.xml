@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="kg.mvvmdordoi">
-
+    <!-- Include required permissions for Google Mobile Ads to run. -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -18,7 +18,17 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.auth.confirm_code.PhoneActivity"></activity>
+        <activity android:name=".ui.test.RewardedActivity"></activity>
+        <activity android:name=".ui.test.EmpActivity" />
+        <activity android:name=".ui.test.AdActivity" />
+        <activity
+            android:name=".ui.test.TestAddActivity"
+            android:label="@string/title_activity_test_add" /> <!-- Include the AdActivity configChanges and theme. -->
+        <activity
+            android:name="com.google.android.gms.ads.AdActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:theme="@android:style/Theme.Translucent" />
+        <activity android:name=".ui.auth.confirm_code.PhoneActivity" />
         <activity android:name=".ui.auth.login.AuthActivity" />
         <activity android:name=".ui.game.preview.PreviewActivity" />
         <activity android:name=".ui.test.test_detail.ContentActivity" />
@@ -75,6 +85,10 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-7649587179327452~9914538335" />
     </application>
 
 </manifest>

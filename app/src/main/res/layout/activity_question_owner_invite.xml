@@ -237,7 +237,7 @@
             android:background="@drawable/blue_5dp"
             android:paddingStart="30dp"
             android:paddingEnd="30dp"
-            android:text="Далее"
+            android:text="@string/dalee"
             android:textColor="@color/white" />
     </LinearLayout>
 
@@ -296,7 +296,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:gravity="center"
-                    android:text="Вы"
+                    android:text="@string/you"
                     android:textColor="#000"
                     android:textSize="17sp" />
 
@@ -400,7 +400,7 @@
             android:background="@drawable/blue_5dp"
             android:paddingStart="30dp"
             android:paddingEnd="30dp"
-            android:text="Далее"
+            android:text="@string/dalee"
             android:textColor="@color/white" />
     </RelativeLayout>
 
@@ -451,7 +451,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:gravity="center"
-                    android:text="Вы"
+                    android:text="@string/you"
                     android:textColor="#00B5BB"
                     android:textSize="20sp" />
 
@@ -505,7 +505,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="30dp"
-            android:text="Выигравший: 20"
+            android:text="@string/win_20"
             android:textColor="#000"
             android:textSize="17sp" />
 
@@ -513,7 +513,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Проигравший: -10"
+            android:text="@string/lose_10"
             android:textColor="#000"
             android:textSize="17sp" />
 
@@ -521,7 +521,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Ничья: 5"
+            android:text="@string/draw_5"
             android:textColor="#000"
             android:textSize="17sp" />
 
@@ -531,7 +531,7 @@
             android:background="@drawable/blue_5dp"
             android:textColor="@color/white"
             android:layout_gravity="center"
-            android:text="Начать"
+            android:text="@string/start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 

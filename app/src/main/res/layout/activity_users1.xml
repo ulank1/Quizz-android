@@ -52,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
     <Button
-        android:text="Пригласить друзей"
+        android:text="@string/invite_friend"
         android:textColor="@color/white"
         android:layout_margin="5dp"
         android:layout_above="@+id/random"
@@ -61,7 +61,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <Button
-        android:text="Случайный"
+        android:text="@string/random_player"
         android:textColor="@color/white"
         android:layout_margin="5dp"
         android:id="@+id/random"

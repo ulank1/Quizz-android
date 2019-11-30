@@ -17,6 +17,7 @@ import kg.mvvmdordoi.model.get.Notification
 import kg.mvvmdordoi.ui.game.preview.PreviewActivity
 import kg.mvvmdordoi.ui.info.news.NewsListActivity
 import kg.mvvmdordoi.ui.test.test_detail.GameQuestionActivity
+import kg.mvvmdordoi.utils.extension.formatDateNotification
 
 
 class NotificationRvAdapter(val context: Context) : RecyclerView.Adapter<NotificationRvAdapter.AdvertViewHolder>() {
@@ -51,11 +52,10 @@ class NotificationRvAdapter(val context: Context) : RecyclerView.Adapter<Notific
             name.text = item.title
             desc.text = item.body
             if (item.created_at!=null)
-            time.text = item.created_at.toString()
-
+            time.text = formatDateNotification(item.created_at.toString())
 
             itemView.setOnClickListener {
-                if (item.title=="Дуэль"){
+                if (item.title.contains("Дуэль")){
                     App.activity!!.setResult(RESULT_OK)
                     App.activity!!.finish()
                 }else {

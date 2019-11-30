@@ -16,7 +16,7 @@ class PhoneActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_phone)
 
-        supportActionBar!!.title = "Востановить пароль"
+        supportActionBar!!.title = getString(R.string.restore_password)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         btn_ok.setOnClickListener { startActivity(Intent(this,ConfirmCodeActivity::class.java).putExtra("phone",code.text.toString()))

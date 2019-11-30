@@ -118,7 +118,7 @@
         android:background="@drawable/blue_5dp"
         android:paddingStart="30dp"
         android:paddingEnd="30dp"
-        android:text="начать"
+        android:text="@string/start"
         android:textColor="@color/white"
         android:visibility="invisible" />
 

@@ -20,13 +20,7 @@
             android:layout_height="100dp"/>
         <TextView
             android:layout_marginTop="20dp"
-            android:text="Synak time –это социальный проект.\n\n
-
-Цель Synak time – оказание помощи для успешной сдачи ОРТ и поступлении в лучшие Высшие учебные заведения.\n\n
-
-Вы поддержите наш проект, просматривая рекламу, и обогатите наш контент, присылая свои вопросы. Благодарим Вас за понимание!\n\n
-
-При разработке разделов «Подготовка к ОРТ» и «Инфо» были использованы данные с сайта http://testing.kg/kg/ , «Университеты» - с сайта Министерства образовании и науки КР http://www.university.edu.gov.kg/. "
+            android:text="@string/about_us_text"
             android:textSize="16sp"
             android:textColor="#000"
             android:layout_width="match_parent"
@@ -36,7 +30,7 @@
             android:id="@+id/rate_us"
             android:layout_marginTop="30dp"
             android:textAllCaps="false"
-            android:text="Оцените Нас"
+            android:text="@string/count_us"
             android:textColor="@color/white"
             android:textSize="21sp"
             android:background="@drawable/blue_5dp"
@@ -47,7 +41,7 @@
             android:textSize="16sp"
             android:textColor="#2E5E05"
             android:layout_marginTop="15dp"
-            android:text="Подписывайтесь на наши соц. страницы:"
+            android:text="@string/subscribe_us"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

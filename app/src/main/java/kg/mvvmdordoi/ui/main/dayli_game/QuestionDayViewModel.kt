@@ -134,7 +134,7 @@ class QuestionDayViewModel() : BaseViewModel() {
                 .doOnTerminate { hideProgress() }
                 .subscribe(
                     { result -> hideProgress()
-                        Log.e("EWW",result.toString())
+                        Log.e("EWW",result.body().toString())
                         if (result.isSuccessful) {
                             tests.value = result.body()
                         } else {
@@ -203,7 +203,7 @@ class QuestionDayViewModel() : BaseViewModel() {
     fun getRating(sum:Int) {
 
         subscription.add(
-            postApi.getRatingByDate(getTodayDateDot(),"1")
+            postApi.getRatingByDate(getTodayDateDot(),UserToken.getToken(App.activity!!).toString())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { showProgress() }

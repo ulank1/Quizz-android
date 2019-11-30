@@ -3,6 +3,7 @@ package kg.mvvmdordoi.fcm
 import android.app.*
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.support.v4.app.NotificationCompat
 import android.util.Log
@@ -65,7 +66,9 @@ class FMService : FirebaseMessagingService() {
     private fun sendNotification(message: String,title:String) {
 
         var resultIntent=Intent(this, MainActivity::class.java)
-
+        if (title.contains("Дуэль")){
+            resultIntent.putExtra("is_duel",true)
+        }
 
         resultIntent.action = System.currentTimeMillis().toString()
 
@@ -109,11 +112,13 @@ class FMService : FirebaseMessagingService() {
                 .setAutoCancel(true)
                 .setContentIntent(resultPendingIntent)
 
-
+        val icon = BitmapFactory.decodeResource(resources, R.drawable.synakprofile)
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            builder.setSmallIcon(R.mipmap.ic_launcher)
+            builder.setSmallIcon(R.drawable.synakprofile)
+            builder.setLargeIcon(icon)
         } else {
-            builder.setSmallIcon(R.mipmap.ic_launcher)
+            builder.setLargeIcon(icon)
+            builder.setSmallIcon(R.drawable.synakprofile)
         }
         val notification = builder.build()
 

@@ -26,7 +26,7 @@ class NewPasswordActivity : AppCompatActivity() {
 
         supportActionBar!!.setDefaultDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.title = "Смена пароля"
+        supportActionBar!!.title = getString(R.string.new_password)
 
         App.activity = this
         viewModel =
@@ -36,7 +36,7 @@ class NewPasswordActivity : AppCompatActivity() {
             Log.e("Boolean",it.toString())
             if (it != null) {
                 when {
-                    it.isEmpty() -> this.toast("Такого аккаунта не существует")
+                    it.isEmpty() -> this.toast(getString(R.string.accont_not_exist))
                     else -> {
                         viewModel.putPassword(it[0].id,password.text.toString())
                     }
@@ -60,12 +60,12 @@ class NewPasswordActivity : AppCompatActivity() {
 
         if (password.text.toString().isEmpty()) {
             boolean = false
-            password.error = "Пароль не может быть пустым"
+            password.error = getString(R.string.empty_password)
         }
 
         if (password.text.toString() != repeat_password.text.toString()) {
             boolean = false
-            repeat_password.error = "Пароли не совпадают"
+            repeat_password.error = getString(R.string.no_password)
         }
         return boolean
     }

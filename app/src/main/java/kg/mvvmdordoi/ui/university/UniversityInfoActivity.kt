@@ -26,7 +26,7 @@ class UniversityInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_uni)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.title = "Инфо"
+        supportActionBar!!.title = getString(R.string.info)
         App.activity = this
         val info = intent.getSerializableExtra("info") as University
         desc.loadData(
