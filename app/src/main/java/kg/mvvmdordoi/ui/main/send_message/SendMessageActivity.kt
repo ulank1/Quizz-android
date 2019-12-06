@@ -33,7 +33,7 @@ class SendMessageActivity : AppCompatActivity() {
 
         btn_send.setOnClickListener {
             val send = Intent(Intent.ACTION_SENDTO)
-            val uriText = "mailto:" + Uri.encode("email@gmail.com") +
+            val uriText = "mailto:" + Uri.encode("jrt00996@gmail.com") +
                     "?subject=" + Uri.encode("the subject") +
                     "&body=" + Uri.encode("the body of the message")
             val uri = Uri.parse(uriText)
@@ -44,7 +44,7 @@ class SendMessageActivity : AppCompatActivity() {
 
         }
         btn_send_facebook.setOnClickListener { launchFacebook(this) }
-        btn_send_instagram.setOnClickListener { launchInstagram(this,"ulankkarimov") }
+        btn_send_instagram.setOnClickListener { launchInstagram(this,"synak_time") }
 
 
     }
@@ -64,7 +64,7 @@ class SendMessageActivity : AppCompatActivity() {
     }
 
     private fun getOpenFacebookIntent(context: Context): Intent {
-        return Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/100005190183416"))
+        return Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/synaktimeapp"))
 
     }
 

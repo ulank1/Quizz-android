@@ -8,6 +8,9 @@ import android.support.v7.widget.GridLayoutManager
 import android.util.Log
 import android.view.MenuItem
 import com.bumptech.glide.Glide
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kg.mvvmdordoi.App
 import kg.mvvmdordoi.R
 import kg.mvvmdordoi.injection.ViewModelFactory
@@ -21,12 +24,19 @@ import kotlinx.android.synthetic.main.activity_uni.*
 
 class UniversityInfoActivity : AppCompatActivity() {
 
+    lateinit var mAdView : AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_uni)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.title = getString(R.string.info)
+
+        MobileAds.initialize(this,"ca-app-pub-7649587179327452~9914538335")
+        mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
         App.activity = this
         val info = intent.getSerializableExtra("info") as University
         desc.loadData(

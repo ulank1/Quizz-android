@@ -39,9 +39,11 @@ import kg.mvvmdordoi.ui.auth.login.LoginActivity
 import kg.mvvmdordoi.ui.auth.register.RegisterActivity
 import kg.mvvmdordoi.ui.auth.register.RegisterViewModel
 import kg.mvvmdordoi.ui.test.test_detail.Shared
+import kg.mvvmdordoi.utils.extension.getDateDot
 import kg.mvvmdordoi.utils.extension.getTodayDate
 import kg.mvvmdordoi.utils.extension.getTodayDateDot
 import kg.mvvmdordoi.utils.extension.gone
+import kotlinx.android.synthetic.main.fragment_quiz.*
 import kotlinx.android.synthetic.main.profile_layout.*
 import lecho.lib.hellocharts.gesture.ContainerScrollType
 import lecho.lib.hellocharts.gesture.ZoomType
@@ -52,6 +54,7 @@ import lecho.lib.hellocharts.model.LineChartData
 import lecho.lib.hellocharts.model.PointValue
 import lecho.lib.hellocharts.view.LineChartView
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.math.max
 import kotlin.math.min
 
@@ -205,11 +208,48 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    fun getRatingsForChart(ratings:ArrayList<Rating>):ArrayList<Rating>{
+        var chart_ratings:ArrayList<Rating> = ArrayList()
+
+
+        return chart_ratings
+    }
+
+    fun compareText(s1:String,s2:String):String{
+
+        return if (s1>s2){
+            s1
+        }else{
+            s2
+        }
+
+    }
+
     private fun setupChart(ratings:ArrayList<Rating>) {
+
+        var typeofCalendar = if (max_sixe==7){
+            Calendar.DAY_OF_YEAR
+        }else if (max_sixe==30){
+            Calendar.MONTH
+        }else{
+            Calendar.YEAR
+        }
+
         if (ratings.size>1) {
-            date1.text = ratings[max(0,ratings.size-1-max_sixe)].created_at
+
+            date1.text = compareText(ratings[max(0,ratings.size-1-max_sixe)].created_at, getDateDot(-1*max_sixe,typeofCalendar))
             date2.text = ratings[ratings.size - 1].created_at
         }
+
+        var step=1
+        step = if (max_sixe==7){
+            1
+        }else if (max_sixe==30){
+            3
+        }else{
+            30
+        }
+
 
         if (ratings.size>0) {
             Log.e("sds", "sdsdsd")
@@ -220,7 +260,7 @@ class ProfileFragment : Fragment() {
 
             var rat:ArrayList<Rating> = ArrayList()
 
-            for (i in ratings.size-1 downTo max(0,ratings.size-max_sixe) ){
+            for (i in ratings.size-1 downTo max(0,ratings.size-max_sixe)){
                 var rating = ratings[i].copy()
                 Log.e("RATIGGGGG",rating.toString())
                 var rattt = rating.rating
@@ -269,6 +309,7 @@ class ProfileFragment : Fragment() {
 
             // Setting Data
             val data = LineData(dataSet)
+            data.setDrawValues(false)
             chart.data = data
             chart.animateX(10)
 

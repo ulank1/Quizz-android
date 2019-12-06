@@ -16,7 +16,9 @@ import kg.mvvmdordoi.network.PostApi
 import kg.mvvmdordoi.network.UserToken
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 class ProfileViewModel() : BaseViewModel() {
 
@@ -64,7 +66,7 @@ class ProfileViewModel() : BaseViewModel() {
                             }
 
                             Log.e("RRRR",rating.toString())
-
+//                            rating.reverse()
                             ratings.value = rating
                         }else{
                             Log.e("ERROR", result.errorBody()?.string())

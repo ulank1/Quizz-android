@@ -21,8 +21,13 @@ import kg.mvvmdordoi.R
 import kg.mvvmdordoi.utils.extension.gone
 import kg.mvvmdordoi.utils.extension.visible
 import android.os.CountDownTimer
+import android.os.Handler
 import android.util.Log
 import com.bumptech.glide.Glide
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.MobileAds
 import kg.mvvmdordoi.network.UserToken
 import kg.mvvmdordoi.ui.game.users.Shared
 import kg.mvvmdordoi.utils.URL1
@@ -82,7 +87,7 @@ class GameQuestionActivity : AppCompatActivity(), NumerationListener, View.OnCli
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_question_owner)
-
+        setAd()
         setSupportActionBar(toolbar)
 
         var title = "Тест"
@@ -112,6 +117,48 @@ class GameQuestionActivity : AppCompatActivity(), NumerationListener, View.OnCli
 
         setOnclickListeners()
     }
+
+    private lateinit var mInterstitialAd: InterstitialAd
+
+    fun setAd(){
+        MobileAds.initialize(
+            this,
+            getString(R.string.app_id_ad_mob)
+        )
+        mInterstitialAd = InterstitialAd(this)
+        mInterstitialAd.adUnitId = getString(R.string.ad_video_id)
+        mInterstitialAd.loadAd(AdRequest.Builder().build())
+
+        mInterstitialAd.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+                Log.e("Status", "onAdLoaded")
+                // Code to be executed when an ad finishes loading.
+            }
+
+            override fun onAdFailedToLoad(errorCode: Int) {
+                Log.e("Status", "onAdFailedToLoad")
+            }
+
+            override fun onAdOpened() {
+                Log.e("Status", "onAdOpened")
+            }
+
+            override fun onAdClicked() {
+                Log.e("Status", "onAdClicked")
+            }
+
+            override fun onAdLeftApplication() {
+                Log.e("Status", "onAdLeftApplication")
+            }
+
+            override fun onAdClosed() {
+                Log.e("Status", "onAdClosed")
+                mInterstitialAd.loadAd(AdRequest.Builder().build())
+            }
+        }
+    }
+
+
 
     private fun setSSS() {
         name_outer1.text = Shared.name_outer
@@ -251,10 +298,18 @@ class GameQuestionActivity : AppCompatActivity(), NumerationListener, View.OnCli
                             setQuestion()
                             //adapter.setChoosePosition(currentPosition)
                         } else {
-                            line_quiz.gone()
-                            line_result.visible()
-                            setResultRV()
-                            cT.cancel()
+                            if (mInterstitialAd.isLoaded) {
+                                mInterstitialAd.show()
+                            } else {
+                                Log.e("TAG", "The interstitial wasn't loaded yet.")
+                            }
+                            Handler().postDelayed({
+                                line_quiz.gone()
+                                line_result.visible()
+                                setResultRV()
+                                cT.cancel()
+                            }, 2000)
+
                         }
                     }
                     R.id.ok -> {

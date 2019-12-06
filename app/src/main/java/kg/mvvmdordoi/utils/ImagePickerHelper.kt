@@ -118,7 +118,7 @@ abstract class ImagePickerHelper : AppCompatActivity() {
                 }
                 101 -> {
                     if (data == null || data.data == null) return
-                    val fileName = getImagePathFromInputStreamUri(this, data.data)
+                    val fileName = getImagePathFromInputStreamUri(this, data.data!!)
                     val file = File(fileName)
                     val path = Compressor(this)
                             .setQuality(70)

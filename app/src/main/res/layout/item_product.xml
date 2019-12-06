@@ -16,11 +16,11 @@
         android:layout_marginTop="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin">
 
-        <android.support.constraint.ConstraintLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <android.support.constraint.ConstraintLayout
+            <RelativeLayout
                 android:id="@+id/store_wrapper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-            </android.support.constraint.ConstraintLayout>
+            </RelativeLayout>
 
 
             <android.support.v4.view.ViewPager
@@ -198,7 +198,7 @@
                 app:layout_constraintTop_toBottomOf="@id/icon_like" />
 
 
-            <android.support.constraint.ConstraintLayout
+            <RelativeLayout
                 android:id="@+id/desc_wrapper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -246,7 +246,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/desc" />
 
-            </android.support.constraint.ConstraintLayout>
+            </RelativeLayout>
 
 
             <Button
@@ -267,7 +267,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/desc_wrapper" />
 
-            <android.support.constraint.ConstraintLayout
+            <RelativeLayout
                 android:id="@+id/basket_wrapper"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -310,7 +310,7 @@
                     app:layout_constraintEnd_toEndOf="parent" />
 
 
-            </android.support.constraint.ConstraintLayout>
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/old_price"
@@ -337,7 +337,7 @@
                 app:layout_constraintTop_toTopOf="@id/old_price" />
 
 
-        </android.support.constraint.ConstraintLayout>
+        </RelativeLayout>
 
     </android.support.v7.widget.CardView>
 </layout>

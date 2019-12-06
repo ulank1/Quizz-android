@@ -9,20 +9,31 @@ import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
 import kg.mvvmdordoi.R
 import kotlinx.android.synthetic.main.activity_emp.*
+import java.security.NoSuchAlgorithmException
+import android.provider.Settings
+
 
 class EmpActivity : AppCompatActivity() {
-    private lateinit var mInterstitialAd: InterstitialAd
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_emp)
+        setAd()
+    }
+
+    private lateinit var mInterstitialAd: InterstitialAd
+
+    fun setAd() {
         MobileAds.initialize(
             this,
-            "ca-app-pub-3940256099942544~3347511713"
+            getString(R.string.app_id_ad_mob)
         )
+//        6B635D398D472375ADFAF82341AB573B
+        val android_id = Settings.Secure.getString(this.contentResolver, Settings.Secure.ANDROID_ID)
+        val deviceId = md5(android_id).toUpperCase()
         mInterstitialAd = InterstitialAd(this)
-        mInterstitialAd.adUnitId = "ca-app-pub-3940256099942544/8691691433"
-        mInterstitialAd.loadAd(AdRequest.Builder().build())
-
+        mInterstitialAd.adUnitId = getString(R.string.ad_video_id)
+        mInterstitialAd.loadAd(AdRequest.Builder().addTestDevice("6B635D398D472375ADFAF82341AB573B").build())
+        Log.e("device id=",deviceId);
         btn_rek.setOnClickListener {
             if (mInterstitialAd.isLoaded) {
                 mInterstitialAd.show()
@@ -38,7 +49,7 @@ class EmpActivity : AppCompatActivity() {
             }
 
             override fun onAdFailedToLoad(errorCode: Int) {
-                Log.e("Status", "onAdFailedToLoad")
+                Log.e("Status", errorCode.toString())
             }
 
             override fun onAdOpened() {
@@ -59,6 +70,23 @@ class EmpActivity : AppCompatActivity() {
             }
         }
     }
+    fun md5(s: String): String {
+        try {
+            // Create MD5 Hash
+            val digest = java.security.MessageDigest.getInstance("MD5")
+            digest.update(s.toByteArray())
+            val messageDigest = digest.digest()
 
+            // Create Hex String
+            val hexString = StringBuffer()
+            for (i in messageDigest.indices)
+                hexString.append(Integer.toHexString(0xFF and messageDigest[i].toInt()))
+            return hexString.toString()
 
+        } catch (e: NoSuchAlgorithmException) {
+            e.printStackTrace()
+        }
+
+        return ""
+    }
 }

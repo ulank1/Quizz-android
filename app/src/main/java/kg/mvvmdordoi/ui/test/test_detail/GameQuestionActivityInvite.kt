@@ -22,8 +22,13 @@ import kg.mvvmdordoi.R
 import kg.mvvmdordoi.utils.extension.gone
 import kg.mvvmdordoi.utils.extension.visible
 import android.os.CountDownTimer
+import android.os.Handler
 import android.util.Log
 import com.bumptech.glide.Glide
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
+import com.google.android.gms.ads.MobileAds
 import kg.mvvmdordoi.ui.game.users.Shared
 import kg.mvvmdordoi.utils.URL1
 import kg.mvvmdordoi.utils.extension.toast
@@ -84,7 +89,7 @@ class GameQuestionActivityInvite : AppCompatActivity(), NumerationListener, View
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_question_owner_invite)
-
+        setAd()
         setSupportActionBar(toolbar)
 
         var title = "Тест"
@@ -110,6 +115,46 @@ class GameQuestionActivityInvite : AppCompatActivity(), NumerationListener, View
         setOnclickListeners()
     }
 
+    private lateinit var mInterstitialAd: InterstitialAd
+
+    fun setAd() {
+        MobileAds.initialize(
+            this,
+            getString(R.string.app_id_ad_mob)
+        )
+        mInterstitialAd = InterstitialAd(this)
+        mInterstitialAd.adUnitId = getString(R.string.ad_video_id)
+        mInterstitialAd.loadAd(AdRequest.Builder().build())
+
+        mInterstitialAd.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+                Log.e("Status", "onAdLoaded")
+                // Code to be executed when an ad finishes loading.
+            }
+
+            override fun onAdFailedToLoad(errorCode: Int) {
+                Log.e("Status", "onAdFailedToLoad")
+            }
+
+            override fun onAdOpened() {
+                Log.e("Status", "onAdOpened")
+            }
+
+            override fun onAdClicked() {
+                Log.e("Status", "onAdClicked")
+            }
+
+            override fun onAdLeftApplication() {
+                Log.e("Status", "onAdLeftApplication")
+            }
+
+            override fun onAdClosed() {
+                Log.e("Status", "onAdClosed")
+                mInterstitialAd.loadAd(AdRequest.Builder().build())
+            }
+        }
+    }
+
     private fun getTime(quizzes: ArrayList<Quiz>) {
 
         var time = 0
@@ -126,10 +171,10 @@ class GameQuestionActivityInvite : AppCompatActivity(), NumerationListener, View
         name_outer1.text = Shared.gameOuter.user_outer.name
         name1.text = Shared.gameOuter.user_owner.name
 
-        Log.e("ImageII",Shared.gameOuter.user_owner.avatar)
+        Log.e("ImageII", Shared.gameOuter.user_owner.avatar)
 
-        Glide.with(this).load(URL1+Shared.gameOuter.user_owner.avatar).into(image11)
-        Glide.with(this).load(URL1+Shared.gameOuter.user_outer.avatar).into(image21)
+        Glide.with(this).load(URL1 + Shared.gameOuter.user_owner.avatar).into(image11)
+        Glide.with(this).load(URL1 + Shared.gameOuter.user_outer.avatar).into(image21)
 
         btn_start.setOnClickListener {
             line_preview.gone()
@@ -140,17 +185,17 @@ class GameQuestionActivityInvite : AppCompatActivity(), NumerationListener, View
 
     override fun onBackPressed() {
 
-        if (line_preview.visibility == View.VISIBLE){
+        if (line_preview.visibility == View.VISIBLE) {
             finish()
-        }else{
+        } else {
             toast(getString(R.string.cant_finish))
         }
 
     }
 
-    lateinit var cT:CountDownTimer
+    lateinit var cT: CountDownTimer
     private fun setTime(millis: Long) {
-         cT = object : CountDownTimer(millis * 1000, 1000) {
+        cT = object : CountDownTimer(millis * 1000, 1000) {
 
             @SuppressLint("SetTextI18n")
             override fun onTick(millisUntilFinished: Long) {
@@ -222,19 +267,26 @@ class GameQuestionActivityInvite : AppCompatActivity(), NumerationListener, View
                             setQuestion()
                             adapter.setChoosePosition(currentPosition)
                         } else {
-                            line_quiz.gone()
-                            line_result.visible()
-                            setResultRV()
-                            cT.cancel()
-                            var ownerPoint = Shared.gameOuter.owner_point
-
-                            when {
-                                ownerPoint > trues -> viewModel.getRating(-10, 0, 0)
-                                ownerPoint < trues -> viewModel.getRating(20, 0, 0)
-                                else -> viewModel.getRating(5, 0, 0)
+                            if (mInterstitialAd.isLoaded) {
+                                mInterstitialAd.show()
+                            } else {
+                                Log.e("TAG", "The interstitial wasn't loaded yet.")
                             }
-                            viewModel.putGameCache(trues, Shared.gameOuter.id)
 
+                            Handler().postDelayed({
+                                line_quiz.gone()
+                                line_result.visible()
+                                setResultRV()
+                                cT.cancel()
+                                var ownerPoint = Shared.gameOuter.owner_point
+
+                                when {
+                                    ownerPoint > trues -> viewModel.getRating(-10, 0, 0)
+                                    ownerPoint < trues -> viewModel.getRating(20, 0, 0)
+                                    else -> viewModel.getRating(5, 0, 0)
+                                }
+                                viewModel.putGameCache(trues, Shared.gameOuter.id)
+                            }, 2000)
                         }
                     }
                     R.id.ok -> {
@@ -244,7 +296,7 @@ class GameQuestionActivityInvite : AppCompatActivity(), NumerationListener, View
                     }
                 }
             }
-        }catch (e:Exception){
+        } catch (e: Exception) {
 
         }
     }
@@ -253,13 +305,13 @@ class GameQuestionActivityInvite : AppCompatActivity(), NumerationListener, View
         super.onPause()
 
 
-
     }
+
     override fun onDestroy() {
         super.onDestroy()
         try {
             cT.cancel()
-        }catch (e:Exception){
+        } catch (e: Exception) {
 
         }
     }
@@ -292,8 +344,8 @@ class GameQuestionActivityInvite : AppCompatActivity(), NumerationListener, View
         name_outer.text = Shared.gameOuter.user_outer.name
         name.text = Shared.gameOuter.user_owner.name
 
-        Glide.with(this).load(URL1+Shared.gameOuter.user_owner.avatar).into(image1)
-        Glide.with(this).load(URL1+Shared.gameOuter.user_outer.avatar).into(image2)
+        Glide.with(this).load(URL1 + Shared.gameOuter.user_owner.avatar).into(image1)
+        Glide.with(this).load(URL1 + Shared.gameOuter.user_outer.avatar).into(image2)
         when {
             trues > Shared.gameOuter.owner_point -> {
 
@@ -302,7 +354,7 @@ class GameQuestionActivityInvite : AppCompatActivity(), NumerationListener, View
                 text.text = getString(R.string.you_win)
                 point_result.text = getString(R.string.you_received) + " 20"
             }
-            trues<Shared.gameOuter.owner_point -> {
+            trues < Shared.gameOuter.owner_point -> {
                 left_win.visible()
                 text.visible()
                 point_result.text = getString(R.string.you_received) + " -10"
@@ -328,29 +380,29 @@ class GameQuestionActivityInvite : AppCompatActivity(), NumerationListener, View
         return ids.substring(0, ids.length - 2)
     }
 
-    fun setEditWeb(){
+    fun setEditWeb() {
         a.setOnTouchListener { v, event ->
-            Log.e("sadsa","dssdsd")
+            Log.e("sadsa", "dssdsd")
             return@setOnTouchListener true
         }
         b.setOnTouchListener { v, event ->
-            Log.e("sadsa","dssdsd")
+            Log.e("sadsa", "dssdsd")
             return@setOnTouchListener true
         }
         c.setOnTouchListener { v, event ->
-            Log.e("sadsa","dssdsd")
+            Log.e("sadsa", "dssdsd")
             return@setOnTouchListener true
         }
         d.setOnTouchListener { v, event ->
-            Log.e("sadsa","dssdsd")
+            Log.e("sadsa", "dssdsd")
             return@setOnTouchListener true
         }
         e.setOnTouchListener { v, event ->
-            Log.e("sadsa","dssdsd")
+            Log.e("sadsa", "dssdsd")
             return@setOnTouchListener true
         }
         question.setOnTouchListener { v, event ->
-            Log.e("sadsa","dssdsd")
+            Log.e("sadsa", "dssdsd")
             return@setOnTouchListener true
         }
     }
@@ -378,7 +430,7 @@ class GameQuestionActivityInvite : AppCompatActivity(), NumerationListener, View
         if (quiz.answer_e.isNullOrEmpty()) {
             line_e.gone()
         }
-        if (quiz.answer_d.isNullOrEmpty()){
+        if (quiz.answer_d.isNullOrEmpty()) {
             line_d.gone()
         }
         question.settings.javaScriptEnabled = true
@@ -422,7 +474,7 @@ class GameQuestionActivityInvite : AppCompatActivity(), NumerationListener, View
 
         var true_data = data.replace(
             "/media/django-summernote",
-            URL1 +"/media/django-summernote"
+            URL1 + "/media/django-summernote"
         )
 
         Log.e("TRUEDATA", true_data)
@@ -462,7 +514,7 @@ class GameQuestionActivityInvite : AppCompatActivity(), NumerationListener, View
         if (result) {
             sum += 10
             trueText.setBackgroundResource(R.drawable.blue_stroke_1dp_circle)
-        }else{
+        } else {
             sum -= 7
             trueText.setBackgroundResource(R.drawable.red_stroke_1dp_circle)
         }

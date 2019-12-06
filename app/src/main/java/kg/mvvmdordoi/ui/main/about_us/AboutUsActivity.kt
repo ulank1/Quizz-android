@@ -37,7 +37,7 @@ class AboutUsActivity : AppCompatActivity() {
                 )
             ) }
         btn_send_facebook.setOnClickListener { launchFacebook(this) }
-        btn_send_instagram.setOnClickListener { launchInstagram(this,"ulankkarimov") }
+        btn_send_instagram.setOnClickListener { launchInstagram(this,"synak_time") }
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -50,7 +50,7 @@ class AboutUsActivity : AppCompatActivity() {
     }
 
     private fun getOpenFacebookIntent(context: Context): Intent {
-        return Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/100005190183416"))
+        return Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/synaktimeapp"))
 
     }
 

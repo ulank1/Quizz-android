@@ -6,7 +6,7 @@
                 name="viewModel"
                 type="kg.mvvmdordoi.post.PostListViewModel" />
     </data>
-    <android.support.constraint.ConstraintLayout
+    <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -28,5 +28,5 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
-    </android.support.constraint.ConstraintLayout>
+    </RelativeLayout>
 </layout>

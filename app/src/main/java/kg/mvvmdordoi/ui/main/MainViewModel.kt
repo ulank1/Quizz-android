@@ -12,13 +12,19 @@ import kg.mvvmdordoi.base.BaseViewModel
 import kg.mvvmdordoi.model.ApiResponse
 import kg.mvvmdordoi.model.Product
 import kg.mvvmdordoi.model.get.Category
+import kg.mvvmdordoi.model.get.Rating
 import kg.mvvmdordoi.network.Lang
 import kg.mvvmdordoi.network.PostApi
 import kg.mvvmdordoi.network.UserToken
+import kg.mvvmdordoi.ui.main.profile.Shared
+import kg.mvvmdordoi.utils.extension.getDateDot
+import kg.mvvmdordoi.utils.extension.getTodayDateDot
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
+import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 class MainViewModel() : BaseViewModel() {
 
@@ -120,5 +126,84 @@ class MainViewModel() : BaseViewModel() {
         )
     }
 
+    fun getRating() {
+
+        subscription.add(
+            postApi.getRating(UserToken.getToken(App.activity!!).toString())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { result -> hideProgress()
+                        Log.e("EWW",result.body().toString())
+                        if (result.isSuccessful) {
+                            val rating:ArrayList<Rating> = (result.body() as ArrayList<Rating>?)!!
+
+                            for ((i,rat)in rating.withIndex()){
+                                if (rat.created_at=="all"){
+                                    Shared.rating_all = rat.rating
+                                    rating.removeAt(i)
+                                    break
+                                }
+                            }
+                            var created_at = rating[rating.size-1].created_at
+                            if (created_at!= getTodayDateDot()){
+                                var bool = true
+                                var day = 0
+                                while (bool){
+                                    day--
+                                    var date = getDateDot(day,Calendar.DAY_OF_YEAR)
+                                    if (date!=created_at) {
+                                        addRating(getDateDot(day, Calendar.DAY_OF_YEAR), 0, 0, 0)
+                                    }else{
+                                        bool = false
+                                    }
+                                }
+                            }
+
+                        } else {
+                            var error = result.errorBody()!!.string()
+                            Log.e("Error",error)
+
+                        }
+                    },
+                    { hideProgress()
+                        Log.e("Error",it.toString())
+                    }
+                )
+        )
+    }
+
+
+    private fun addRating(date: String, sum: Int, trueAnswer: Int, falseAnswer: Int) {
+
+        subscription.add(
+            postApi.addRating(
+                sum,
+                UserToken.getToken(App.activity!!)!!.toInt(),
+                date,
+                trueAnswer,
+                falseAnswer
+            )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { result ->
+                        hideProgress()
+                        Log.e("EWW", result.body().toString())
+                        if (result.isSuccessful) {
+
+                        } else {
+                            var error = result.errorBody()!!.string()
+                            Log.e("Erroradd", error)
+
+                        }
+                    },
+                    {
+                        hideProgress()
+                        Log.e("Erroradd", it.toString())
+                    }
+                )
+        )
+    }
 
 }

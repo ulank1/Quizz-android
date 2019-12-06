@@ -148,6 +148,8 @@
     <string name="redact_profile">профилди өзгөртүү</string>
     <string name="invite_friend">Досторду чакыруу</string>
     <string name="random_player">Туш келген оюнчу</string>
+    <string name="app_id_ad_mob">ca-app-pub-7649587179327452~9914538335</string>
+    <string name="ad_video_id">ca-app-pub-7649587179327452/8399627756</string>
     <string-array name="regions">
         <item>Бишкек шаары</item>
         <item>Ош шаары</item>

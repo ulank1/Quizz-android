@@ -7,6 +7,9 @@ import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.util.Log
 import android.view.MenuItem
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kg.mvvmdordoi.App
 import kg.mvvmdordoi.R
 import kg.mvvmdordoi.injection.ViewModelFactory
@@ -17,6 +20,7 @@ import kg.mvvmdordoi.utils.URL1
 import kotlinx.android.synthetic.main.activity_info.*
 
 class InfoActivity : AppCompatActivity() {
+    lateinit var mAdView : AdView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,6 +32,10 @@ class InfoActivity : AppCompatActivity() {
 
         var it = intent.getSerializableExtra("info") as Info
 
+        MobileAds.initialize(this,"ca-app-pub-7649587179327452~9914538335")
+        mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         desc.loadData(
             "<html><body>" + correctImage(it.desc) + "</body></html>",

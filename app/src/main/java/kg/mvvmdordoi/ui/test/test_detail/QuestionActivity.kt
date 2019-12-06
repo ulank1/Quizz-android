@@ -28,11 +28,16 @@ import kotlinx.android.synthetic.main.activity_question.e
 import kotlinx.android.synthetic.main.activity_question.next
 import kotlinx.android.synthetic.main.activity_question.question
 import android.os.CountDownTimer
+import android.os.Handler
 import android.util.Log
 import android.widget.Toast
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
 import kg.mvvmdordoi.utils.URL1
 import kg.mvvmdordoi.utils.extension.toast
+import kotlinx.android.synthetic.main.activity_emp.*
 import kotlinx.android.synthetic.main.activity_question.back
 import kotlinx.android.synthetic.main.activity_question.choose_a
 import kotlinx.android.synthetic.main.activity_question.choose_b
@@ -72,6 +77,7 @@ class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickLi
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_question)
         setSupportActionBar(toolbar)
+        setAd()
         back.setOnClickListener {
             if (line_result.visibility == View.VISIBLE) {
                 finish()
@@ -117,6 +123,46 @@ class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickLi
             content.gone()
         }
 
+    }
+
+    private lateinit var mInterstitialAd: InterstitialAd
+
+    fun setAd(){
+        MobileAds.initialize(
+            this,
+            getString(R.string.app_id_ad_mob)
+        )
+        mInterstitialAd = InterstitialAd(this)
+        mInterstitialAd.adUnitId = getString(R.string.ad_video_id)
+        mInterstitialAd.loadAd(AdRequest.Builder().build())
+
+        mInterstitialAd.adListener = object : AdListener() {
+            override fun onAdLoaded() {
+                Log.e("Status", "onAdLoaded")
+                // Code to be executed when an ad finishes loading.
+            }
+
+            override fun onAdFailedToLoad(errorCode: Int) {
+                Log.e("Status", "onAdFailedToLoad")
+            }
+
+            override fun onAdOpened() {
+                Log.e("Status", "onAdOpened")
+            }
+
+            override fun onAdClicked() {
+                Log.e("Status", "onAdClicked")
+            }
+
+            override fun onAdLeftApplication() {
+                Log.e("Status", "onAdLeftApplication")
+            }
+
+            override fun onAdClosed() {
+                Log.e("Status", "onAdClosed")
+                mInterstitialAd.loadAd(AdRequest.Builder().build())
+            }
+        }
     }
 
     private fun getTime(quizzes: ArrayList<Quiz>) {
@@ -233,24 +279,37 @@ class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickLi
                         setQuestion()
                         adapter.setChoosePosition(currentPosition)
                     } else {
-                        line_quiz.gone()
-                        line_result.visible()
-                        sum = 0
-
-                        for (quizz in quizzes) {
-
-                            if (quizz.choosenPosition == quizz.true_answer) {
-                                sum += 10
-                            } else {
-                                sum -= 7
-                            }
-
+                        if (mInterstitialAd.isLoaded) {
+                            mInterstitialAd.show()
+                        } else {
+                            Log.e("TAG", "The interstitial wasn't loaded yet.")
                         }
 
-                        result.text = sum.toString()
-                        setResultRV()
-                        cT.cancel()
-                        viewModel.getRating(sum, trues, quizzes.size - trues)
+
+
+                        Handler().postDelayed({
+                            line_quiz.gone()
+                            line_result.visible()
+                            sum = 0
+
+                            for (quizz in quizzes) {
+
+                                if (quizz.choosenPosition == quizz.true_answer) {
+                                    sum += 10
+                                } else {
+                                    sum -= 7
+                                }
+
+                            }
+                            result.text = sum.toString()
+                            setResultRV()
+                            cT.cancel()
+                            viewModel.getRating(sum, trues, quizzes.size - trues)
+
+                        }, 2000)
+
+
+
                     }
                 }
                 R.id.ok -> {

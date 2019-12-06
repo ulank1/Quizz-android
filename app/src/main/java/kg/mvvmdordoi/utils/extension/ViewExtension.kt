@@ -105,3 +105,13 @@ fun formatDateNotification(date:String):String{
 
     return sdf1.format(date2)
 }
+
+@SuppressLint("SimpleDateFormat")
+fun getDateDot(num:Int,typeOfClendar:Int):String{
+    val df = SimpleDateFormat("dd.MM.yyyy")
+
+    var calendar = Calendar.getInstance()
+    calendar.add(typeOfClendar,num)
+    var date:Date = calendar.time
+    return df.format(date)
+}
