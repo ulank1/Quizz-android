@@ -13,6 +13,7 @@ import kg.mvvmdordoi.model.Product
 import kg.mvvmdordoi.model.get.User
 import kg.mvvmdordoi.network.PostApi
 import kg.mvvmdordoi.network.UserToken
+import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import javax.inject.Inject
@@ -83,7 +84,7 @@ class RegisterViewModel() : BaseViewModel() {
         )
     }
 
-    fun register(
+    fun  register(
         login: RequestBody,
         password: RequestBody,
         name: RequestBody,
@@ -93,9 +94,10 @@ class RegisterViewModel() : BaseViewModel() {
         is_kg: RequestBody,
         is_ru: RequestBody
     ) {
+        val is_notification = RequestBody.create(MediaType.parse("text/plain"), true.toString())
 
         subscription.add(
-            postApi.addUser(login, name, password, birthDate, regions, is_kg, is_ru, image)
+            postApi.addUser(login, name, password, birthDate, regions, is_kg, is_ru, image,is_notification)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { showProgress() }
@@ -125,9 +127,10 @@ class RegisterViewModel() : BaseViewModel() {
         is_kg: RequestBody,
         is_ru: RequestBody
     ) {
+        val is_notification = RequestBody.create(MediaType.parse("text/plain"), true.toString())
 
         subscription.add(
-            postApi.addUser(login, name, password, birthDate, regions, is_kg, is_ru)
+            postApi.addUser(login, name, password, birthDate, regions, is_kg, is_ru,is_notification)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { showProgress() }

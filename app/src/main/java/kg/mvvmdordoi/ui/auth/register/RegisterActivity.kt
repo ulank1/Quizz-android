@@ -56,11 +56,6 @@ class RegisterActivity : ImagePickerHelper(),DatePickerDialog.OnDateSetListener 
             return@setOnTouchListener true
         }
 
-        birth_date.setOnClickListener {
-
-            Log.e("SFSDf","Asdasd")
-
-        }
         supportActionBar!!.setDefaultDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.title = getString(R.string.regisre)

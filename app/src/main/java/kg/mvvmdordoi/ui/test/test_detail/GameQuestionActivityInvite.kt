@@ -171,7 +171,7 @@ class GameQuestionActivityInvite : AppCompatActivity(), NumerationListener, View
         name_outer1.text = Shared.gameOuter.user_outer.name
         name1.text = Shared.gameOuter.user_owner.name
 
-        Log.e("ImageII", Shared.gameOuter.user_owner.avatar)
+        //Log.e("ImageII", Shared.gameOuter.user_owner.avatar)
 
         Glide.with(this).load(URL1 + Shared.gameOuter.user_owner.avatar).into(image11)
         Glide.with(this).load(URL1 + Shared.gameOuter.user_outer.avatar).into(image21)
@@ -281,12 +281,21 @@ class GameQuestionActivityInvite : AppCompatActivity(), NumerationListener, View
                                 var ownerPoint = Shared.gameOuter.owner_point
 
                                 when {
-                                    ownerPoint > trues -> viewModel.getRating(-10, 0, 0)
-                                    ownerPoint < trues -> viewModel.getRating(20, 0, 0)
-                                    else -> viewModel.getRating(5, 0, 0)
+                                    ownerPoint > trues -> {
+                                        viewModel.getRating(-10, 0, 0)
+                                        viewModel.getRating(Shared.gameOuter.user_owner.id.toString(),20, 0, 0)
+                                    }
+                                    ownerPoint < trues -> {
+                                        viewModel.getRating(20, 0, 0)
+                                        viewModel.getRating(Shared.gameOuter.user_owner.id.toString(),-10, 0, 0)
+                                    }
+                                    else -> {
+                                        viewModel.getRating(5, 0, 0)
+                                        viewModel.getRating(Shared.gameOuter.user_owner.id.toString(),5, 0, 0)
+                                    }
                                 }
                                 viewModel.putGameCache(trues, Shared.gameOuter.id)
-                            }, 2000)
+                            }, 1000)
                         }
                     }
                     R.id.ok -> {

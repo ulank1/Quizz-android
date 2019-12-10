@@ -408,4 +408,125 @@ class QuestionViewModel() : BaseViewModel() {
         }
     }
 
+
+    fun getRating(user_id:String,sum: Int, trueAnswer: Int, falseAnswer: Int) {
+
+        if (user_id != "empty") {
+            subscription.add(
+                postApi.getRatingByDate(getTodayDateDot(), user_id.toString())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnSubscribe { showProgress() }
+                    .doOnTerminate { hideProgress() }
+                    .subscribe(
+                        { result ->
+                            hideProgress()
+                            Log.e("EWW", result.body().toString())
+                            if (result.isSuccessful) {
+
+                                getRatingAll(user_id,sum,trueAnswer,falseAnswer)
+                                if (result.body() != null) {
+                                    if (result.body()!!.isNotEmpty()) {
+                                        updateRating(
+                                            getTodayDateDot(),
+                                            sum + result.body()!![0].rating,
+                                            result.body()!![0].id,
+                                            result.body()!![0].true_answer + trueAnswer,
+                                            result.body()!![0].false_answer + falseAnswer,
+                                            2
+                                        )
+                                    } else {
+                                        addRating(
+                                            getTodayDateDot(),
+                                            sum,
+                                            trueAnswer,
+                                            falseAnswer,
+                                            2
+                                        )
+                                    }
+                                } else {
+                                    addRating(
+                                        getTodayDateDot(),
+                                        sum,
+                                        trueAnswer,
+                                        falseAnswer,
+                                        2
+                                    )
+                                }
+                            } else {
+                                var error = result.errorBody()!!.string()
+                                Log.e("Errorget", error)
+
+                            }
+                        },
+                        {
+                            hideProgress()
+                            Log.e("Errorget", it.toString())
+                        }
+                    )
+            )
+        } else {
+            App.activity!!.finish()
+        }
+    }
+
+
+    fun getRatingAll(user_id: String,sum: Int,trueAnswer: Int,falseAnswer: Int) {
+        if (user_id != "empty") {
+            subscription.add(
+                postApi.getRatingByDate("all", user_id.toString())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnSubscribe { showProgress() }
+                    .doOnTerminate { hideProgress() }
+                    .subscribe(
+                        { result ->
+                            hideProgress()
+                            Log.e("EWW", result.body().toString())
+                            if (result.isSuccessful) {
+                                if (result.body() != null) {
+                                    if (result.body()!!.isNotEmpty()) {
+                                        updateRating(
+                                            "all",
+                                            result.body()!![0].rating+sum,
+                                            result.body()!![0].id,
+                                            result.body()!![0].true_answer+trueAnswer,
+                                            result.body()!![0].false_answer+falseAnswer,
+                                            1
+                                        )
+                                    } else {
+                                        addRating(
+                                            "all",
+                                            sum,
+                                            trueAnswer,
+                                            falseAnswer,
+                                            1
+                                        )
+                                    }
+                                } else {
+                                    addRating(
+                                        "all",
+                                        sum,
+                                        trueAnswer,
+                                        falseAnswer,
+                                        1
+                                    )
+                                }
+                            } else {
+                                var error = result.errorBody()!!.string()
+                                Log.e("Errorgetall", error)
+
+                            }
+                        },
+                        {
+                            hideProgress()
+                            Log.e("Errorgetall", it.toString())
+                        }
+                    )
+            )
+        } else {
+            App.activity!!.finish()
+        }
+    }
+
 }

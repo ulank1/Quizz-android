@@ -165,5 +165,6 @@
     <string name="random_player">Случайный</string>
     <string name="app_id_ad_mob">ca-app-pub-7649587179327452~9914538335</string>
     <string name="ad_video_id">ca-app-pub-7649587179327452/8399627756</string>
+    <string name="no_exit">Вы не можете выйти, не завершив тест!</string>
 
 </resources>

@@ -5,6 +5,7 @@ import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.content.res.Configuration
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -35,6 +36,7 @@ import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
+import kg.mvvmdordoi.network.Lang
 import kg.mvvmdordoi.utils.URL1
 import kg.mvvmdordoi.utils.extension.toast
 import kotlinx.android.synthetic.main.activity_emp.*
@@ -58,6 +60,8 @@ import kotlinx.android.synthetic.main.activity_question.test_number
 import kotlinx.android.synthetic.main.activity_question.time
 import kotlinx.android.synthetic.main.activity_question.toolbar
 import kotlinx.android.synthetic.main.activity_question_owner.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickListener {
@@ -75,6 +79,7 @@ class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickLi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_question)
         setSupportActionBar(toolbar)
         setAd()
@@ -82,7 +87,13 @@ class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickLi
             if (line_result.visibility == View.VISIBLE) {
                 finish()
             } else {
-                toast("REKLAMA")
+                if (mInterstitialAd.isLoaded) {
+                    mInterstitialAd.show()
+                    Handler().postDelayed(Runnable { finish() },6111)
+
+                } else {
+                    Log.e("TAG", "The interstitial wasn't loaded yet.")
+                }
             }
         }
         var title = "Тест"
@@ -122,7 +133,19 @@ class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickLi
         } else {
             content.gone()
         }
-
+        if (Lang.get(this) == "1") {
+            val locale = Locale("ky")
+            Locale.setDefault(locale)
+            val configuration = Configuration()
+            configuration.locale = locale
+            baseContext.resources.updateConfiguration(configuration, null)
+        } else {
+            val locale = Locale("ru")
+            Locale.setDefault(locale)
+            val configuration = Configuration()
+            configuration.locale = locale
+            baseContext.resources.updateConfiguration(configuration, null)
+        }
     }
 
     private lateinit var mInterstitialAd: InterstitialAd
@@ -361,7 +384,13 @@ class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickLi
         if (line_result.visibility == View.VISIBLE) {
             finish()
         } else {
-            toast("REKLAMA")
+            if (mInterstitialAd.isLoaded) {
+                mInterstitialAd.show()
+                Handler().postDelayed(Runnable { finish() },6111)
+            } else {
+                Log.e("TAG", "The interstitial wasn't loaded yet.")
+            }
+//            toast(getString(R.string.no_exit))
         }
     }
 

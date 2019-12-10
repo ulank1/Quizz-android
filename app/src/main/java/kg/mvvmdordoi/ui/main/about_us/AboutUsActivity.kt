@@ -33,7 +33,7 @@ class AboutUsActivity : AppCompatActivity() {
             startActivity(
                 Intent(
                     Intent.ACTION_VIEW,
-                    Uri.parse("market://details?id=com.google.android.youtube")
+                    Uri.parse("https://play.google.com/store/apps/details?id=kg.mvvmdordoi")
                 )
             ) }
         btn_send_facebook.setOnClickListener { launchFacebook(this) }

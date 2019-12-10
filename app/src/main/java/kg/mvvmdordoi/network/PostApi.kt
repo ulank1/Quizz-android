@@ -50,7 +50,9 @@ interface PostApi {
         @Part("place") region: RequestBody,
         @Part("is_kg") is_kg: RequestBody,
         @Part("is_ru") is_ru: RequestBody,
-        @Part avatar: MultipartBody.Part
+        @Part avatar: MultipartBody.Part,
+        @Part("is_notification") is_notification : RequestBody
+
 
     ): Observable<User>
     @Multipart
@@ -62,7 +64,9 @@ interface PostApi {
         @Part("birth_date") birth_date: RequestBody,
         @Part("place") region: RequestBody,
         @Part("is_kg") is_kg: RequestBody,
-        @Part("is_ru") is_ru: RequestBody
+        @Part("is_ru") is_ru: RequestBody,
+        @Part("is_notification") is_notification : RequestBody
+
 
     ): Observable<User>
 
@@ -175,7 +179,7 @@ interface PostApi {
     fun getQuiz(@Query("test") category: Int): Observable<Response<List<Quiz>>>
 
     @GET("quote/")
-    fun getQuote(): Observable<Response<Quote>>
+    fun getQuote(@Query("lang")lang: String): Observable<Response<Quote>>
 
     @GET("day_quiz/")
     fun getQuizDay(@Query("date") category: String,@Query("lang") lang: String): Observable<Response<List<Quiz>>>

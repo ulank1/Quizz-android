@@ -75,7 +75,7 @@ class QuestionDayViewModel() : BaseViewModel() {
     fun getQuote() {
 
         subscription.add(
-            postApi.getQuote()
+            postApi.getQuote(Lang.get(App.activity!!).toString())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { showProgress() }

@@ -8,6 +8,7 @@ private val TAG = Lang::class.java.simpleName
 object Day{
     val APP_PREFERENCES = "Day"
     val TOKEN = "day"
+    val First = "first"
 
 
     private var mSettings: SharedPreferences? = null
@@ -41,7 +42,21 @@ object Day{
         return token != "empty" && token != ""
     }
 
+    fun saveFirst(token: String, context: Context) {
 
+        mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+
+        val editor = mSettings!!.edit()
+        editor.putString(First, token)
+        Log.e(TAG, "saved $token")
+        editor.apply()
+    }
+
+    fun getFirst(context: Context): String? {
+        mSettings = context.getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE)
+        Log.e("DATEEEE",mSettings!!.getString(TOKEN, "0"))
+        return mSettings!!.getString(First, "0")
+    }
 
 
 }

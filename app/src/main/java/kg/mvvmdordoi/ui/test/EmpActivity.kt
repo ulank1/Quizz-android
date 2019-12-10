@@ -23,16 +23,13 @@ class EmpActivity : AppCompatActivity() {
     private lateinit var mInterstitialAd: InterstitialAd
 
     fun setAd() {
-        MobileAds.initialize(
-            this,
-            getString(R.string.app_id_ad_mob)
-        )
+        MobileAds.initialize(this)
 //        6B635D398D472375ADFAF82341AB573B
         val android_id = Settings.Secure.getString(this.contentResolver, Settings.Secure.ANDROID_ID)
         val deviceId = md5(android_id).toUpperCase()
         mInterstitialAd = InterstitialAd(this)
         mInterstitialAd.adUnitId = getString(R.string.ad_video_id)
-        mInterstitialAd.loadAd(AdRequest.Builder().addTestDevice("6B635D398D472375ADFAF82341AB573B").build())
+        mInterstitialAd.loadAd(AdRequest.Builder().addTestDevice("6B635D398D472375ADFAF82341AB573B").addTestDevice("77B336B4B2D2256D188B11E4AFF3E10B").addTestDevice(AdRequest.DEVICE_ID_EMULATOR).build())
         Log.e("device id=",deviceId);
         btn_rek.setOnClickListener {
             if (mInterstitialAd.isLoaded) {

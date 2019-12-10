@@ -137,6 +137,7 @@ class GameQuestionActivity : AppCompatActivity(), NumerationListener, View.OnCli
 
             override fun onAdFailedToLoad(errorCode: Int) {
                 Log.e("Status", "onAdFailedToLoad")
+                toast(errorCode.toString())
             }
 
             override fun onAdOpened() {

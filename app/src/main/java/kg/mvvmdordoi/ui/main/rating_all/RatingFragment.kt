@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,7 +53,8 @@ class RatingFragment : Fragment() {
                 }
 
 
-                var my_rating = ratings[it.size-1]
+                var my_rating = it.ratings[it.size-1]
+                Log.e("Rating",my_rating.toString())
                 rating.text = (it.size).toString()
 
                 point.text = my_rating.rating.toString()

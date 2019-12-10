@@ -57,12 +57,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <EditText
+        <TextView
+            android:layout_marginStart="5dp"
+            android:textSize="16sp"
+            android:gravity="center_vertical"
+            android:inputType="none"
             android:id="@+id/birth_date"
             android:hint="@string/birth"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="35dp"/>
 
+        <View
+            android:background="#999"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
 
         <Spinner
             android:drawSelectorOnTop="true"

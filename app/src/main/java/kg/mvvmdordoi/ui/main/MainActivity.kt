@@ -1,10 +1,14 @@
 package kg.mvvmdordoi.ui.main
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.ActivityNotFoundException
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.Configuration
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
@@ -23,18 +27,15 @@ import android.view.View
 import android.widget.ExpandableListView
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 
 import kg.mvvmdordoi.fcm.FCMTokenUtils
-
-import java.util.ArrayList
-import java.util.HashMap
-import java.util.Locale
-import java.util.Objects
 
 import kg.mvvmdordoi.App
 import kg.mvvmdordoi.R
 import kg.mvvmdordoi.injection.ViewModelFactory
 import kg.mvvmdordoi.model.get.Category
+import kg.mvvmdordoi.network.Day
 import kg.mvvmdordoi.network.Lang
 import kg.mvvmdordoi.network.UserToken
 import kg.mvvmdordoi.ui.info.InfoListActivity
@@ -53,6 +54,12 @@ import kg.mvvmdordoi.ui.test.RewardedActivity
 import kg.mvvmdordoi.ui.test.TestActivity
 import kg.mvvmdordoi.ui.test.TestAddActivity
 import kg.mvvmdordoi.ui.university.UniversityListActivity
+import kg.mvvmdordoi.utils.extension.getDateDot
+import kg.mvvmdordoi.utils.extension.getTodayDateDot
+import kg.mvvmdordoi.utils.extension.gone
+import kg.mvvmdordoi.utils.extension.visible
+import kotlinx.android.synthetic.main.content_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -127,6 +134,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         fragmentManager = supportFragmentManager
+
+        if (Day.getFirst(this) == "0") {
+            Day.saveFirst(getTodayDateDot(), this)
+        } else {
+            if (getDateDot(-3, Calendar.DAY_OF_YEAR) == Day.getFirst(this)) {
+                showAlert()
+            }
+        }
+
+        yes.setOnClickListener { finish() }
+        no.setOnClickListener { exit.gone() }
 
         viewModel = ViewModelProviders.of(this, ViewModelFactory()).get(MainViewModel::class.java)
 
@@ -242,6 +260,39 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             false
         }
 
+    }
+
+    private fun showAlert() {
+
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Бизге баа бериңиз!")
+        builder.setMessage("Хотите оценить Synak Time?")
+        //builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
+
+        builder.setPositiveButton("Yes") { dialog, which ->
+            try {
+                startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("market://details?id=" + getPackageName())
+                    )
+                )
+            } catch (e: ActivityNotFoundException) {
+                startActivity(
+                    Intent(
+                        Intent.ACTION_VIEW,
+                        Uri.parse("https://play.google.com/store/apps/details?id=" + getPackageName())
+                    )
+                )
+            }
+        }
+
+        builder.setNegativeButton("No") { dialog, which ->
+            Day.saveFirst(getTodayDateDot(), this)
+            dialog.dismiss()
+        }
+
+        builder.show()
     }
 
     private fun setExpandable() {
@@ -385,7 +436,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+            exit.visible()
         }
     }
 
@@ -403,11 +454,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
         if (id == R.id.action_logOut) {
-    /*        var intent = Intent(this, SplashScreen::class.java)
+            var intent = Intent(this, SplashScreen::class.java)
             startActivity(intent)
             UserToken.clearToken(this)
-            finish()*/
-            startActivity(Intent(this, EmpActivity::class.java))
+            finish()
+//            startActivity(Intent(this, EmpActivity::class.java))
         } else if (id == R.id.action_lang) {
             //  Toast.makeText(this, "Язык", Toast.LENGTH_SHORT).show();
             startActivityForResult(Intent(this@MainActivity, SettingsActivity::class.java), 407)

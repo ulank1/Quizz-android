@@ -6,6 +6,25 @@
     android:layout_height="match_parent"
     tools:context=".ui.auth.login.AuthActivity">
 
+    <LinearLayout
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+
+            android:text="KG"
+            android:id="@+id/kg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+
+            android:text="RU"
+            android:id="@+id/ru"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
     <Button
         android:id="@+id/signIn"
         android:layout_width="match_parent"
@@ -32,11 +51,11 @@
         android:textColor="@color/colorTextGrey" />
 
     <ImageView
-        android:src="@drawable/logo"
         android:layout_width="100dp"
         android:layout_height="150dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="90dp" />
+        android:layout_marginTop="90dp"
+        android:src="@drawable/logo" />
 
 
 </RelativeLayout>

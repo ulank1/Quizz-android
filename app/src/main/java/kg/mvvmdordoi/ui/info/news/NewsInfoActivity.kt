@@ -7,6 +7,9 @@ import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.util.Log
 import android.view.MenuItem
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kg.mvvmdordoi.App
 import kg.mvvmdordoi.R
 import kg.mvvmdordoi.injection.ViewModelFactory
@@ -18,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_info.*
 
 class NewsInfoActivity : AppCompatActivity() {
 
+    lateinit var mAdView : AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +29,11 @@ class NewsInfoActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.title = getString(R.string.news)
         App.activity = this
+
+        MobileAds.initialize(this,"ca-app-pub-7649587179327452~9914538335")
+        mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         var it = intent.getSerializableExtra("info") as Info
 
