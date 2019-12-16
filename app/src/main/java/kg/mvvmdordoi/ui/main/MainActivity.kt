@@ -28,6 +28,9 @@ import android.widget.ExpandableListView
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 
 import kg.mvvmdordoi.fcm.FCMTokenUtils
 
@@ -142,6 +145,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 showAlert()
             }
         }
+
+        MobileAds.initialize(this,"ca-app-pub-7649587179327452~9914538335")
+        var mAdView = findViewById<AdView>(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         yes.setOnClickListener { finish() }
         no.setOnClickListener { exit.gone() }
@@ -465,7 +473,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         } else if (id == R.id.action_share) {
             val sharingIntent = Intent(android.content.Intent.ACTION_SEND)
             sharingIntent.type = "text/plain"
-            val shareBody = "Here is the share content body"
+            val shareBody = "https://play.google.com/store/apps/details?id=kg.mvvmdordoi"
             sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here")
             sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody)
             startActivity(Intent.createChooser(sharingIntent, "Share via"))

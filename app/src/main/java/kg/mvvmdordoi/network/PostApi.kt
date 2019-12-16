@@ -1,13 +1,11 @@
 package kg.mvvmdordoi.network
 
 import io.reactivex.Observable
-import kg.mvvmdordoi.App
 import kg.mvvmdordoi.model.ApiResponse
 import kg.mvvmdordoi.model.Product
 import kg.mvvmdordoi.model.Post
 import kg.mvvmdordoi.model.get.*
 import okhttp3.MultipartBody
-import okhttp3.Request
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -200,7 +198,7 @@ interface PostApi {
     @POST("rating/")
     fun addRating(
         @Field("rating") rating: Int,
-        @Field("user") user: Int,
+        @Field("user") user: String,
         @Field("created_at") create_at: String,
         @Field("true_answer") true_answer: Int,
         @Field("false_answer") false_answer: Int

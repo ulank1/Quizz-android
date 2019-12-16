@@ -2,7 +2,9 @@ package kg.mvvmdordoi.ui.info.news
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.support.v7.widget.RecyclerView
+import android.text.Html
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -56,8 +58,12 @@ class NewsRvAdapter(val context: Context) : RecyclerView.Adapter<NewsRvAdapter.A
 //                "UTF-8"
 //            )
 
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                desc.text = Html.fromHtml(item.desc, Html.FROM_HTML_MODE_COMPACT)
+            } else {
+                desc.text = Html.fromHtml(item.desc)
+            }
 
-            desc.text = item.desc
 
             name.setOnClickListener {
                 val intent = Intent(App.activity, NewsInfoActivity::class.java)

@@ -77,7 +77,7 @@ class UsersActivity : AppCompatActivity(),TextWatcher {
         share.setOnClickListener {
             val sharingIntent = Intent(Intent.ACTION_SEND)
             sharingIntent.type = "text/plain"
-            val shareBody = "Here is the share content body"
+            val shareBody = "https://play.google.com/store/apps/details?id=kg.mvvmdordoi"
             sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here")
             sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody)
             startActivity(Intent.createChooser(sharingIntent, "Share via")) }

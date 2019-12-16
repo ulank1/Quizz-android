@@ -53,7 +53,7 @@
             android:layout_marginTop="15dp"
             android:layout_below="@+id/adView"
             android:textColor="#000"
-            android:text="Хотите выйти?"
+            android:text="@string/want_exit"
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

@@ -115,3 +115,14 @@ fun getDateDot(num:Int,typeOfClendar:Int):String{
     var date:Date = calendar.time
     return df.format(date)
 }
+
+@SuppressLint("SimpleDateFormat")
+fun getDateDotDate(num:Int,typeOfClendar:Int,create_at: String):String{
+    val df = SimpleDateFormat("dd.MM.yyyy")
+    var date1 = df.parse(create_at)
+    var calendar = Calendar.getInstance()
+    calendar.time = date1
+    calendar.add(typeOfClendar,num)
+    var date:Date = calendar.time
+    return df.format(date)
+}

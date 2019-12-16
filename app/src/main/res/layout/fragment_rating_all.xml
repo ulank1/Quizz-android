@@ -32,6 +32,7 @@
                 android:textStyle="bold"
                 android:textColor="#686968"
                 android:id="@+id/name2"
+                android:gravity="center"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,6 +59,7 @@
                 android:textStyle="bold"
                 android:textColor="#FF9800"
                 android:id="@+id/name1"
+                android:gravity="center"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -80,6 +82,7 @@
                 android:layout_height="50dp" />
 
             <TextView
+                android:gravity="center"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 android:textColor="#6B2020"

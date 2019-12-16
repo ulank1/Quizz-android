@@ -421,35 +421,47 @@ class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickLi
         }
         question.settings.javaScriptEnabled = true
 
-        question.loadData(
+        question.loadDataWithBaseURL(
+            null,
             "<html><body>" + correctImage(quiz.question) + "</body></html>",
             "text/html; charset=utf-8",
-            "UTF-8"
+            "UTF-8",
+            null
         );
-        a.loadData(
+        a.loadDataWithBaseURL(
+            null,
             "<html><body>" + correctImage(quiz.answer_a) + "</body></html>",
             "text/html; charset=utf-8",
-            "UTF-8"
+            "UTF-8",
+            null
         );
-        b.loadData(
+        b.loadDataWithBaseURL(
+            null,
             "<html><body>" + correctImage(quiz.answer_b) + "</body></html>",
             "text/html; charset=utf-8",
-            "UTF-8"
+            "UTF-8",
+            null
         );
-        c.loadData(
+        c.loadDataWithBaseURL(
+            null,
             "<html><body>" + correctImage(quiz.answer_c) + "</body></html>",
             "text/html; charset=utf-8",
-            "UTF-8"
+            "UTF-8",
+            null
         );
-        d.loadData(
+        d.loadDataWithBaseURL(
+            null,
             "<html><body>" + correctImage(quiz.answer_d) + "</body></html>",
             "text/html; charset=utf-8",
-            "UTF-8"
+            "UTF-8",
+            null
         );
-        e.loadData(
+        e.loadDataWithBaseURL(
+            null,
             "<html><body>" + correctImage(quiz.answer_e) + "</body></html>",
             "text/html; charset=utf-8",
-            "UTF-8"
+            "UTF-8",
+            null
         );
         //question.loadDataWithBaseURL("", "<html><body>"+quiz.question+"</body></html>", "text/html", "UTF-8", "")
 

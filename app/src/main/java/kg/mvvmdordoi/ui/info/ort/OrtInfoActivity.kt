@@ -36,10 +36,12 @@ class OrtInfoActivity : AppCompatActivity() {
         var it = intent.getSerializableExtra("info") as Info
 
 
-        desc.loadData(
+        desc.loadDataWithBaseURL(
+            null,
             "<html><body>" + correctImage(it.desc) + "</body></html>",
             "text/html; charset=utf-8",
-            "UTF-8"
+            "UTF-8",
+            null
         )
 
         name.text = it.name

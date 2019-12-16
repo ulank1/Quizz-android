@@ -3,27 +3,18 @@ package kg.mvvmdordoi.ui.test.test_detail
 import android.app.Activity.RESULT_OK
 import android.arch.lifecycle.MutableLiveData
 import android.util.Log
-import android.view.View
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kg.mvvmdordoi.App
-import kg.mvvmdordoi.R
 import kg.mvvmdordoi.base.BaseViewModel
-import kg.mvvmdordoi.model.ApiResponse
 import kg.mvvmdordoi.model.Product
 import kg.mvvmdordoi.model.get.Quiz
-import kg.mvvmdordoi.model.get.Test
 import kg.mvvmdordoi.network.Lang
 import kg.mvvmdordoi.network.PostApi
 import kg.mvvmdordoi.network.UserToken
 import kg.mvvmdordoi.ui.game.users.Shared
-import kg.mvvmdordoi.utils.extension.getTodayDate
 import kg.mvvmdordoi.utils.extension.getTodayDateDot
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import retrofit2.Response
-import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
@@ -225,7 +216,7 @@ class QuestionViewModel() : BaseViewModel() {
         subscription.add(
             postApi.addRating(
                 sum,
-                UserToken.getToken(App.activity!!)!!.toInt(),
+                UserToken.getToken(App.activity!!)!!,
                 date,
                 trueAnswer,
                 falseAnswer
@@ -286,6 +277,42 @@ class QuestionViewModel() : BaseViewModel() {
                 )
         )
     }
+
+
+    private fun addRating(user_id: String,date: String, sum: Int, trueAnswer: Int, falseAnswer: Int,type: Int) {
+
+        subscription.add(
+            postApi.addRating(
+                sum,
+               user_id,
+                date,
+                trueAnswer,
+                falseAnswer
+            )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { showProgress() }
+                .doOnTerminate { hideProgress() }
+                .subscribe(
+                    { result ->
+                        hideProgress()
+                        Log.e("EWW", result.body().toString())
+                        if (result.isSuccessful) {
+
+                        } else {
+                            var error = result.errorBody()!!.string()
+                            Log.e("Erroradd", error)
+
+                        }
+                    },
+                    {
+                        hideProgress()
+                        Log.e("Erroradd", it.toString())
+                    }
+                )
+        )
+    }
+
 
     fun getRating(sum: Int, trueAnswer: Int, falseAnswer: Int) {
         val user_id = UserToken.getToken(App.activity!!)
@@ -437,6 +464,7 @@ class QuestionViewModel() : BaseViewModel() {
                                         )
                                     } else {
                                         addRating(
+                                            user_id,
                                             getTodayDateDot(),
                                             sum,
                                             trueAnswer,
@@ -446,6 +474,7 @@ class QuestionViewModel() : BaseViewModel() {
                                     }
                                 } else {
                                     addRating(
+                                        user_id,
                                         getTodayDateDot(),
                                         sum,
                                         trueAnswer,
@@ -496,6 +525,7 @@ class QuestionViewModel() : BaseViewModel() {
                                         )
                                     } else {
                                         addRating(
+                                            user_id,
                                             "all",
                                             sum,
                                             trueAnswer,
@@ -505,6 +535,7 @@ class QuestionViewModel() : BaseViewModel() {
                                     }
                                 } else {
                                     addRating(
+                                        user_id,
                                         "all",
                                         sum,
                                         trueAnswer,

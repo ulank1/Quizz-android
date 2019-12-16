@@ -24,11 +24,13 @@ import kg.mvvmdordoi.utils.extension.visible
 import android.os.CountDownTimer
 import android.os.Handler
 import android.util.Log
+import android.webkit.WebView
 import com.bumptech.glide.Glide
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import com.google.android.gms.ads.MobileAds
+import kg.mvvmdordoi.network.UserToken
 import kg.mvvmdordoi.ui.game.users.Shared
 import kg.mvvmdordoi.utils.URL1
 import kg.mvvmdordoi.utils.extension.toast
@@ -279,7 +281,7 @@ class GameQuestionActivityInvite : AppCompatActivity(), NumerationListener, View
                                 setResultRV()
                                 cT.cancel()
                                 var ownerPoint = Shared.gameOuter.owner_point
-
+                                Log.e("UserIDS",UserToken.getToken(this)+" "+ Shared.gameOuter.user_owner.id.toString()+" "+Shared.gameOuter.user_outer.id.toString())
                                 when {
                                     ownerPoint > trues -> {
                                         viewModel.getRating(-10, 0, 0)
@@ -444,39 +446,22 @@ class GameQuestionActivityInvite : AppCompatActivity(), NumerationListener, View
         }
         question.settings.javaScriptEnabled = true
 
-        question.loadData(
-            "<html><body>" + correctImage(quiz.question) + "</body></html>",
-            "text/html; charset=utf-8",
-            "UTF-8"
-        );
-        a.loadData(
-            "<html><body>" + correctImage(quiz.answer_a) + "</body></html>",
-            "text/html; charset=utf-8",
-            "UTF-8"
-        );
-        b.loadData(
-            "<html><body>" + correctImage(quiz.answer_b) + "</body></html>",
-            "text/html; charset=utf-8",
-            "UTF-8"
-        );
-        c.loadData(
-            "<html><body>" + correctImage(quiz.answer_c) + "</body></html>",
-            "text/html; charset=utf-8",
-            "UTF-8"
-        );
-        d.loadData(
-            "<html><body>" + correctImage(quiz.answer_d) + "</body></html>",
-            "text/html; charset=utf-8",
-            "UTF-8"
-        );
-        e.loadData(
-            "<html><body>" + correctImage(quiz.answer_e) + "</body></html>",
-            "text/html; charset=utf-8",
-            "UTF-8"
-        );
+        loadWeb(question,quiz.question)
+        loadWeb(a,quiz.answer_a)
+        loadWeb(b,quiz.answer_b)
+        loadWeb(c,quiz.answer_c)
+        loadWeb(d,quiz.answer_d)
+        loadWeb(e,quiz.answer_e)
         //question.loadDataWithBaseURL("", "<html><body>"+quiz.question+"</body></html>", "text/html", "UTF-8", "")
-
-
+    }
+    fun loadWeb(webView: WebView, text:String){
+        webView.loadDataWithBaseURL(
+            null,
+            "<html><body>" + correctImage(text) + "</body></html>",
+            "text/html; charset=utf-8",
+            "UTF-8",
+            null
+        );
     }
 
     private fun correctImage(data: String): String {

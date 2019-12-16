@@ -34,8 +34,8 @@ class SendMessageActivity : AppCompatActivity() {
         btn_send.setOnClickListener {
             val send = Intent(Intent.ACTION_SENDTO)
             val uriText = "mailto:" + Uri.encode("jrt00996@gmail.com") +
-                    "?subject=" + Uri.encode("the subject") +
-                    "&body=" + Uri.encode("the body of the message")
+                    "?subject=" + Uri.encode("") +
+                    "&body=" + Uri.encode("")
             val uri = Uri.parse(uriText)
 
             send.data = uri
