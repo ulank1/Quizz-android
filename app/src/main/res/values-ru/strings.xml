@@ -176,5 +176,6 @@
     <string name="ad_video_id">ca-app-pub-7649587179327452/8399627756</string>
     <string name="no_exit">Вы не можете выйти, не завершив тест</string>
     <string name="want_exit">Хотите выйти?</string>
+    <string name="search_users">Поиск игрока ...</string>
 
 </resources>

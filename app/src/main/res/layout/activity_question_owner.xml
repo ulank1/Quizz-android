@@ -46,201 +46,204 @@
 
     </android.support.design.widget.AppBarLayout>
 
-
-    <LinearLayout
-        android:id="@+id/line_quiz"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <ScrollView
         android:layout_below="@+id/app_bar"
-        android:orientation="vertical">
-
-
-        <TextView
-            android:id="@+id/test_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_margin="5dp"
-            android:background="#888" />
-
-        <WebView
-            android:id="@+id/question"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/line_a"
+            android:id="@+id/line_quiz"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="5dp"
-            android:orientation="horizontal"
-            tools:ignore="WebViewLayout">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
 
             <TextView
-                android:id="@+id/choose_a"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:background="@drawable/gray_stroke_1dp_circle"
-                android:gravity="center"
-                android:text="A" />
-
-
-            <WebView
-                android:id="@+id/a"
+                android:id="@+id/test_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="5dp" />
+                android:gravity="center" />
 
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/line_b"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="5dp"
-            android:orientation="horizontal"
-            tools:ignore="WebViewLayout">
-
-            <TextView
-                android:id="@+id/choose_b"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:background="@drawable/gray_stroke_1dp_circle"
-                android:gravity="center"
-                android:text="Б" />
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_margin="5dp"
+                android:background="#888" />
 
             <WebView
-                android:id="@+id/b"
+                android:id="@+id/question"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="5dp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/line_c"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="5dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/choose_c"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:background="@drawable/gray_stroke_1dp_circle"
-                android:gravity="center"
-                android:text="В" />
-
-
-            <WebView
-                android:id="@+id/c"
+            <LinearLayout
+                android:id="@+id/line_a"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_marginStart="5dp"
-                tools:ignore="WebViewLayout" />
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="5dp"
+                android:orientation="horizontal"
+                tools:ignore="WebViewLayout">
+
+                <TextView
+                    android:id="@+id/choose_a"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/gray_stroke_1dp_circle"
+                    android:gravity="center"
+                    android:text="A" />
 
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/line_d"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="5dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/choose_d"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:background="@drawable/gray_stroke_1dp_circle"
-                android:gravity="center"
-                android:text="Г" />
+                <WebView
+                    android:id="@+id/a"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp" />
 
 
-            <WebView
-                android:id="@+id/d"
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/line_b"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_marginStart="5dp"
-                tools:ignore="WebViewLayout" />
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="5dp"
+                android:orientation="horizontal"
+                tools:ignore="WebViewLayout">
+
+                <TextView
+                    android:id="@+id/choose_b"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/gray_stroke_1dp_circle"
+                    android:gravity="center"
+                    android:text="Б" />
 
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/line_e"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="5dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/choose_e"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:background="@drawable/gray_stroke_1dp_circle"
-                android:gravity="center"
-                android:text="Д" />
+                <WebView
+                    android:id="@+id/b"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp" />
 
 
-            <WebView
-                android:id="@+id/e"
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/line_c"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_marginStart="5dp"
-                tools:ignore="WebViewLayout" />
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/choose_c"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/gray_stroke_1dp_circle"
+                    android:gravity="center"
+                    android:text="В" />
 
 
+                <WebView
+                    android:id="@+id/c"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    tools:ignore="WebViewLayout" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/line_d"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/choose_d"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/gray_stroke_1dp_circle"
+                    android:gravity="center"
+                    android:text="Г" />
+
+
+                <WebView
+                    android:id="@+id/d"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    tools:ignore="WebViewLayout" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/line_e"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="5dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/choose_e"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/gray_stroke_1dp_circle"
+                    android:gravity="center"
+                    android:text="Д" />
+
+
+                <WebView
+                    android:id="@+id/e"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    tools:ignore="WebViewLayout" />
+
+
+            </LinearLayout>
+
+
+            <Button
+
+                android:id="@+id/next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/blue_5dp"
+                android:paddingStart="30dp"
+                android:paddingEnd="30dp"
+                android:text="@string/dalee"
+                android:textColor="@color/white" />
         </LinearLayout>
-
-
-        <Button
-
-            android:id="@+id/next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/blue_5dp"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
-            android:text="@string/dalee"
-            android:textColor="@color/white" />
-    </LinearLayout>
-
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/line_result"

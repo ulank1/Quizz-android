@@ -152,6 +152,7 @@
     <string name="ad_video_id">ca-app-pub-7649587179327452/8399627756</string>
     <string name="no_exit">Тестти бүтүрбөй чыгууга болбойт!</string>
     <string name="want_exit">Чыгууну каалайсызбы?</string>
+    <string name="search_users">Оюнчу издөө ...</string>
     <string-array name="regions">
         <item>Бишкек шаары</item>
         <item>Ош шаары</item>

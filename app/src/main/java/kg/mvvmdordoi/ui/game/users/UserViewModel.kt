@@ -13,6 +13,7 @@ import kg.mvvmdordoi.model.ApiResponse
 import kg.mvvmdordoi.model.Product
 import kg.mvvmdordoi.model.get.Test
 import kg.mvvmdordoi.model.get.User
+import kg.mvvmdordoi.model.get.UserDuel
 import kg.mvvmdordoi.network.PostApi
 import kg.mvvmdordoi.network.UserToken
 import okhttp3.MultipartBody
@@ -27,6 +28,7 @@ class UserViewModel() : BaseViewModel() {
     var postList: ArrayList<Product> = ArrayList()
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
     val users: MutableLiveData<List<User>> = MutableLiveData()
+    val usersDuel: MutableLiveData<UserDuel> = MutableLiveData()
 
     private var subscription: CompositeDisposable = CompositeDisposable()
 
@@ -42,7 +44,7 @@ class UserViewModel() : BaseViewModel() {
     fun getUsers() {
 
         subscription.add(
-            postApi.getUsers()
+            postApi.getUsersDuel(UsersActivity.page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { showProgress() }
@@ -51,7 +53,7 @@ class UserViewModel() : BaseViewModel() {
                     { result -> hideProgress()
                         Log.e("EWW",result.toString())
                         if (result.isSuccessful) {
-                            users.value = result.body()
+                            usersDuel.value = result.body()
                         } else {
                             var error = result.errorBody()!!.string()
                             Log.e("Error4",error)

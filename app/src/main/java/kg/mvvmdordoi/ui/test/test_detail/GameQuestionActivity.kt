@@ -164,9 +164,12 @@ class GameQuestionActivity : AppCompatActivity(), NumerationListener, View.OnCli
 
     private fun setSSS() {
         name_outer1.text = Shared.name_outer
-        Glide.with(this).load(kg.mvvmdordoi.ui.test.test_detail.Shared.user.avatar).into(image11)
-        Glide.with(this).load(Shared.avatar_outer).into(image21)
-
+        if (kg.mvvmdordoi.ui.test.test_detail.Shared.user!=null) {
+            Glide.with(this).load(kg.mvvmdordoi.ui.test.test_detail.Shared.user).into(image11)
+        }
+        if (Shared.avatar_outer!=null) {
+            Glide.with(this).load(Shared.avatar_outer).into(image21)
+        }
         btn_start.setOnClickListener {
             line_preview.gone()
             viewModel.getTestsGame(intent.getIntExtra("id", 1))
@@ -400,6 +403,8 @@ class GameQuestionActivity : AppCompatActivity(), NumerationListener, View.OnCli
         if (quiz.answer_e.isNullOrEmpty()) {
             line_e.gone()
         }
+        Log.e("D_ANSWER",quiz.answer_d)
+        line_d.visible()
         if (quiz.answer_d.isNullOrEmpty()){
             line_d.gone()
         }

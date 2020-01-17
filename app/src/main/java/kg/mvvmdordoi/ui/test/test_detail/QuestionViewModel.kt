@@ -350,13 +350,7 @@ class QuestionViewModel() : BaseViewModel() {
                                         )
                                     }
                                 } else {
-                                    addRating(
-                                        getTodayDateDot(),
-                                        sum,
-                                         trueAnswer,
-                                        falseAnswer,
-                                        2
-                                    )
+
                                 }
                             } else {
                                 var error = result.errorBody()!!.string()
@@ -410,13 +404,7 @@ class QuestionViewModel() : BaseViewModel() {
                                         )
                                     }
                                 } else {
-                                    addRating(
-                                        "all",
-                                        sum,
-                                       trueAnswer,
-                                        falseAnswer,
-                                        1
-                                    )
+
                                 }
                             } else {
                                 var error = result.errorBody()!!.string()
@@ -473,14 +461,7 @@ class QuestionViewModel() : BaseViewModel() {
                                         )
                                     }
                                 } else {
-                                    addRating(
-                                        user_id,
-                                        getTodayDateDot(),
-                                        sum,
-                                        trueAnswer,
-                                        falseAnswer,
-                                        2
-                                    )
+
                                 }
                             } else {
                                 var error = result.errorBody()!!.string()
@@ -534,14 +515,7 @@ class QuestionViewModel() : BaseViewModel() {
                                         )
                                     }
                                 } else {
-                                    addRating(
-                                        user_id,
-                                        "all",
-                                        sum,
-                                        trueAnswer,
-                                        falseAnswer,
-                                        1
-                                    )
+
                                 }
                             } else {
                                 var error = result.errorBody()!!.string()

@@ -441,6 +441,8 @@ class GameQuestionActivityInvite : AppCompatActivity(), NumerationListener, View
         if (quiz.answer_e.isNullOrEmpty()) {
             line_e.gone()
         }
+        line_d.visible()
+
         if (quiz.answer_d.isNullOrEmpty()) {
             line_d.gone()
         }

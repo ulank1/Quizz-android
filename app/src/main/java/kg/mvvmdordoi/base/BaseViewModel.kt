@@ -65,7 +65,7 @@ abstract class BaseViewModel:ViewModel(){
 
     private var progressBar: ProgressDialog? = null
 
-
+ 
 
     fun showProgress() {
         if (progressBar!=null){

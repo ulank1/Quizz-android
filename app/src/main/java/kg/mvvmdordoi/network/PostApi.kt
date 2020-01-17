@@ -32,6 +32,9 @@ interface PostApi {
     @GET("users/")
     fun getUsers(): Observable<Response<List<User>>>
 
+    @GET("users_duel/")
+    fun getUsersDuel(@Query("page") page:String): Observable<Response<UserDuel>>
+
     @GET("users/")
     fun getUsersSearch(@Query("search")text:String): Observable<Response<List<User>>>
 
@@ -224,10 +227,14 @@ interface PostApi {
         @Query("user") user_id: String
     ): Observable<Response<List<Rating>>>
 
-    @GET("rating_al/")
+    @GET("rating_first/")
     fun getRatingAll(
         @Query("user_id") user_id: String
     ): Observable<Response<RatingAll>>
+
+    @GET("rating_all_of/")
+    fun getRatingAllOf(
+    ): Observable<Response<List<RatingWithUser>>>
 
 
 

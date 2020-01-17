@@ -32,14 +32,20 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
 
     <EditText
+        android:paddingStart="10dp"
         android:inputType="text"
         android:paddingEnd="5dp"
         android:layout_margin="5dp"
         android:drawableEnd="@drawable/ic_search_black_24dp"
         android:id="@+id/search"
         android:layout_below="@+id/appbar"
+        android:hint="@string/search_users"
         android:background="@drawable/black_stroke_1dp_circle"
         android:layout_width="match_parent"
         android:layout_height="50dp"/>

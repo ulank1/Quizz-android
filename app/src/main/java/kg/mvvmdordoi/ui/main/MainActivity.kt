@@ -8,6 +8,7 @@ import android.content.ActivityNotFoundException
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.Configuration
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
@@ -22,6 +23,8 @@ import android.support.v4.widget.DrawerLayout
 
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.util.TypedValue
+import android.view.Gravity
 import android.view.Menu
 import android.view.View
 import android.widget.ExpandableListView
@@ -130,9 +133,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-
         super.onCreate(savedInstanceState)
         App.activity = this
+
         setContentView(R.layout.activity_main)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -145,7 +148,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 showAlert()
             }
         }
-
         MobileAds.initialize(this,"ca-app-pub-7649587179327452~9914538335")
         var mAdView = findViewById<AdView>(R.id.adView)
         val adRequest = AdRequest.Builder().build()
@@ -274,9 +276,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Бизге баа бериңиз!")
-        builder.setMessage("Хотите оценить Synak Time?")
-        //builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
+        builder.setIcon(R.drawable.clap)
+        var myMsg = TextView(this);
+        myMsg.setText("Мы гордимся вами!\nПоставив оценку 5,\nВы мотивируете нас!");
+        myMsg.setGravity(Gravity.CENTER_HORIZONTAL)
+        myMsg.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17F)
+        myMsg.setTextColor(Color.BLACK)
 
+        builder.setView(myMsg)
         builder.setPositiveButton("Yes") { dialog, which ->
             try {
                 startActivity(

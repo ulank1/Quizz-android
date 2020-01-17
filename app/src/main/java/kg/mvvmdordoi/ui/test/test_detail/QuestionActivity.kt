@@ -82,6 +82,7 @@ class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickLi
 
         setContentView(R.layout.activity_question)
         setSupportActionBar(toolbar)
+        ok.isEnabled = false
         setAd()
         back.setOnClickListener {
             if (line_result.visibility == View.VISIBLE) {
@@ -96,6 +97,8 @@ class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickLi
                 }
             }
         }
+
+
         var title = "Тест"
         title = intent.getStringExtra("title")
         supportActionBar!!.title = title.toString()
@@ -109,7 +112,7 @@ class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickLi
 
         viewModel.tests.observe(this, Observer {
             getTime(it as ArrayList<Quiz>)
-
+            ok.isEnabled = true
             quizzes = it
             currentPosition = 0
             setQuestion()
@@ -420,6 +423,11 @@ class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickLi
             line_d.gone()
         }
         question.settings.javaScriptEnabled = true
+        a.settings.javaScriptEnabled = true
+        b.settings.javaScriptEnabled = true
+        c.settings.javaScriptEnabled = true
+        d.settings.javaScriptEnabled = true
+        e.settings.javaScriptEnabled = true
 
         question.loadDataWithBaseURL(
             null,

@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -34,6 +35,7 @@ import kg.mvvmdordoi.R
 import kg.mvvmdordoi.injection.ViewModelFactory
 import kg.mvvmdordoi.model.get.GameOuter
 import kg.mvvmdordoi.model.get.Rating
+import kg.mvvmdordoi.network.Lang
 import kg.mvvmdordoi.network.UserToken
 import kg.mvvmdordoi.ui.auth.login.LoginActivity
 import kg.mvvmdordoi.ui.auth.register.RegisterActivity
@@ -69,7 +71,19 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View? { if (Lang.get(context!!) == "1") {
+        val locale = Locale("ky")
+        Locale.setDefault(locale)
+        val configuration = Configuration()
+        configuration.locale = locale
+        activity!!.baseContext.resources.updateConfiguration(configuration, null)
+    } else {
+        val locale = Locale("ru")
+        Locale.setDefault(locale)
+        val configuration = Configuration()
+        configuration.locale = locale
+        activity!!.baseContext.resources.updateConfiguration(configuration, null)
+    }
 
         return inflater.inflate(R.layout.profile_layout, container, false)
     }

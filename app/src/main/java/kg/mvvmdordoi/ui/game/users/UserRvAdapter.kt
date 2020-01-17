@@ -34,8 +34,12 @@ class UserRvAdapter(val context: Context) : RecyclerView.Adapter<UserRvAdapter.A
     override fun onBindViewHolder(holder: AdvertViewHolder, position: Int) = holder.bind(data[position])
 
     fun swapData(data: ArrayList<User>) {
-        this.data = data
+        this.data.addAll(data)
         notifyDataSetChanged()
+    }
+
+    fun clearData(){
+        data.clear()
     }
 
     inner class AdvertViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

@@ -8,10 +8,7 @@ import io.reactivex.schedulers.Schedulers
 import kg.mvvmdordoi.App
 import kg.mvvmdordoi.base.BaseViewModel
 import kg.mvvmdordoi.model.Product
-import kg.mvvmdordoi.model.get.GameOuter
-import kg.mvvmdordoi.model.get.Rating
-import kg.mvvmdordoi.model.get.RatingAll
-import kg.mvvmdordoi.model.get.User
+import kg.mvvmdordoi.model.get.*
 import kg.mvvmdordoi.network.PostApi
 import kg.mvvmdordoi.network.UserToken
 import okhttp3.MultipartBody
@@ -30,6 +27,7 @@ class ProfileViewModel() : BaseViewModel() {
     val user: MutableLiveData<User> = MutableLiveData()
     val game: MutableLiveData<List<GameOuter>> = MutableLiveData()
     val ratingAll: MutableLiveData<RatingAll> = MutableLiveData()
+    val ratingAllOf: MutableLiveData<List<RatingWithUser>> = MutableLiveData()
 
     private var subscription: CompositeDisposable = CompositeDisposable()
 
@@ -102,6 +100,31 @@ class ProfileViewModel() : BaseViewModel() {
                 )
         )
     }
+
+    fun getRatingAllOf() {
+
+        subscription.add(
+            postApi.getRatingAllOf()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { showProgress() }
+                .doOnTerminate { hideProgress() }
+                .subscribe(
+                    { result -> hideProgress()
+                        if (result.isSuccessful) {
+                            Log.e("RATINGS",result.body().toString())
+                            ratingAllOf.value = result.body()!!
+                        }else{
+                            Log.e("ERROR", result.errorBody()?.string())
+                        }
+                    },
+                    { hideProgress()
+                        Log.e("Errdasdasor",it.toString())
+                    }
+                )
+        )
+    }
+
 
     fun getUser() {
 
