@@ -34,6 +34,7 @@ import android.widget.Toast
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
+import com.google.firebase.FirebaseApp
 
 import kg.mvvmdordoi.fcm.FCMTokenUtils
 
@@ -135,6 +136,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         super.onCreate(savedInstanceState)
         App.activity = this
+        FirebaseApp.initializeApp(this)
 
         setContentView(R.layout.activity_main)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
@@ -189,7 +191,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         })
 
         FCMTokenUtils.deleteToken(this)
-        Log.e("DEVICE_ID", FCMTokenUtils.getTokenFromPrefs(this))
 
 
         val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)

@@ -121,36 +121,6 @@ class QuestionViewModel() : BaseViewModel() {
     }
 
 
-
-    fun getTestsDay() {
-
-        subscription.add(
-            postApi.getQuizDay(getTodayDateDot(), Lang.get(App.activity!!).toString())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { showProgress() }
-                .doOnTerminate { hideProgress() }
-                .subscribe(
-                    { result ->
-                        hideProgress()
-                        Log.e("EWW", result.toString())
-                        if (result.isSuccessful) {
-                            tests.value = result.body()
-                        } else {
-                            var error = result.errorBody()!!.string()
-                            Log.e("Error", error)
-
-                        }
-                    },
-                    {
-                        hideProgress()
-                        Log.e("Error", it.toString())
-                    }
-                )
-        )
-    }
-
-
     fun postGameCache(trues:Int,ids:String,type:Int,category:String) {
         Log.e("TOKEN",UserToken.getToken(App.activity!!)!!)
         subscription.add(

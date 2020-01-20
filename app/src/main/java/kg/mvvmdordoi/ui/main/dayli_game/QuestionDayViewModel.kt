@@ -8,11 +8,14 @@ import io.reactivex.schedulers.Schedulers
 import kg.mvvmdordoi.App
 import kg.mvvmdordoi.base.BaseViewModel
 import kg.mvvmdordoi.model.Product
+import kg.mvvmdordoi.model.get.Comment
+import kg.mvvmdordoi.model.get.DayQuiz
 import kg.mvvmdordoi.model.get.Quiz
 import kg.mvvmdordoi.model.get.Quote
 import kg.mvvmdordoi.network.Lang
 import kg.mvvmdordoi.network.PostApi
 import kg.mvvmdordoi.network.UserToken
+import kg.mvvmdordoi.utils.extension.getTodayDate
 import kg.mvvmdordoi.utils.extension.getTodayDateDot
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -23,7 +26,9 @@ class QuestionDayViewModel() : BaseViewModel() {
     lateinit var postApi: PostApi
     var postList: ArrayList<Product> = ArrayList()
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
-    val tests: MutableLiveData<List<Quiz>> = MutableLiveData()
+    val tests: MutableLiveData<List<DayQuiz>> = MutableLiveData()
+    val comments: MutableLiveData<List<Comment>> = MutableLiveData()
+    val comment: MutableLiveData<Comment> = MutableLiveData()
     val quote: MutableLiveData<Quote> = MutableLiveData()
 
     private var subscription: CompositeDisposable = CompositeDisposable()
@@ -37,31 +42,7 @@ class QuestionDayViewModel() : BaseViewModel() {
         subscription = CompositeDisposable()
     }
 
-    fun getTests(id:Int) {
 
-        subscription.add(
-            postApi.getQuiz(id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { showProgress() }
-                .doOnTerminate { hideProgress() }
-                .subscribe(
-                    { result -> hideProgress()
-                        Log.e("EWW",result.body().toString())
-                        if (result.isSuccessful) {
-                            tests.value = result.body()
-                        } else {
-                            var error = result.errorBody()!!.string()
-                            Log.e("Error",error)
-
-                        }
-                    },
-                    { hideProgress()
-                    Log.e("Error",it.toString())
-                    }
-                )
-        )
-    }
 
     fun getQuote() {
 
@@ -73,35 +54,9 @@ class QuestionDayViewModel() : BaseViewModel() {
                 .doOnTerminate { hideProgress() }
                 .subscribe(
                     { result -> hideProgress()
-                        Log.e("EWW",result.body().toString())
+                        Log.e("EWW33",result.body().toString())
                         if (result.isSuccessful) {
                             quote.value = result.body()
-                        } else {
-                            var error = result.errorBody()!!.string()
-                            Log.e("Error",error)
-
-                        }
-                    },
-                    { hideProgress()
-                        Log.e("Error",it.toString())
-                    }
-                )
-        )
-    }
-
-    fun getTestsGame(id:Int) {
-
-        subscription.add(
-            postApi.getQuizGame(id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { showProgress() }
-                .doOnTerminate { hideProgress() }
-                .subscribe(
-                    { result -> hideProgress()
-                        Log.e("EWW",result.toString())
-                        if (result.isSuccessful) {
-                            tests.value = result.body()
                         } else {
                             var error = result.errorBody()!!.string()
                             Log.e("Error",error)
@@ -118,14 +73,14 @@ class QuestionDayViewModel() : BaseViewModel() {
     fun getTestsDay() {
 
         subscription.add(
-            postApi.getQuizDay(getTodayDateDot(), Lang.get(App.activity!!).toString())
+            postApi.getQuizDay("2020-01-18", Lang.get(App.activity!!).toString())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { showProgress() }
                 .doOnTerminate { hideProgress() }
                 .subscribe(
                     { result -> hideProgress()
-                        Log.e("EWW",result.body().toString())
+                        Log.e("EWW333",result.body().toString())
                         if (result.isSuccessful) {
                             tests.value = result.body()
                         } else {
@@ -140,19 +95,19 @@ class QuestionDayViewModel() : BaseViewModel() {
                 )
         )
     }
-
-    fun addRating(date:String, sum:Int,trueAnswer: Int,falseAnswer: Int) {
+    fun getComments(id:Int) {
 
         subscription.add(
-            postApi.addRating(sum,UserToken.getToken(App.activity!!)!!, date,trueAnswer,falseAnswer)
+            postApi.getCommentQuiz(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { showProgress() }
                 .doOnTerminate { hideProgress() }
                 .subscribe(
                     { result -> hideProgress()
-                        Log.e("EWW",result.toString())
+                        Log.e("EWW",result.body().toString())
                         if (result.isSuccessful) {
+                            comments.value = result.body()
                         } else {
                             var error = result.errorBody()!!.string()
                             Log.e("Error",error)
@@ -165,22 +120,48 @@ class QuestionDayViewModel() : BaseViewModel() {
                 )
         )
     }
-
-    private fun updateRating(date:String,sum:Int, id: Int,trueAnswer:Int,falseAnswer:Int) {
-
+    fun sendComment(message:String,quiz_id:Int) {
+        Log.e("User",UserToken.getToken(App.activity!!).toString())
         subscription.add(
-            postApi.updateRating(id,sum,trueAnswer,falseAnswer)
+            postApi.postComment(quiz_id,message,UserToken.getToken(App.activity!!)!!.toInt())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { showProgress() }
                 .doOnTerminate { hideProgress() }
                 .subscribe(
                     { result -> hideProgress()
-                        Log.e("EWW",result.toString())
+                        Log.e("Post Comment",result.body().toString())
                         if (result.isSuccessful) {
+                            getComments(quiz_id)
                         } else {
                             var error = result.errorBody()!!.string()
                             Log.e("Error",error)
+
+                        }
+                    },
+                    { hideProgress()
+                        Log.e("ASError",it.toString())
+                    }
+                )
+        )
+    }
+
+    fun sendAnswer(message:String,quiz_id:Int,comment_id:Int) {
+
+        subscription.add(
+            postApi.postAnswer(quiz_id,message,UserToken.getToken(App.activity!!).toString(),comment_id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { showProgress() }
+                .doOnTerminate { hideProgress() }
+                .subscribe(
+                    { result -> hideProgress()
+                        Log.e("Post Comment",result.body().toString())
+                        if (result.isSuccessful) {
+                            getComments(quiz_id)
+                        } else {
+                            var error = result.errorBody()!!.string()
+                            Log.e("FFError",error)
 
                         }
                     },
@@ -190,88 +171,5 @@ class QuestionDayViewModel() : BaseViewModel() {
                 )
         )
     }
-
-    fun getRating(sum:Int) {
-
-        subscription.add(
-            postApi.getRatingByDate(getTodayDateDot(),UserToken.getToken(App.activity!!).toString())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { showProgress() }
-                .doOnTerminate { hideProgress() }
-                .subscribe(
-                    { result -> hideProgress()
-                        Log.e("EWW",result.toString())
-                        if (result.isSuccessful) {
-                           if (result.body()!=null){
-                               if (result.body()!!.isNotEmpty()) {
-                                   updateRating(
-                                       getTodayDateDot(),sum + result.body()!![0].rating,result.body()!![0].id,
-                                       result.body()!![0].true_answer, result.body()!![0].false_answer)
-                               }else{
-                                   addRating(getTodayDateDot(),sum,0,0)
-                               }
-                           }else{
-                                addRating(getTodayDateDot(),sum,0,0)
-                           }
-                            getRatingAll(sum)
-                        } else {
-                            var error = result.errorBody()!!.string()
-                            Log.e("Error",error)
-
-                        }
-                    },
-                    { hideProgress()
-                        Log.e("Error",it.toString())
-                    }
-                )
-        )
-    }
-
-    fun getRatingAll(sum:Int) {
-        val user_id = UserToken.getToken(App.activity!!)
-        if (user_id != "empty") {
-            subscription.add(
-                postApi.getRatingByDate("all", user_id.toString())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .doOnSubscribe { showProgress() }
-                    .doOnTerminate { hideProgress() }
-                    .subscribe(
-                        { result ->
-                            hideProgress()
-                            Log.e("EWW", result.toString())
-                            if (result.isSuccessful) {
-                                if (result.body() != null) {
-                                    if (result.body()!!.isNotEmpty()) {
-                                        updateRating(
-                                            "all",
-                                            sum + result.body()!![0].rating,
-                                            result.body()!![0].id,
-                                            result.body()!![0].true_answer,
-                                            result.body()!![0].false_answer
-                                        )
-                                    } else {
-                                        addRating("all", sum, 0, 0)
-                                    }
-                                } else {
-                                    addRating("all", sum, 0, 0)
-                                }
-                            } else {
-                                var error = result.errorBody()!!.string()
-                                Log.e("Error", error)
-
-                            }
-                        },
-                        {
-                            hideProgress()
-                            Log.e("Error", it.toString())
-                        }
-                    )
-            )
-        }
-    }
-
-
 
 }

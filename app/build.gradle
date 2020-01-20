@@ -4,19 +4,17 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'com.google.gms.google-services'
 apply plugin: 'io.fabric'
-
 android {
     signingConfigs {
         release {
-            storeFile file('E:\\ffff\\Quizz-android\\quiz.jks')
+            storeFile file('C:\\Users\\lopst\\AndroidStudioProjects\\Quizz-android\\quiz.jks')
             storePassword 'quiz2019'
             keyAlias = 'quiz2019'
             keyPassword 'quiz2019'
         }
     }
-    compileSdkVersion 29
+    compileSdkVersion 28
 
     dataBinding {
         enabled = true
@@ -25,7 +23,7 @@ android {
     defaultConfig {
         applicationId "kg.mvvmdordoi"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 28
         versionCode 14
         versionName "1.13"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -130,3 +128,4 @@ dependencies {
     implementation 'com.github.Ferfalk:SimpleSearchView:0.1.4'
 
 }
+apply plugin: 'com.google.gms.google-services'

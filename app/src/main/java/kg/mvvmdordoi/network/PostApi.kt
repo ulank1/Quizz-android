@@ -183,10 +183,27 @@ interface PostApi {
     fun getQuote(@Query("lang")lang: String): Observable<Response<Quote>>
 
     @GET("day_quiz/")
-    fun getQuizDay(@Query("date") category: String,@Query("lang") lang: String): Observable<Response<List<Quiz>>>
+    fun getQuizDay(@Query("date") category: String,@Query("lang") lang: String): Observable<Response<List<DayQuiz>>>
 
     @GET("game_quiz/")
     fun getQuizGame(@Query("test") category: Int): Observable<Response<List<Quiz>>>
+
+    @GET("comment_quiz/")
+    fun getCommentQuiz(@Query("quiz") id: Int): Observable<Response<List<Comment>>>
+
+    @FormUrlEncoded
+    @POST("comment_quiz_create/")
+    fun postComment(@Field("quiz") quiz_id: Int,
+                    @Field("message") message:String,
+                    @Field("user") user_id: Int): Observable<Response<Comment>>
+
+    @FormUrlEncoded
+    @POST("answer_quiz/")
+    fun postAnswer(@Field("quiz") quiz_id: Int,
+                    @Field("message") message:String,
+                    @Field("user") user_id: String,
+                   @Field("comment")comment_id:Int): Observable<Response<Comment>>
+
 
     @GET("game_invite/")
     fun getQuizGameInvite(@Query("quiz") category: String): Observable<Response<List<Quiz>>>
