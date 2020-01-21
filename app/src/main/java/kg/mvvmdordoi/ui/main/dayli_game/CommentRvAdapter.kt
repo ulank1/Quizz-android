@@ -45,6 +45,7 @@ class CommentRvAdapter(val context: Context,val listener: CommentClickListener) 
             val img_like:ImageView = itemView.findViewById(R.id.img_like)
             val rv:RecyclerView = itemView.findViewById(R.id.rv)
 
+
             name.text = item.user.name
             message.text = item.message
             img_like.setImageResource(R.drawable.ic_like_non)
