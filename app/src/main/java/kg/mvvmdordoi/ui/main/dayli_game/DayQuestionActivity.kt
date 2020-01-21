@@ -41,9 +41,13 @@ class DayQuestionActivity : Fragment(),CommentClickListener{
         idComment = comment
         user.text = "$name,"
         user.visible()
+        if (name != null) {
+            this.name = name
+        }
     }
 
     private var idComment = 0
+    private var name = ""
 
     private lateinit var quizzes: ArrayList<DayQuiz>
     private lateinit var viewModel: QuestionDayViewModel
@@ -92,12 +96,13 @@ class DayQuestionActivity : Fragment(),CommentClickListener{
                 }
             }else{
                 if (message.text.toString().isNotEmpty()) {
-                    viewModel.sendAnswer(message.text.toString(),quizzes[0].id,idComment)
+                    viewModel.sendAnswer(message.text.toString(),quizzes[0].id,idComment,user.text.toString())
                 }
             }
             user.gone()
             message.setText("")
         }
+        viewModel.isSuccess.observe(this, Observer { viewModel.getComments(quizzes[0].id) })
     }
 
     override fun onResume() {

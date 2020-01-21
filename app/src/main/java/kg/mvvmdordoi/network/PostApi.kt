@@ -195,14 +195,16 @@ interface PostApi {
     @POST("comment_quiz_create/")
     fun postComment(@Field("quiz") quiz_id: Int,
                     @Field("message") message:String,
-                    @Field("user") user_id: Int): Observable<Response<Comment>>
+                    @Field("user") user_id: Int): Observable<Response<Any>>
 
     @FormUrlEncoded
     @POST("answer_quiz/")
     fun postAnswer(@Field("quiz") quiz_id: Int,
                     @Field("message") message:String,
                     @Field("user") user_id: String,
-                   @Field("comment")comment_id:Int): Observable<Response<Comment>>
+                   @Field("comment")comment_id:Int,
+                   @Field("name") name: String
+                   ): Observable<Response<Any>>
 
 
     @GET("game_invite/")

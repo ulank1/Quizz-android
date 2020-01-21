@@ -28,8 +28,9 @@ class QuestionDayViewModel() : BaseViewModel() {
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
     val tests: MutableLiveData<List<DayQuiz>> = MutableLiveData()
     val comments: MutableLiveData<List<Comment>> = MutableLiveData()
-    val comment: MutableLiveData<Comment> = MutableLiveData()
     val quote: MutableLiveData<Quote> = MutableLiveData()
+    val isSuccess: MutableLiveData<Boolean> = MutableLiveData()
+
 
     private var subscription: CompositeDisposable = CompositeDisposable()
 
@@ -132,7 +133,7 @@ class QuestionDayViewModel() : BaseViewModel() {
                     { result -> hideProgress()
                         Log.e("Post Comment",result.body().toString())
                         if (result.isSuccessful) {
-                            getComments(quiz_id)
+                            isSuccess.value = true
                         } else {
                             var error = result.errorBody()!!.string()
                             Log.e("Error",error)
@@ -146,10 +147,10 @@ class QuestionDayViewModel() : BaseViewModel() {
         )
     }
 
-    fun sendAnswer(message:String,quiz_id:Int,comment_id:Int) {
+    fun sendAnswer(message:String,quiz_id:Int,comment_id:Int,name:String) {
 
         subscription.add(
-            postApi.postAnswer(quiz_id,message,UserToken.getToken(App.activity!!).toString(),comment_id)
+            postApi.postAnswer(quiz_id,message,UserToken.getToken(App.activity!!).toString(),comment_id,name)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { showProgress() }
@@ -158,7 +159,7 @@ class QuestionDayViewModel() : BaseViewModel() {
                     { result -> hideProgress()
                         Log.e("Post Comment",result.body().toString())
                         if (result.isSuccessful) {
-                            getComments(quiz_id)
+                            isSuccess.value = true
                         } else {
                             var error = result.errorBody()!!.string()
                             Log.e("FFError",error)

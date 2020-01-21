@@ -43,7 +43,7 @@ class AnswerRvAdapter(
             val message:TextView = itemView.findViewById(R.id.message)
 
             name.text = item.user.name
-            message.text = item.message
+            message.text = item.name+" "+item.message
 
 
             itemView.setOnClickListener {
