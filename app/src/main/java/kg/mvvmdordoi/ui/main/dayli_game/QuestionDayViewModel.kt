@@ -99,7 +99,7 @@ class QuestionDayViewModel() : BaseViewModel() {
     fun getComments(id:Int) {
 
         subscription.add(
-            postApi.getCommentQuiz(id)
+            postApi.getCommentQuiz(id, UserToken.getToken(App.activity!!)!!.toInt())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { showProgress() }
@@ -172,5 +172,52 @@ class QuestionDayViewModel() : BaseViewModel() {
                 )
         )
     }
+    fun sendLike(idComment:Int,type:Int) {
 
+        subscription.add(
+            postApi.postLike(UserToken.getToken(App.activity!!)!!.toInt(),idComment,type)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { showProgress() }
+                .doOnTerminate { hideProgress() }
+                .subscribe(
+                    { result -> hideProgress()
+                        Log.e("Post Comment",result.body().toString())
+                        if (result.isSuccessful) {
+                        } else {
+                            var error = result.errorBody()!!.string()
+                            Log.e("FFError",error)
+
+                        }
+                    },
+                    { hideProgress()
+                        Log.e("Error",it.toString())
+                    }
+                )
+        )
+    }
+    fun sendLikeAnswer(idAnswer:Int,type:Int) {
+
+        subscription.add(
+            postApi.postLikeAnswer(UserToken.getToken(App.activity!!)!!.toInt(),idAnswer,type)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { showProgress() }
+                .doOnTerminate { hideProgress() }
+                .subscribe(
+                    { result -> hideProgress()
+                        Log.e("Post Comment",result.body().toString())
+                        if (result.isSuccessful) {
+                        } else {
+                            var error = result.errorBody()!!.string()
+                            Log.e("FFError",error)
+
+                        }
+                    },
+                    { hideProgress()
+                        Log.e("Error",it.toString())
+                    }
+                )
+        )
+    }
 }

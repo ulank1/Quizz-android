@@ -29,12 +29,12 @@ import java.lang.Exception
 
 
 class DayQuestionActivity : Fragment(),CommentClickListener{
-    override fun likeClick(comment: Int) {
-
+    override fun likeClick(comment: Int, type: Int) {
+        viewModel.sendLike(comment,type)
     }
 
-    override fun unlikeClick(comment: Int) {
-
+    override fun likeAnswerClick(comment: Int, type: Int) {
+        viewModel.sendLikeAnswer(comment,type)
     }
 
     override fun commentClick(name: String?, comment: Int) {

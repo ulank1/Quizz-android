@@ -189,7 +189,7 @@ interface PostApi {
     fun getQuizGame(@Query("test") category: Int): Observable<Response<List<Quiz>>>
 
     @GET("comment_quiz/")
-    fun getCommentQuiz(@Query("quiz") id: Int): Observable<Response<List<Comment>>>
+    fun getCommentQuiz(@Query("quiz") id: Int,@Query("user_id")user_id: Int): Observable<Response<List<Comment>>>
 
     @FormUrlEncoded
     @POST("comment_quiz_create/")
@@ -205,6 +205,22 @@ interface PostApi {
                    @Field("comment")comment_id:Int,
                    @Field("name") name: String
                    ): Observable<Response<Any>>
+
+    @FormUrlEncoded
+    @POST("like_quiz/")
+    fun postLike(@Field("user") user_id: Int,
+                   @Field("comment") idComment:Int,
+                   @Field("like") like: Int
+    ): Observable<Response<Any>>
+
+
+    @FormUrlEncoded
+    @POST("like_answer_quiz/")
+    fun postLikeAnswer(@Field("user") user_id: Int,
+                   @Field("answer") answer:Int,
+                   @Field("like") like: Int
+    ): Observable<Response<Any>>
+
 
 
     @GET("game_invite/")
