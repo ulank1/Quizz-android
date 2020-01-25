@@ -11,9 +11,6 @@ import kg.mvvmdordoi.model.Product
 import kg.mvvmdordoi.model.get.*
 import kg.mvvmdordoi.network.PostApi
 import kg.mvvmdordoi.network.UserToken
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
 
@@ -27,7 +24,7 @@ class ProfileViewModel() : BaseViewModel() {
     val user: MutableLiveData<User> = MutableLiveData()
     val game: MutableLiveData<List<GameOuter>> = MutableLiveData()
     val ratingAll: MutableLiveData<RatingAll> = MutableLiveData()
-    val ratingAllOf: MutableLiveData<List<RatingWithUser>> = MutableLiveData()
+    val ratingAllOf: MutableLiveData<RatingPagination> = MutableLiveData()
 
     private var subscription: CompositeDisposable = CompositeDisposable()
 
@@ -101,10 +98,10 @@ class ProfileViewModel() : BaseViewModel() {
         )
     }
 
-    fun getRatingAllOf() {
+    fun getRatingAllOf(page: String) {
 
         subscription.add(
-            postApi.getRatingAllOf()
+            postApi.getRatingAllOf(page)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { showProgress() }
@@ -112,7 +109,7 @@ class ProfileViewModel() : BaseViewModel() {
                 .subscribe(
                     { result -> hideProgress()
                         if (result.isSuccessful) {
-                            Log.e("RATINGS",result.body().toString())
+                            Log.e("RATINGSGHJKL",result.body().toString())
                             ratingAllOf.value = result.body()!!
                         }else{
                             Log.e("ERROR", result.errorBody()?.string())

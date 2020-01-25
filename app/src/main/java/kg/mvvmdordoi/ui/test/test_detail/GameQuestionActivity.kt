@@ -319,6 +319,7 @@ class GameQuestionActivity : AppCompatActivity(), NumerationListener, View.OnCli
                     }
                     R.id.ok -> {
                         viewModel.postGameCache(trues, getQuizIds(), 1,intent.getStringExtra("title"))
+                        ok.isEnabled = false
                     }
                 }
             }

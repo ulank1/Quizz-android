@@ -101,7 +101,7 @@ fun formatDateNotification(date:String):String{
     Log.e("DATEEEE",date1)
     val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
     var date2 = sdf.parse(date1)
-    val sdf1 = SimpleDateFormat("yyyy-MM-dd HH:mm")
+    val sdf1 = SimpleDateFormat("HH:mm")
 
     return sdf1.format(date2)
 }

@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+    android:layout_marginBottom="10dp"
     android:orientation="vertical">
 
     <LinearLayout
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
         android:id="@+id/suka"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@drawable/white_5dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -36,48 +38,66 @@
         </LinearLayout>
 
         <TextView
+            android:textColor="#222"
             android:id="@+id/message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="asdasdas" />
 
-        <LinearLayout
-            android:id="@+id/line_like"
-            android:layout_width="match_parent"
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginStart="5dp"
+        android:id="@+id/line_like"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/suka">
+
+        <ImageView
+            android:padding="2dp"
+            android:id="@+id/img_like"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_like_non" />
+
+        <TextView
+            android:textSize="12sp"
+            android:id="@+id/like_text"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/suka">
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:text="10"
+            android:textColor="#000" />
 
-            <ImageView
-                android:id="@+id/img_like"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_like_non" />
+        <ImageView
+            android:padding="2dp"
+            android:id="@+id/img_un_like"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/ic_like_non" />
 
-            <TextView
-                android:id="@+id/like_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="5dp"
-                android:text="10"
-                android:textColor="#000" />
+        <TextView
+            android:textSize="12sp"
+            android:id="@+id/un_like_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:text="10"
+            android:textColor="#000" />
 
-            <ImageView
-                android:id="@+id/img_un_like"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="15dp"
-                android:src="@drawable/ic_like_non" />
+        <View
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+        <TextView
 
-            <TextView
-                android:id="@+id/un_like_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="5dp"
-                android:text="10"
-                android:textColor="#000" />
-        </LinearLayout>
+            android:text="@string/answer"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
@@ -89,4 +109,4 @@
         android:layout_below="@+id/suka"
         android:layout_marginStart="35dp" />
 
-</RelativeLayout>
+</LinearLayout>

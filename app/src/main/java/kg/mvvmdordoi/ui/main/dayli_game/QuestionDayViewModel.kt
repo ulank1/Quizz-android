@@ -74,7 +74,7 @@ class QuestionDayViewModel() : BaseViewModel() {
     fun getTestsDay() {
 
         subscription.add(
-            postApi.getQuizDay("2020-01-18", Lang.get(App.activity!!).toString())
+            postApi.getQuizDay(getTodayDateDot(), Lang.get(App.activity!!).toString())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { showProgress() }

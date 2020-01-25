@@ -38,7 +38,7 @@ class RatingRvAdapter(val context: Context) : RecyclerView.Adapter<RatingRvAdapt
     override fun onBindViewHolder(holder: AdvertViewHolder, position: Int) = holder.bind(data[position],position)
     public var size:Int = 0
     fun swapData(data: ArrayList<RatingWithUser>,size:Int) {
-        this.data = data
+        this.data.addAll(data)
         this.size = size
         notifyDataSetChanged()
     }

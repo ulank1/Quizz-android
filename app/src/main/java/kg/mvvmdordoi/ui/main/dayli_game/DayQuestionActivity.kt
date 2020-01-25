@@ -19,6 +19,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.EditText
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import kg.mvvmdordoi.model.get.Comment
 import kg.mvvmdordoi.model.get.DayQuiz
 import kg.mvvmdordoi.utils.URL1
@@ -53,8 +56,7 @@ class DayQuestionActivity : Fragment(),CommentClickListener{
     private lateinit var viewModel: QuestionDayViewModel
     private lateinit var message: EditText
     lateinit var adapter: CommentRvAdapter
-
-
+    lateinit var mAdView : AdView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,6 +73,10 @@ class DayQuestionActivity : Fragment(),CommentClickListener{
             ViewModelProviders.of(this, ViewModelFactory()).get(QuestionDayViewModel::class.java)
 
         setupRv()
+        MobileAds.initialize(activity!!)
+        mAdView = view.findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         line_no_one.setOnClickListener { }
 

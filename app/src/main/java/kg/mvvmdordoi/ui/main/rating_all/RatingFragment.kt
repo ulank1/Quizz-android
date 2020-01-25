@@ -13,8 +13,10 @@ import android.view.ViewGroup
 import kg.mvvmdordoi.R
 import kg.mvvmdordoi.injection.ViewModelFactory
 import kg.mvvmdordoi.model.get.RatingWithUser
+import kg.mvvmdordoi.ui.game.PaginationScrollListener
 import kg.mvvmdordoi.ui.main.profile.ProfileViewModel
 import kotlinx.android.synthetic.main.fragment_rating_all.*
+import kotlinx.android.synthetic.main.fragment_rating_all.rv
 
 class RatingFragment : Fragment() {
     private lateinit var viewModel: ProfileViewModel
@@ -58,15 +60,43 @@ class RatingFragment : Fragment() {
                 name.text = my_rating.user.name
             }
         })
-        viewModel.ratingAllOf.observe(this, Observer { adapter.swapData(it as ArrayList<RatingWithUser>,myPosition)})
+        viewModel.ratingAllOf.observe(this, Observer {
+            if (it != null) {
+                isLastPage = it.next.isNullOrEmpty()
+                page = it.next.toString()
+                isLoading = false
+                adapter.swapData(it.user,myPosition)
+            }
+
+        })
         viewModel.getRatingAll()
-        viewModel.getRatingAllOf()
+        isLoading = true
+        viewModel.getRatingAllOf(page)
     }
 
+    var isLastPage: Boolean = false
+    var isLoading: Boolean = false
+    var page="1"
     private fun setupRv(){
         val layoutManager = GridLayoutManager(context,1)
         rv.layoutManager = layoutManager
         adapter = RatingRvAdapter(context!!)
         rv.adapter = adapter
+        rv.addOnScrollListener(object : PaginationScrollListener(layoutManager) {
+            override fun isLastPage(): Boolean {
+                return isLastPage
+            }
+
+            override fun isLoading(): Boolean {
+                return isLoading
+            }
+
+            override fun loadMoreItems() {
+                isLoading = true
+                //you have to call loadmore items to get more data
+                isLoading = true
+                viewModel.getRatingAllOf(page)
+            }
+        })
     }
 }

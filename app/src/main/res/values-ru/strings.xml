@@ -177,5 +177,6 @@
     <string name="no_exit">Вы не можете выйти, не завершив тест</string>
     <string name="want_exit">Хотите выйти?</string>
     <string name="search_users">Поиск игрока ...</string>
+    <string name="answer">Ответить</string>
 
 </resources>

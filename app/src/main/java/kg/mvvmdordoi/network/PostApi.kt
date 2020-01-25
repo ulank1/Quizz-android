@@ -267,9 +267,10 @@ interface PostApi {
         @Query("user_id") user_id: String
     ): Observable<Response<RatingAll>>
 
-    @GET("rating_all_of/")
+    @GET("rating_all_of_pagination/")
     fun getRatingAllOf(
-    ): Observable<Response<List<RatingWithUser>>>
+            @Query("page") page:String
+    ): Observable<Response<RatingPagination>>
 
 
 

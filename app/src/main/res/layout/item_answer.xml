@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_margin="10dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:id="@+id/suka"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_5dp"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,47 +38,67 @@
         </LinearLayout>
 
         <TextView
-            android:text="asdasdas"
+            android:textColor="#222"
             android:id="@+id/message"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-        <LinearLayout
-            android:id="@+id/line_like"
-            android:layout_below="@+id/suka"
+            android:layout_height="wrap_content"
+            android:text="asdasdas" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginStart="5dp"
+        android:id="@+id/line_like"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/suka">
+
+        <ImageView
+            android:padding="2dp"
+            android:id="@+id/img_like"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_like_non" />
+
+        <TextView
+            android:textSize="12sp"
+            android:id="@+id/like_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:text="10"
+            android:textColor="#000" />
+
+        <ImageView
+            android:padding="2dp"
+            android:id="@+id/img_un_like"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/ic_like_non" />
+
+        <TextView
+            android:textSize="12sp"
+            android:id="@+id/un_like_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:text="10"
+            android:textColor="#000" />
+
+        <View
+            android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="1dp"/>
+        <TextView
 
-            <ImageView
-                android:id="@+id/img_like"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_like_non" />
+            android:text="@string/answer"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
-            <TextView
-                android:id="@+id/like_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="5dp"
-                android:text="10"
-                android:textColor="#000" />
-
-            <ImageView
-                android:layout_marginStart="15dp"
-                android:id="@+id/img_un_like"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_like_non" />
-
-            <TextView
-                android:id="@+id/un_like_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="5dp"
-                android:text="10"
-                android:textColor="#000" />
-        </LinearLayout>
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>
