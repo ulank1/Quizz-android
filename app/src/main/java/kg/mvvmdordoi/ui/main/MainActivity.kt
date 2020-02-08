@@ -209,6 +209,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (intent.getBooleanExtra("is_duel", false)) {
             bottomNavView.selectedItemId = R.id.second_bottom_nav
         }
+        if (intent.getBooleanExtra("is_news",false)){
+            startActivity(Intent(this,NewsListActivity::class.java))
+        }
 
         // get the listview
         expListView = findViewById<View>(R.id.lvExp) as ExpandableListView

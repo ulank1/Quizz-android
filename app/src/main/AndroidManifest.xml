@@ -18,7 +18,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.test.RewardedActivity"></activity>
+        <activity android:name=".ui.game.users.MyFriendsActivity"></activity>
+        <activity android:name=".ui.test.RewardedActivity" />
         <activity android:name=".ui.test.EmpActivity" />
         <activity
             android:name=".ui.test.TestAddActivity"

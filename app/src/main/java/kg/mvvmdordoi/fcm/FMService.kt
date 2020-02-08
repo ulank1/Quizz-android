@@ -68,6 +68,8 @@ class FMService : FirebaseMessagingService() {
         var resultIntent=Intent(this, MainActivity::class.java)
         if (title.contains("Дуэль")){
             resultIntent.putExtra("is_duel",true)
+        }else if (title.contains("Новости")){
+            resultIntent.putExtra("is_news",true)
         }
 
         resultIntent.action = System.currentTimeMillis().toString()

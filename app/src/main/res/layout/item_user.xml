@@ -20,6 +20,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
+    <ImageView
+        android:src="@drawable/ic_add_friend"
+        android:padding="5dp"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/add_friend"
+        android:layout_width="40dp"
+        android:layout_height="40dp"/>
+
     <View
         android:background="#777"
         android:layout_below="@+id/image"

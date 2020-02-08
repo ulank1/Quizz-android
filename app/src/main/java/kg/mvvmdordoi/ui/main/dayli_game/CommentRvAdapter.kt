@@ -13,6 +13,8 @@ import kotlin.collections.ArrayList
 import kg.mvvmdordoi.R
 import kg.mvvmdordoi.model.get.*
 import kg.mvvmdordoi.utils.extension.formatDateNotification
+import kg.mvvmdordoi.utils.extension.gone
+import kg.mvvmdordoi.utils.extension.visible
 
 
 class CommentRvAdapter(val context: Context,val listener: CommentClickListener) : RecyclerView.Adapter<CommentRvAdapter.AdvertViewHolder>() {
@@ -91,11 +93,14 @@ class CommentRvAdapter(val context: Context,val listener: CommentClickListener) 
             }
 
             if (!item.answers.isNullOrEmpty()){
+                rv.visible()
                 val layoutManager = GridLayoutManager(context, 1)
                 rv.layoutManager = layoutManager
                 var adapter = AnswerRvAdapter(App.activity!!,listener,item.id)
                 rv.adapter = adapter
                 adapter.swapData(item.answers!!)
+            }else{
+                rv.gone()
             }
 
             itemView.setOnClickListener {

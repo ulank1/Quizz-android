@@ -18,7 +18,7 @@ import kg.mvvmdordoi.ui.game.category.CategoryActivity
 import kg.mvvmdordoi.ui.test.test_detail.QuestionActivity
 
 
-class UserRvAdapter(val context: Context) : RecyclerView.Adapter<UserRvAdapter.AdvertViewHolder>() {
+class UserRvAdapter(val context: Context,val listener: FriendListener) : RecyclerView.Adapter<UserRvAdapter.AdvertViewHolder>() {
 
     private var data: ArrayList<User> = ArrayList()
 
@@ -47,6 +47,7 @@ class UserRvAdapter(val context: Context) : RecyclerView.Adapter<UserRvAdapter.A
 
             val name:TextView = itemView.findViewById(R.id.name)
             val image:ImageView = itemView.findViewById(R.id.image)
+            val friend:ImageView = itemView.findViewById(R.id.add_friend)
 
             var text = item.name+" ["
 
@@ -59,6 +60,23 @@ class UserRvAdapter(val context: Context) : RecyclerView.Adapter<UserRvAdapter.A
                 if (item.is_ru){
                     text+="ru/"
                 }
+            }
+
+            if (item.friend){
+                friend.setImageResource(R.drawable.ic_add_friend)
+            }else{
+                friend.setImageResource(R.drawable.ic_add_friend_non)
+            }
+
+            friend.setOnClickListener {
+
+                if (item.friend){
+                    friend.setImageResource(R.drawable.ic_add_friend_non)
+                }else{
+                    friend.setImageResource(R.drawable.ic_add_friend)
+                }
+                item.friend = !item.friend
+                listener.onClickAddFriend(item.id)
             }
 
             text = text.substring(0,text.length-1)

@@ -6,6 +6,7 @@ data class User (
 	@SerializedName("id") val id : Int,
 	@SerializedName("name") val name : String,
 	@SerializedName("is_kg") val is_kg : Boolean,
+	@SerializedName("friend") var friend : Boolean=true,
 	@SerializedName("is_ru") val is_ru : Boolean,
 	@SerializedName("login") val login : String,
 	@SerializedName("birth_date") val birth_date : String,

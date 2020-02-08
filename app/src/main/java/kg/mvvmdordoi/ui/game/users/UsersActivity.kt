@@ -24,7 +24,11 @@ import kg.mvvmdordoi.utils.extension.hideKeyboardFrom
 import kotlinx.android.synthetic.main.activity_users1.*
 
 
-class UsersActivity : AppCompatActivity(), TextWatcher {
+class UsersActivity : AppCompatActivity(), TextWatcher,FriendListener {
+    override fun onClickAddFriend(user_id:Int) {
+        viewModel.postFriend(user_id)
+    }
+
     override fun afterTextChanged(s: Editable?) {
 
     }
@@ -143,6 +147,9 @@ class UsersActivity : AppCompatActivity(), TextWatcher {
                 App.activity!!.startActivity(intent)
             }
         }
+
+        my_friend.setOnClickListener { startActivity(Intent(this,MyFriendsActivity::class.java)) }
+
         hideKeyboardFrom(this, search)
     }
 
@@ -152,7 +159,7 @@ class UsersActivity : AppCompatActivity(), TextWatcher {
         Log.e("USER_ACTIVITY", "setupRv")
         val layoutManager = GridLayoutManager(this, 1)
         rv.layoutManager = layoutManager
-        adapter = UserRvAdapter(this)
+        adapter = UserRvAdapter(this,this)
         rv.adapter = adapter
         rv.addOnScrollListener(object : PaginationScrollListener(layoutManager) {
             override fun isLastPage(): Boolean {
@@ -194,3 +201,7 @@ class UsersActivity : AppCompatActivity(), TextWatcher {
         }
     }
 }
+
+
+
+

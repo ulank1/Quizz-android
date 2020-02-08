@@ -33,10 +33,22 @@ interface PostApi {
     fun getUsers(): Observable<Response<List<User>>>
 
     @GET("users_duel/")
-    fun getUsersDuel(@Query("page") page:String): Observable<Response<UserDuel>>
+    fun getUsersDuel(@Query("page") page:String,@Query("user")user:Int): Observable<Response<UserDuel>>
 
     @GET("users/")
-    fun getUsersSearch(@Query("search")text:String): Observable<Response<List<User>>>
+    fun getUsersSearch(@Query("search")text:String,@Query("user")user:Int): Observable<Response<List<User>>>
+
+    @GET("my_friend/")
+    fun getFriend(@Query("user")user:Int): Observable<Response<List<Friend>>>
+
+    @FormUrlEncoded
+    @POST("friend/")
+    fun addFriend(
+        @Field("user")user:Int,
+        @Field("friend")friend:Int,
+        @Field("is_active")is_active:Boolean
+
+    ): Observable<Response<Any>>
 
     @GET("users/{id}")
     fun getUser(@Path("id") id:String): Observable<Response<User>>
