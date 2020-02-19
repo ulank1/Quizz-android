@@ -13,6 +13,7 @@ import kotlin.collections.ArrayList
 import kg.mvvmdordoi.R
 import kg.mvvmdordoi.model.get.*
 import kg.mvvmdordoi.utils.extension.formatDateNotification
+import kg.mvvmdordoi.utils.extension.formatDateNotification1
 import kg.mvvmdordoi.utils.extension.gone
 import kg.mvvmdordoi.utils.extension.visible
 
@@ -52,7 +53,7 @@ class CommentRvAdapter(val context: Context,val listener: CommentClickListener) 
 
             name.text = item.user.name
             message.text = item.message
-            time.text = formatDateNotification(item.created_at)
+            time.text = formatDateNotification1(item.created_at)
 
 
             img_like.setOnClickListener {

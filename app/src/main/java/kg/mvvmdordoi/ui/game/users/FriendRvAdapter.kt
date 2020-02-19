@@ -1,5 +1,6 @@
 package kg.mvvmdordoi.ui.game.users
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
@@ -63,19 +64,40 @@ class FriendRvAdapter(val context: Context, val listener: FriendListener) : Recy
                 }
             }
 
-
-            friend.setImageResource(R.drawable.ic_add_friend)
+            if (item.friend.friend){
+                friend.setImageResource(R.drawable.ic_add_friend)
+            }else{
+                friend.setImageResource(R.drawable.ic_add_friend_non)
+            }
 
 
             friend.setOnClickListener {
 
-                if (item.friend.friend){
-                    friend.setImageResource(R.drawable.ic_add_friend_non)
+                var title = if (item.friend.friend){
+                    context.getString(R.string.delete_friend)
                 }else{
-                    friend.setImageResource(R.drawable.ic_add_friend)
+                    context.getString(R.string.add_friend)
                 }
-                item.friend.friend = !item.friend.friend
-                listener.onClickAddFriend(item.friend.id)
+                val builder = AlertDialog.Builder(context)
+                builder.setTitle(title)
+                //builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
+
+                builder.setPositiveButton("yes") { dialog, which ->
+                    if (item.friend.friend){
+                        friend.setImageResource(R.drawable.ic_add_friend_non)
+                    }else{
+                        friend.setImageResource(R.drawable.ic_add_friend)
+                    }
+                    item.friend.friend = !item.friend.friend
+                    listener.onClickAddFriend(item.friend.id)
+
+                }
+
+                builder.setNegativeButton("no") { dialog, which ->
+                }
+
+
+                builder.show()
             }
 
             text = text.substring(0,text.length-1)

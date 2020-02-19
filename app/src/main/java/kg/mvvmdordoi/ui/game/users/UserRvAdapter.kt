@@ -1,5 +1,6 @@
 package kg.mvvmdordoi.ui.game.users
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
@@ -16,6 +17,7 @@ import kg.mvvmdordoi.R
 import kg.mvvmdordoi.model.get.User
 import kg.mvvmdordoi.ui.game.category.CategoryActivity
 import kg.mvvmdordoi.ui.test.test_detail.QuestionActivity
+import kotlinx.android.synthetic.main.item_product.view.*
 
 
 class UserRvAdapter(val context: Context,val listener: FriendListener) : RecyclerView.Adapter<UserRvAdapter.AdvertViewHolder>() {
@@ -69,14 +71,32 @@ class UserRvAdapter(val context: Context,val listener: FriendListener) : Recycle
             }
 
             friend.setOnClickListener {
-
-                if (item.friend){
-                    friend.setImageResource(R.drawable.ic_add_friend_non)
+                var title = if (item.friend){
+                    context.getString(R.string.delete_friend)
                 }else{
-                    friend.setImageResource(R.drawable.ic_add_friend)
+                    context.getString(R.string.add_friend)
                 }
-                item.friend = !item.friend
-                listener.onClickAddFriend(item.id)
+                val builder = AlertDialog.Builder(context)
+                builder.setTitle(title)
+                //builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
+
+                builder.setPositiveButton("yes") { dialog, which ->
+                    if (item.friend){
+                        friend.setImageResource(R.drawable.ic_add_friend_non)
+                    }else{
+                        friend.setImageResource(R.drawable.ic_add_friend)
+                    }
+                    item.friend = !item.friend
+                    listener.onClickAddFriend(item.id)
+
+                }
+
+                builder.setNegativeButton("no") { dialog, which ->
+                }
+
+
+                builder.show()
+
             }
 
             text = text.substring(0,text.length-1)

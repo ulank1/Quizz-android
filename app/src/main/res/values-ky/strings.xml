@@ -154,6 +154,9 @@
     <string name="want_exit">Чыгууну каалайсызбы?</string>
     <string name="search_users">Оюнчу издөө ...</string>
     <string name="answer">Жооп берүү</string>
+    <string name="delete_friend">Достуктан өчүрүү</string>
+    <string name="add_friend">Досторго кошуу</string>
+    <string name="friends">Достор</string>
     <string-array name="regions">
         <item>Бишкек шаары</item>
         <item>Ош шаары</item>

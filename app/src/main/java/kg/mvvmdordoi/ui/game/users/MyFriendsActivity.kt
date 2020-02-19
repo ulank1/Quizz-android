@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.util.Log
+import android.view.MenuItem
 import kg.mvvmdordoi.R
 import kg.mvvmdordoi.injection.ViewModelFactory
 import kg.mvvmdordoi.model.get.Friend
@@ -24,7 +25,7 @@ class MyFriendsActivity : AppCompatActivity(),FriendListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_my_friends)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.title = "Мои друзья"
+        supportActionBar!!.title = getString(R.string.friends)
 
         viewModel = ViewModelProviders.of(this, ViewModelFactory()).get(UserViewModel::class.java)
         setupRv()
@@ -43,5 +44,10 @@ class MyFriendsActivity : AppCompatActivity(),FriendListener {
         adapter = FriendRvAdapter(this,this)
         rv.adapter = adapter
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        finish()
+        return super.onOptionsItemSelected(item)
     }
 }

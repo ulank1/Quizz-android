@@ -58,7 +58,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
     <Button
-        android:text="Мои друзья"
+        android:text="@string/friends"
         android:textColor="@color/white"
         android:layout_margin="5dp"
         android:layout_above="@+id/share"

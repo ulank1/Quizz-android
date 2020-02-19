@@ -33,7 +33,7 @@ class NewsListActivity : AppCompatActivity() {
 
         viewModel = ViewModelProviders.of(this, ViewModelFactory()).get(InfoViewModel::class.java)
 
-        viewModel.getNews(intent.getIntExtra("id",1))
+        viewModel.getNews()
         viewModel.info.observe(this, Observer {
 
             if (it != null) {

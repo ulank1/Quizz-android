@@ -46,75 +46,81 @@ class UserViewModel() : BaseViewModel() {
     fun getUsers() {
 
         subscription.add(
-            postApi.getUsersDuel(UsersActivity.page,UserToken.getToken(App.activity!!)!!.toInt())
+            postApi.getUsersDuel(UsersActivity.page, UserToken.getToken(App.activity!!)!!.toInt())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { showProgress() }
                 .doOnTerminate { hideProgress() }
                 .subscribe(
-                    { result -> hideProgress()
-                        Log.e("EWW",result.toString())
+                    { result ->
+                        hideProgress()
+                        Log.e("EWW", result.toString())
                         if (result.isSuccessful) {
                             usersDuel.value = result.body()
                         } else {
                             var error = result.errorBody()!!.string()
-                            Log.e("Error4",error)
+                            Log.e("Error4", error)
 
                         }
                     },
-                    { hideProgress()
-                    Log.e("Error5",it.toString())
+                    {
+                        hideProgress()
+                        Log.e("Error5", it.toString())
                     }
                 )
         )
     }
 
-    fun getUsers(text:String) {
+    fun getUsers(text: String) {
 
         subscription.add(
-            postApi.getUsersSearch(text,UserToken.getToken(App.activity!!)!!.toInt())
+            postApi.getUsersSearch1(text, UserToken.getToken(App.activity!!)!!.toInt())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { showProgress() }
                 .doOnTerminate { hideProgress() }
                 .subscribe(
-                    { result -> hideProgress()
-                        Log.e("EWW",result.toString())
+                    { result ->
+                        hideProgress()
+                        Log.e("EWW", result.toString())
                         if (result.isSuccessful) {
                             users.value = result.body()
                         } else {
                             var error = result.errorBody()!!.string()
-                            Log.e("Error14",error)
+                            Log.e("Error14", error)
 
                         }
                     },
-                    { hideProgress()
-                        Log.e("Error51",it.toString())
+                    {
+                        hideProgress()
+                        Log.e("Error51", it.toString())
                     }
                 )
         )
     }
 
     fun postFriend(userId: Int) {
-        Log.e("IDDDD",UserToken.getToken(App.activity!!)!!)
+        Log.e("IDDDD", UserToken.getToken(App.activity!!)!!)
         subscription.add(
-            postApi.addFriend(UserToken.getToken(App.activity!!)!!.toInt(),userId,true)
+            postApi.addFriend(UserToken.getToken(App.activity!!)!!.toInt(), userId, true)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { showProgress() }
                 .doOnTerminate { hideProgress() }
                 .subscribe(
-                    { result -> hideProgress()
-                        Log.e("EWW",result.toString())
+                    { result ->
+                        hideProgress()
+                        Log.e("EWW", result.toString())
                         if (result.isSuccessful) {
                         } else {
                             var error = result.errorBody()!!.string()
-                            Log.e("Error14",error)
+                            Log.e("Error14", error)
 
                         }
                     },
-                    { hideProgress()
-                        Log.e("Error5e",it.toString())
+                    {
+                        hideProgress()
+                        Log.e("Error5e", it.toString())
                     }
                 )
         )
@@ -128,19 +134,29 @@ class UserViewModel() : BaseViewModel() {
                 .doOnSubscribe { showProgress() }
                 .doOnTerminate { hideProgress() }
                 .subscribe(
-                    { result -> hideProgress()
-                        Log.e("EWW",result.toString())
+                    { result ->
+                        hideProgress()
+                        Log.e("EWW", result.toString())
                         if (result.isSuccessful) {
+                            var results = result.body()
+                            if (results != null) {
 
-                            friends.value = result.body()
+                                for (r in results) {
+                                    r.friend.friend = true
+                                }
+                                friends.value = results
+
+                            }
+
                         } else {
                             var error = result.errorBody()!!.string()
-                            Log.e("Error14",error)
+                            Log.e("Error14", error)
 
                         }
                     },
-                    { hideProgress()
-                        Log.e("Error51",it.toString())
+                    {
+                        hideProgress()
+                        Log.e("Error51", it.toString())
                     }
                 )
         )

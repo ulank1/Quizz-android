@@ -21,6 +21,8 @@ import kg.mvvmdordoi.network.UserToken
 import kg.mvvmdordoi.ui.game.PaginationScrollListener
 import kg.mvvmdordoi.utils.extension.hideKeyboard
 import kg.mvvmdordoi.utils.extension.hideKeyboardFrom
+import kg.mvvmdordoi.utils.extension.isKeyboardClosed
+import kg.mvvmdordoi.utils.extension.isKeyboardOpen
 import kotlinx.android.synthetic.main.activity_users1.*
 
 
@@ -124,6 +126,7 @@ class UsersActivity : AppCompatActivity(), TextWatcher,FriendListener {
 
         search.addTextChangedListener(this)
 
+
         share.setOnClickListener {
             val sharingIntent = Intent(Intent.ACTION_SEND)
             sharingIntent.type = "text/plain"
@@ -150,7 +153,6 @@ class UsersActivity : AppCompatActivity(), TextWatcher,FriendListener {
 
         my_friend.setOnClickListener { startActivity(Intent(this,MyFriendsActivity::class.java)) }
 
-        hideKeyboardFrom(this, search)
     }
 
     var isLastPage: Boolean = false
@@ -171,9 +173,12 @@ class UsersActivity : AppCompatActivity(), TextWatcher,FriendListener {
             }
 
             override fun loadMoreItems() {
-                isLoading = true
-                //you have to call loadmore items to get more data
-                viewModel.getUsers()
+                Log.e("ISKEY",isKeyboardClosed().toString())
+                if (isKeyboardClosed()) {
+                    isLoading = true
+                    //you have to call loadmore items to get more data
+                    viewModel.getUsers()
+                }
             }
         })
     }

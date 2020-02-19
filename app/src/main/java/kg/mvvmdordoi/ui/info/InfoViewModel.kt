@@ -119,7 +119,7 @@ class InfoViewModel() : BaseViewModel() {
         )
     }
 
-    fun getNews(id:Int) {
+    fun getNews() {
 
         subscription.add(
             postApi.getNews(Lang.get(App.activity!!).toString())

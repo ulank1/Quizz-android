@@ -4,10 +4,12 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
+import android.graphics.Rect
 import android.support.annotation.StringRes
 import android.support.design.widget.TextInputEditText
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.util.TypedValue
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -101,6 +103,18 @@ fun formatDateNotification(date:String):String{
     Log.e("DATEEEE",date1)
     val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
     var date2 = sdf.parse(date1)
+    val sdf1 = SimpleDateFormat("dd-MM-yyyy HH:mm")
+
+    return sdf1.format(date2)
+}
+
+@SuppressLint("SimpleDateFormat")
+fun formatDateNotification1(date:String):String{
+
+    var date1 = date.substring(0,date.indexOf("."))
+    Log.e("DATEEEE",date1)
+    val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+    var date2 = sdf.parse(date1)
     val sdf1 = SimpleDateFormat("HH:mm")
 
     return sdf1.format(date2)
@@ -125,4 +139,26 @@ fun getDateDotDate(num:Int,typeOfClendar:Int,create_at: String):String{
     calendar.add(typeOfClendar,num)
     var date:Date = calendar.time
     return df.format(date)
+}
+
+fun Activity.getRootView(): View {
+    return findViewById<View>(android.R.id.content)
+}
+fun Context.convertDpToPx(dp: Float): Float {
+    return TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        dp,
+        this.resources.displayMetrics
+    )
+}
+fun Activity.isKeyboardOpen(): Boolean {
+    val visibleBounds = Rect()
+    this.getRootView().getWindowVisibleDisplayFrame(visibleBounds)
+    val heightDiff = getRootView().height - visibleBounds.height()
+    val marginOfError = Math.round(this.convertDpToPx(50F))
+    return heightDiff > marginOfError
+}
+
+fun Activity.isKeyboardClosed(): Boolean {
+    return !this.isKeyboardOpen()
 }

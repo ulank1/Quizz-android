@@ -38,6 +38,9 @@ interface PostApi {
     @GET("users/")
     fun getUsersSearch(@Query("search")text:String,@Query("user")user:Int): Observable<Response<List<User>>>
 
+    @GET("search_users/")
+    fun getUsersSearch1(@Query("search")text:String,@Query("user")user:Int): Observable<Response<List<User>>>
+
     @GET("my_friend/")
     fun getFriend(@Query("user")user:Int): Observable<Response<List<Friend>>>
 
