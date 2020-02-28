@@ -141,17 +141,10 @@ class MainViewModel() : BaseViewModel() {
                                 }
                             }
                             var created_at = rating[rating.size-1].created_at
-                            if (created_at!= getTodayDateDot()){
-                                var bool = true
-                                var day = 0
-                                while (bool){
-                                    day++
-                                    var date = getDateDotDate(day,Calendar.DAY_OF_YEAR,created_at)
-                                    if (date!= getTodayDateDot()) {
-                                        addRating(date, 0, 0, 0)
-                                    }else{
-                                        bool = false
-                                    }
+                            if (created_at< getTodayDateDot()){
+                                var date = getDateDotDate(1,Calendar.DAY_OF_YEAR,created_at)
+                                if (date < getTodayDateDot()) {
+                                    addRating(date, 0, 0, 0)
                                 }
                             }
 
@@ -184,8 +177,16 @@ class MainViewModel() : BaseViewModel() {
                 .subscribe(
                     { result ->
                         hideProgress()
-                        Log.e("EWW", result.body().toString())
+                        Log.e("RVYUBNUIIOUVC", result.body().toString())
                         if (result.isSuccessful) {
+                            val rating = result.body()
+                            val created_at = rating!!.created_at
+                            if (created_at< getTodayDateDot()){
+                                val date = getDateDotDate(1,Calendar.DAY_OF_YEAR,created_at)
+                                if (date < getTodayDateDot()) {
+                                    addRating(date, 0, 0, 0)
+                                }
+                            }
 
                         } else {
                             var error = result.errorBody()!!.string()

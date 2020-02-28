@@ -21,13 +21,45 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
-                app:title="Example" />
+                app:title="Example" >
 
-            <com.ferfalk.simplesearchview.SimpleSearchView
-                android:id="@+id/searchView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorPrimary" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textSize="15sp"
+                        android:text="@string/choose_user"
+                        android:textColor="#fff"
+                        android:gravity="center"
+                        android:layout_toStartOf="@id/share"
+                        android:layout_centerInParent="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                    <ImageView
+                        android:padding="5dp"
+                        android:id="@+id/my_friend"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/ic_friend"
+                        android:layout_alignParentEnd="true"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"/>
+
+                    <ImageView
+                        android:padding="5dp"
+                        android:id="@+id/share"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/ic_share"
+                        android:layout_toStartOf="@+id/my_friend"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"/>
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.Toolbar>
+
+
         </FrameLayout>
 
     </android.support.design.widget.AppBarLayout>
@@ -48,34 +80,17 @@
         android:hint="@string/search_users"
         android:background="@drawable/black_stroke_1dp_circle"
         android:layout_width="match_parent"
-        android:layout_height="50dp"/>
+        android:layout_height="40dp"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv"
         android:layout_below="@+id/search"
         android:layout_margin="10dp"
-        android:layout_above="@+id/my_friend"
+        android:layout_above="@id/random"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-    <Button
-        android:text="@string/friends"
-        android:textColor="@color/white"
-        android:layout_margin="5dp"
-        android:layout_above="@+id/share"
-        android:id="@+id/my_friend"
-        android:background="@drawable/blue_5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
 
-    <Button
-        android:text="@string/invite_friend"
-        android:textColor="@color/white"
-        android:layout_margin="5dp"
-        android:layout_above="@+id/random"
-        android:id="@+id/share"
-        android:background="@drawable/blue_5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+
     <Button
         android:text="@string/random_player"
         android:textColor="@color/white"

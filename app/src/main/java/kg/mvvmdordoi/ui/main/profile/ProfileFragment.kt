@@ -103,9 +103,7 @@ class ProfileFragment : Fragment() {
 
         viewModel.game.observe(this, Observer { setupGameInfo(it as ArrayList<GameOuter>) })
 
-        viewModel.getGameOuter()
-        viewModel.getRating()
-        viewModel.getUser()
+
         viewModel.user.observe(this, Observer {
 
             nick_name.text = it?.name

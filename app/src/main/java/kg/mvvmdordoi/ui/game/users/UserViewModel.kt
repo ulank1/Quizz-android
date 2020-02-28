@@ -44,7 +44,7 @@ class UserViewModel() : BaseViewModel() {
     }
 
     fun getUsers() {
-
+        Log.e("YYYYY","KKKKK")
         subscription.add(
             postApi.getUsersDuel(UsersActivity.page, UserToken.getToken(App.activity!!)!!.toInt())
                 .subscribeOn(Schedulers.io())
@@ -72,6 +72,7 @@ class UserViewModel() : BaseViewModel() {
     }
 
     fun getUsers(text: String) {
+        Log.e("YYYYY","SEARCH")
 
         subscription.add(
             postApi.getUsersSearch1(text, UserToken.getToken(App.activity!!)!!.toInt())

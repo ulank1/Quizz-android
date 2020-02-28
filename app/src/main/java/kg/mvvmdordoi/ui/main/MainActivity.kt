@@ -4,7 +4,6 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.ActivityNotFoundException
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.res.Configuration
@@ -67,6 +66,7 @@ import kg.mvvmdordoi.utils.extension.gone
 import kg.mvvmdordoi.utils.extension.visible
 import kotlinx.android.synthetic.main.content_main.*
 import java.util.*
+import android.content.ActivityNotFoundException as ActivityNotFoundException
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -298,6 +298,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 )
             } catch (e: ActivityNotFoundException) {
                 startActivity(
+
                     Intent(
                         Intent.ACTION_VIEW,
                         Uri.parse("https://play.google.com/store/apps/details?id=" + getPackageName())

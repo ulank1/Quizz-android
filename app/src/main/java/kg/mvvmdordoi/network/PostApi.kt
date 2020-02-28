@@ -255,7 +255,7 @@ interface PostApi {
         @Field("created_at") create_at: String,
         @Field("true_answer") true_answer: Int,
         @Field("false_answer") false_answer: Int
-    ): Observable<Response<Any>>
+    ): Observable<Response<Rating>>
 
     @FormUrlEncoded
     @PATCH("rating/{id}/")
