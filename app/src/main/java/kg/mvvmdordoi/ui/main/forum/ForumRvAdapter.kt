@@ -51,6 +51,7 @@ class ForumRvAdapter(val context: Context) : RecyclerView.Adapter<ForumRvAdapter
             itemView.setOnClickListener {
                 val intent = Intent(App.activity, TopicActivity::class.java)
                 intent.putExtra("forum",item.id)
+                intent.putExtra("title",item.title)
                 App.activity!!.startActivity(intent)
             }
 

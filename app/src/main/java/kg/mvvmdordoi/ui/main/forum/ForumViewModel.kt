@@ -94,6 +94,32 @@ class ForumViewModel() : BaseViewModel() {
         )
     }
 
+    fun getTopicSearch(id:Int,text:String) {
+
+        subscription.add(
+            postApi.getTopicSearch(id,text)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { showProgress() }
+                .doOnTerminate { hideProgress() }
+                .subscribe(
+                    { result -> hideProgress()
+                        Log.e("EWW3dfsd3",result.body().toString())
+                        if (result.isSuccessful) {
+                            topic.value = result.body()
+                        } else {
+                            var error = result.errorBody()!!.string()
+                            Log.e("Error",error)
+
+                        }
+                    },
+                    { hideProgress()
+                        Log.e("Error",it.toString())
+                    }
+                )
+        )
+    }
+
     fun getUser() {
 
         subscription.add(
@@ -170,7 +196,7 @@ class ForumViewModel() : BaseViewModel() {
     fun getComments(id:Int) {
 
         subscription.add(
-            postApi.getCommentQuiz(id, UserToken.getToken(App.activity!!)!!.toInt())
+            postApi.getCommentForum(id, UserToken.getToken(App.activity!!)!!.toInt())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { showProgress() }
@@ -195,7 +221,7 @@ class ForumViewModel() : BaseViewModel() {
     fun sendComment(message:String,quiz_id:Int) {
         Log.e("User",UserToken.getToken(App.activity!!).toString())
         subscription.add(
-            postApi.postComment(quiz_id,message,UserToken.getToken(App.activity!!)!!.toInt())
+            postApi.postCommentForum(quiz_id,message,UserToken.getToken(App.activity!!)!!.toInt())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { showProgress() }
@@ -218,10 +244,10 @@ class ForumViewModel() : BaseViewModel() {
         )
     }
 
-    fun sendAnswer(message:String,quiz_id:Int,comment_id:Int,name:String) {
+    fun sendAnswer(message:String,comment_id:Int,name:String) {
 
         subscription.add(
-            postApi.postAnswer(quiz_id,message,UserToken.getToken(App.activity!!).toString(),comment_id,name)
+            postApi.postAnswerForum(message,UserToken.getToken(App.activity!!).toString(),comment_id,name)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { showProgress() }
@@ -246,7 +272,7 @@ class ForumViewModel() : BaseViewModel() {
     fun sendLike(idComment:Int,type:Int) {
 
         subscription.add(
-            postApi.postLike(UserToken.getToken(App.activity!!)!!.toInt(),idComment,type)
+            postApi.postLikeForum(UserToken.getToken(App.activity!!)!!.toInt(),idComment,type)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { showProgress() }
@@ -270,7 +296,7 @@ class ForumViewModel() : BaseViewModel() {
     fun sendLikeAnswer(idAnswer:Int,type:Int) {
 
         subscription.add(
-            postApi.postLikeAnswer(UserToken.getToken(App.activity!!)!!.toInt(),idAnswer,type)
+            postApi.postLikeAnswerForum(UserToken.getToken(App.activity!!)!!.toInt(),idAnswer,type)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { showProgress() }

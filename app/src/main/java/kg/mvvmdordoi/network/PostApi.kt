@@ -222,6 +222,9 @@ interface PostApi {
     @GET("topic/")
     fun getTopic(@Query("forum")forum: Int): Observable<Response<ArrayList<Topic>>>
 
+    @GET("topic/")
+    fun getTopicSearch(@Query("forum")forum: Int,@Query("search") text: String): Observable<Response<ArrayList<Topic>>>
+
     @GET("day_quiz/")
     fun getQuizDay(@Query("date") category: String,@Query("lang") lang: String): Observable<Response<List<DayQuiz>>>
 
@@ -237,6 +240,12 @@ interface PostApi {
     @FormUrlEncoded
     @POST("comment_quiz_create/")
     fun postComment(@Field("quiz") quiz_id: Int,
+                    @Field("message") message:String,
+                    @Field("user") user_id: Int): Observable<Response<Any>>
+
+    @FormUrlEncoded
+    @POST("comment_forum_create/")
+    fun postCommentForum(@Field("topic") topic: Int,
                     @Field("message") message:String,
                     @Field("user") user_id: Int): Observable<Response<Any>>
 
@@ -263,6 +272,39 @@ interface PostApi {
                    @Field("answer") answer:Int,
                    @Field("like") like: Int
     ): Observable<Response<Any>>
+
+
+
+
+
+
+    @FormUrlEncoded
+    @POST("answer_forum/")
+    fun postAnswerForum(
+                   @Field("message") message:String,
+                   @Field("user") user_id: String,
+                   @Field("comment")comment_id:Int,
+                   @Field("name") name: String
+    ): Observable<Response<Any>>
+
+    @FormUrlEncoded
+    @POST("like_forum/")
+    fun postLikeForum(@Field("user") user_id: Int,
+                 @Field("comment") idComment:Int,
+                 @Field("like") like: Int
+    ): Observable<Response<Any>>
+
+
+    @FormUrlEncoded
+    @POST("like_answer_forum/")
+    fun postLikeAnswerForum(@Field("user") user_id: Int,
+                       @Field("answer") answer:Int,
+                       @Field("like") like: Int
+    ): Observable<Response<Any>>
+
+
+
+
 
 
 

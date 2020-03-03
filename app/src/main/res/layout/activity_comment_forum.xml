@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E9E9E9">
+
+    <RelativeLayout
+        android:layout_margin="5dp"
+        android:background="@drawable/black_stroke_1dp_circle"
+        android:padding="3dp"
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_alignParentEnd="true"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
+
+       <TextView
+           android:layout_marginEnd="5dp"
+           android:layout_marginStart="5dp"
+           android:id="@+id/title1"
+           android:textColor="#000"
+           android:textStyle="bold"
+           android:textSize="17sp"
+           android:text="sdds"
+           android:layout_toStartOf="@+id/image"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_marginEnd="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_toStartOf="@+id/image"
+            android:layout_below="@id/title1"
+            android:id="@+id/desc"
+            android:text="lll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/line_comment"
+        android:layout_below="@+id/line"
+        android:layout_margin="10dp" />
+
+    <RelativeLayout
+        android:layout_above="@+id/adView"
+        android:id="@+id/line_comment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:paddingStart="3dp"
+            android:layout_marginStart="3dp"
+            android:id="@+id/user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gray_stroke_1dp"
+            android:drawableEnd="@drawable/ic_close"
+            android:text="ulank"
+            android:visibility="gone" />
+
+        <EditText
+            android:paddingStart="10dp"
+            android:hint="@string/answer"
+            android:id="@+id/message1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user"
+            android:layout_toStartOf="@+id/btn_send" />
+
+
+        <ImageView
+            android:id="@+id/btn_send"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_menu_send" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/line_no_one"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#DCDCDC"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/quote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="15dp"
+            android:text="@string/no_question"
+            android:textColor="#000"
+            android:textSize="19sp" />
+
+    </RelativeLayout>
+
+    <com.google.android.gms.ads.AdView
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-7649587179327452/5428546147">
+    </com.google.android.gms.ads.AdView>
+</RelativeLayout>

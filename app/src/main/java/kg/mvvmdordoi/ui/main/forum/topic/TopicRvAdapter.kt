@@ -15,6 +15,7 @@ import kg.mvvmdordoi.App
 import kotlin.collections.ArrayList
 import kg.mvvmdordoi.R
 import kg.mvvmdordoi.model.get.*
+import kg.mvvmdordoi.ui.main.forum.comment_forum.CommentForumActivity
 import kg.mvvmdordoi.ui.test.test_detail.GameQuestionActivity
 import kotlinx.android.synthetic.main.item_forum.view.*
 import kotlinx.android.synthetic.main.item_forum.view.title
@@ -51,8 +52,11 @@ class TopicRvAdapter(val context: Context) : RecyclerView.Adapter<TopicRvAdapter
             itemView.comment_count.text = item.comment_count.toString()
 
             itemView.setOnClickListener {
-//                val intent = Intent(App.activity, GameQuestionActivity::class.java)
-//                App.activity!!.startActivity(intent)
+                val intent = Intent(App.activity, CommentForumActivity::class.java)
+                intent.putExtra("topic",item.id)
+                intent.putExtra("topic1",item)
+                intent.putExtra("title",item.title)
+                App.activity!!.startActivity(intent)
             }
 
         }

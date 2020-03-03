@@ -7,6 +7,9 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.MenuItem
 import com.bumptech.glide.Glide
 import kg.mvvmdordoi.App
 import kg.mvvmdordoi.R
@@ -19,10 +22,31 @@ import kotlinx.android.synthetic.main.activity_topic.name
 import okhttp3.MediaType
 import okhttp3.RequestBody
 import kg.mvvmdordoi.network.UserToken
+import kg.mvvmdordoi.ui.game.users.UsersActivity
+import kg.mvvmdordoi.utils.extension.hideKeyboardFrom
+import kotlinx.android.synthetic.main.activity_topic.rv
+import kotlinx.android.synthetic.main.activity_topic.search
 import okhttp3.MultipartBody
 import java.io.File
 
-class TopicActivity : ImagePickerHelper() {
+class TopicActivity : ImagePickerHelper(),TextWatcher {
+    override fun afterTextChanged(s: Editable?) {
+
+    }
+
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+    }
+
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+        if (s != null) {
+            if (!s.isEmpty()) {
+                viewModel.getTopicSearch(intent.getIntExtra("forum",-1),s.toString())
+            }else{
+                viewModel.getTopic(intent.getIntExtra("forum",-1))
+            }
+        }
+    }
+
     override fun openGallery(mItemId: String) {
 
     }
@@ -30,7 +54,7 @@ class TopicActivity : ImagePickerHelper() {
     override fun setImagePath(imgpath: Uri) {
 
         imagePath = imgpath.path
-        avatar.setImageURI(imgpath)
+        add_photo.setImageURI(imgpath)
 
     }
     var imagePath:String?= null
@@ -43,6 +67,11 @@ class TopicActivity : ImagePickerHelper() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_topic)
+
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.title = intent.getStringExtra("title")
+
+        App.activity = this
         viewModel = ViewModelProviders.of(this, ViewModelFactory()).get(ForumViewModel::class.java)
         setupRv()
         viewModel.getTopic(intent.getIntExtra("forum",-1))
@@ -69,6 +98,8 @@ class TopicActivity : ImagePickerHelper() {
 
         }
 
+        search.addTextChangedListener(this)
+
         btn_add.setOnClickListener {
 
             if (isValidate()){
@@ -89,7 +120,8 @@ class TopicActivity : ImagePickerHelper() {
             }
         }
 
-        new_topic.setOnClickListener { startActivityForResult(Intent(this,TitleActivity::class.java),101) }
+        new_topic.setOnClickListener { startActivityForResult(Intent(this,TitleActivity::class.java),10102) }
+        hideKeyboardFrom(this, search)
 
     }
 
@@ -117,7 +149,7 @@ class TopicActivity : ImagePickerHelper() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode== Activity.RESULT_OK){
+        if (resultCode== Activity.RESULT_OK&&requestCode==10102){
             if (data != null) {
                 textDescription = data.getStringExtra("description")
                 textTitle = data.getStringExtra("title")
@@ -126,6 +158,11 @@ class TopicActivity : ImagePickerHelper() {
             }
         }
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        finish()
+        return super.onOptionsItemSelected(item)
     }
 
 }

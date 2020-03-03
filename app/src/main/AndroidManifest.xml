@@ -18,7 +18,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.main.forum.topic.TitleActivity"></activity>
+        <activity android:name=".ui.main.forum.comment_forum.CommentForumActivity"></activity>
+        <activity android:name=".ui.main.forum.topic.TitleActivity" />
         <activity android:name=".ui.main.forum.topic.TopicActivity" />
         <activity android:name=".ui.main.forum.ForumActivity" />
         <activity android:name=".ui.game.users.MyFriendsActivity" />
