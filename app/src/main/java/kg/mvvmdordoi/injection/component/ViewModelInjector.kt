@@ -14,6 +14,7 @@ import kg.mvvmdordoi.ui.game.users.UserViewModel
 import kg.mvvmdordoi.ui.info.InfoViewModel
 import kg.mvvmdordoi.ui.main.MainViewModel
 import kg.mvvmdordoi.ui.main.dayli_game.QuestionDayViewModel
+import kg.mvvmdordoi.ui.main.forum.ForumViewModel
 import kg.mvvmdordoi.ui.main.game.GameViewModel
 import kg.mvvmdordoi.ui.main.profile.ProfileViewModel
 import kg.mvvmdordoi.ui.notification.NotificationViewModel
@@ -54,6 +55,7 @@ interface ViewModelInjector {
     fun inject(UniversityViewModel: UniversityViewModel)
     fun inject(NotificationViewModel: NotificationViewModel)
     fun inject(ConfirmCodeViewModel: ConfirmCodeViewModel)
+    fun inject(ForumViewModel: ForumViewModel)
 
     @Component.Builder
     interface Builder {

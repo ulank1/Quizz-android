@@ -10,6 +10,12 @@
         android:icon="@drawable/ic_swords"
         android:title="@string/games"/>
     <item
+        android:id="@+id/forum_nav"
+        android:icon="@drawable/ic_forum"
+        android:title="форум"/>
+
+
+    <item
         android:id="@+id/third"
         android:icon="@drawable/ic_zadacha_dnya"
         android:title="@string/day_quiz"/>

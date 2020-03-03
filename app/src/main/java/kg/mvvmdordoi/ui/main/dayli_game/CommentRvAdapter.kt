@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import kg.mvvmdordoi.utils.extension.formatDateNotification
 import kg.mvvmdordoi.utils.extension.formatDateNotification1
 import kg.mvvmdordoi.utils.extension.gone
 import kg.mvvmdordoi.utils.extension.visible
+import kotlinx.android.synthetic.main.item_comment.view.*
 
 
 class CommentRvAdapter(val context: Context,val listener: CommentClickListener) : RecyclerView.Adapter<CommentRvAdapter.AdvertViewHolder>() {
@@ -55,6 +57,24 @@ class CommentRvAdapter(val context: Context,val listener: CommentClickListener) 
             message.text = item.message
             time.text = formatDateNotification1(item.created_at)
 
+            if (item.answers!=null) {
+                Log.e("NUUUUKK",item.answers.toString())
+                if (item.answers!!.size>0) {
+                    itemView.all.text =context.getString(R.string.open) + " (" + item.answers!!.size + ")"
+                    itemView.all.visible()
+                }else{
+                    itemView.all.gone()
+                }
+            }else{
+                itemView.all.gone()
+            }
+
+            itemView.all.setOnClickListener {
+
+                it.gone()
+                rv.visible()
+
+            }
 
             img_like.setOnClickListener {
 
@@ -94,7 +114,7 @@ class CommentRvAdapter(val context: Context,val listener: CommentClickListener) 
             }
 
             if (!item.answers.isNullOrEmpty()){
-                rv.visible()
+                rv.gone()
                 val layoutManager = GridLayoutManager(context, 1)
                 rv.layoutManager = layoutManager
                 var adapter = AnswerRvAdapter(App.activity!!,listener,item.id)

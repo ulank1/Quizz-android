@@ -157,6 +157,10 @@
     <string name="delete_friend">Достуктан өчүрүү</string>
     <string name="add_friend">Досторго кошуу</string>
     <string name="friends">Достор</string>
+    <string name="open">Жоопторду корсотүү</string>
+    <string name="topic_create">тема киргизүү</string>
+    <string name="desc">Мазмуну</string>
+    <string name="back">Артка</string>
     <string-array name="regions">
         <item>Бишкек шаары</item>
         <item>Ош шаары</item>

@@ -1,5 +1,6 @@
 package kg.mvvmdordoi.network
 
+import android.content.ClipDescription
 import io.reactivex.Observable
 import kg.mvvmdordoi.model.ApiResponse
 import kg.mvvmdordoi.model.Product
@@ -68,9 +69,27 @@ interface PostApi {
         @Part("is_ru") is_ru: RequestBody,
         @Part avatar: MultipartBody.Part,
         @Part("is_notification") is_notification : RequestBody
-
-
     ): Observable<User>
+
+    @Multipart
+    @POST("topic/")
+    fun addTopic(
+        @Part("forum") forum: RequestBody,
+        @Part("title") login: RequestBody,
+        @Part avatar: MultipartBody.Part,
+        @Part("description") description: RequestBody,
+        @Part("user") user: RequestBody
+    ): Observable<Response<Topic>>
+
+    @Multipart
+    @POST("topic/")
+    fun addTopic(
+        @Part("forum") forum: RequestBody,
+        @Part("title") login: RequestBody,
+        @Part("description") description: RequestBody,
+        @Part("user") user: RequestBody
+    ): Observable<Response<Topic>>
+
     @Multipart
     @POST("users/")
     fun addUser(
@@ -197,6 +216,12 @@ interface PostApi {
     @GET("quote/")
     fun getQuote(@Query("lang")lang: String): Observable<Response<Quote>>
 
+    @GET("forum/")
+    fun getForum(@Query("lang")lang: String): Observable<Response<ArrayList<Forum>>>
+
+    @GET("topic/")
+    fun getTopic(@Query("forum")forum: Int): Observable<Response<ArrayList<Topic>>>
+
     @GET("day_quiz/")
     fun getQuizDay(@Query("date") category: String,@Query("lang") lang: String): Observable<Response<List<DayQuiz>>>
 
@@ -205,6 +230,9 @@ interface PostApi {
 
     @GET("comment_quiz/")
     fun getCommentQuiz(@Query("quiz") id: Int,@Query("user_id")user_id: Int): Observable<Response<List<Comment>>>
+
+    @GET("comment_forum/")
+    fun getCommentForum(@Query("topic") id: Int,@Query("user_id")user_id: Int): Observable<Response<List<Comment>>>
 
     @FormUrlEncoded
     @POST("comment_quiz_create/")

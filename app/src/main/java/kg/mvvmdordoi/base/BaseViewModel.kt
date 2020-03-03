@@ -19,6 +19,7 @@ import kg.mvvmdordoi.ui.game.users.UserViewModel
 import kg.mvvmdordoi.ui.info.InfoViewModel
 import kg.mvvmdordoi.ui.main.MainViewModel
 import kg.mvvmdordoi.ui.main.dayli_game.QuestionDayViewModel
+import kg.mvvmdordoi.ui.main.forum.ForumViewModel
 import kg.mvvmdordoi.ui.main.game.GameViewModel
 import kg.mvvmdordoi.ui.main.profile.ProfileViewModel
 import kg.mvvmdordoi.ui.notification.NotificationViewModel
@@ -60,6 +61,7 @@ abstract class BaseViewModel:ViewModel(){
             is UniversityViewModel -> injector.inject(this)
             is NotificationViewModel -> injector.inject(this)
             is ConfirmCodeViewModel -> injector.inject(this)
+            is ForumViewModel -> injector.inject(this)
         }
     }
 

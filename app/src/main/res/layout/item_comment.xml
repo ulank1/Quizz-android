@@ -100,13 +100,24 @@
             android:layout_height="wrap_content"/>
 
     </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="20dp"
+            android:layout_alignParentEnd="true"
+            android:text="@string/open"
+            android:id="@+id/all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
     <android.support.v7.widget.RecyclerView
+        android:visibility="gone"
         android:id="@+id/rv"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/suka"
         android:layout_marginStart="35dp" />
-
+    </RelativeLayout>
 </LinearLayout>

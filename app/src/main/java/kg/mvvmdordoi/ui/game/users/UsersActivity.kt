@@ -152,7 +152,7 @@ class UsersActivity : AppCompatActivity(), TextWatcher,FriendListener {
         }
 
         my_friend.setOnClickListener { startActivity(Intent(this,MyFriendsActivity::class.java)) }
-
+        hideKeyboardFrom(this, search)
     }
 
     var isLastPage: Boolean = false

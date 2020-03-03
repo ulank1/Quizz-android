@@ -172,5 +172,9 @@
     <string name="delete_friend">Хотите удалить из друзей?</string>
     <string name="add_friend">Хотите добавить в друзья?</string>
     <string name="friends">Мои друзья</string>
+    <string name="open">Показать ответы</string>
+    <string name="topic_create">создать тему</string>
+    <string name="desc">Описание</string>
+    <string name="back">Вернуться</string>
 
 </resources>

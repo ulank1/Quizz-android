@@ -12,6 +12,7 @@ import kg.mvvmdordoi.ui.game.users.UserViewModel
 import kg.mvvmdordoi.ui.info.InfoViewModel
 import kg.mvvmdordoi.ui.main.MainViewModel
 import kg.mvvmdordoi.ui.main.dayli_game.QuestionDayViewModel
+import kg.mvvmdordoi.ui.main.forum.ForumViewModel
 import kg.mvvmdordoi.ui.main.game.GameViewModel
 import kg.mvvmdordoi.ui.main.profile.ProfileViewModel
 import kg.mvvmdordoi.ui.notification.NotificationViewModel
@@ -84,6 +85,11 @@ class ViewModelFactory(): ViewModelProvider.Factory{
         if (modelClass.isAssignableFrom(ConfirmCodeViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return ConfirmCodeViewModel() as T
+        }
+
+        if (modelClass.isAssignableFrom(ForumViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return ForumViewModel() as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
 

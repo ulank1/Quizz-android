@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:orientation="vertical"
+    tools:context=".ui.main.forum.topic.TitleActivity">
+
+    <EditText
+        android:hint="Тема"
+        android:id="@+id/title1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:id="@+id/desc"
+        android:hint="@string/desc"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <View
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <Button
+        android:layout_marginBottom="20dp"
+        android:textAllCaps="false"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp"
+        android:textColor="@color/white"
+        android:background="@drawable/blue_5dp"
+        android:text="@string/back"
+        android:layout_gravity="center"
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout>

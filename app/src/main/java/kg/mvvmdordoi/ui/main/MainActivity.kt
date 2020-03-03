@@ -49,6 +49,7 @@ import kg.mvvmdordoi.ui.info.news.NewsListActivity
 import kg.mvvmdordoi.ui.info.ort.OrtMainListActivity
 import kg.mvvmdordoi.ui.main.about_us.AboutUsActivity
 import kg.mvvmdordoi.ui.main.dayli_game.DayQuestionActivity
+import kg.mvvmdordoi.ui.main.forum.ForumFragment
 import kg.mvvmdordoi.ui.main.game.GameFragment
 import kg.mvvmdordoi.ui.main.profile.ProfileFragment
 import kg.mvvmdordoi.ui.main.rating_all.RatingFragment
@@ -118,6 +119,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 selectedFragment = RatingFragment()
                 tag = "rating"
             }
+            R.id.forum_nav -> {
+                selectedFragment = ForumFragment()
+                tag = "forum"
+            }
+
+
         }
 
         assert(selectedFragment != null)
