@@ -4,6 +4,9 @@ import com.google.gson.annotations.SerializedName
 data class User (
 
 	@SerializedName("id") val id : Int,
+	@SerializedName("win") val win : Int,
+	@SerializedName("lose") val lose : Int,
+	@SerializedName("draw") val draw : Int,
 	@SerializedName("name") val name : String,
 	@SerializedName("is_kg") val is_kg : Boolean,
 	@SerializedName("friend") var friend : Boolean=true,

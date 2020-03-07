@@ -10,8 +10,10 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -30,6 +32,7 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import kg.mvvmdordoi.App
+import kg.mvvmdordoi.App.Companion.activity
 
 import kg.mvvmdordoi.R
 import kg.mvvmdordoi.injection.ViewModelFactory
@@ -41,7 +44,6 @@ import kg.mvvmdordoi.ui.auth.login.LoginActivity
 import kg.mvvmdordoi.ui.auth.register.RegisterActivity
 import kg.mvvmdordoi.ui.auth.register.RegisterViewModel
 import kg.mvvmdordoi.ui.test.test_detail.Shared
-import kg.mvvmdordoi.utils.ImageActivity
 import kg.mvvmdordoi.utils.extension.getDateDot
 import kg.mvvmdordoi.utils.extension.getTodayDate
 import kg.mvvmdordoi.utils.extension.getTodayDateDot
@@ -61,39 +63,36 @@ import kotlin.collections.ArrayList
 import kotlin.math.max
 import kotlin.math.min
 
-class ProfileFragment : Fragment() {
+class ProfileActivity : AppCompatActivity() {
 
     lateinit var logInBtn: Button
     lateinit var chart: LineChart
     private lateinit var viewModel: ProfileViewModel
     var max_sixe = 7
-    var ratings:ArrayList<Rating> = ArrayList()
+    var ratings: ArrayList<Rating> = ArrayList()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? { if (Lang.get(context!!) == "1") {
-        val locale = Locale("ky")
-        Locale.setDefault(locale)
-        val configuration = Configuration()
-        configuration.locale = locale
-        activity!!.baseContext.resources.updateConfiguration(configuration, null)
-    } else {
-        val locale = Locale("ru")
-        Locale.setDefault(locale)
-        val configuration = Configuration()
-        configuration.locale = locale
-        activity!!.baseContext.resources.updateConfiguration(configuration, null)
-    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.profile_layout)
+        activity = this
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        return inflater.inflate(R.layout.profile_layout, container, false)
-    }
+        if (Lang.get(this!!) == "1") {
+            val locale = Locale("ky")
+            Locale.setDefault(locale)
+            val configuration = Configuration()
+            configuration.locale = locale
+            activity!!.baseContext.resources.updateConfiguration(configuration, null)
+        } else {
+            val locale = Locale("ru")
+            Locale.setDefault(locale)
+            val configuration = Configuration()
+            configuration.locale = locale
+            activity!!.baseContext.resources.updateConfiguration(configuration, null)
+        }
 
-    @SuppressLint("SetJavaScriptEnabled")
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        viewModel = ViewModelProviders.of(this, ViewModelFactory()).get(ProfileViewModel::class.java)
+        viewModel =
+            ViewModelProviders.of(this, ViewModelFactory()).get(ProfileViewModel::class.java)
         viewModel.ratings.observe(this, Observer {
             ratings = it as ArrayList<Rating>
 
@@ -119,12 +118,12 @@ class ProfileFragment : Fragment() {
             }
         })
         logInBtn = activity!!.findViewById(R.id.signIn)
-        chart = view.findViewById(R.id.chart)
+        chart = findViewById(R.id.chart)
 
-        logInBtn.setOnClickListener { startActivity(Intent(context, LoginActivity::class.java)) }
+        logInBtn.setOnClickListener { startActivity(Intent(this, LoginActivity::class.java)) }
 
-        val register = view.findViewById<Button>(R.id.register)
-        register.setOnClickListener { startActivity(Intent(context, RegisterActivity::class.java)) }
+        val register = findViewById<Button>(R.id.register)
+        register.setOnClickListener { startActivity(Intent(this, RegisterActivity::class.java)) }
 
         year.setOnClickListener {
             max_sixe = 365
@@ -139,21 +138,20 @@ class ProfileFragment : Fragment() {
             setupChart(ratings)
         }
 
-        avatar.setOnClickListener { startActivity(Intent(context,ImageActivity::class.java).putExtra("image",Shared.user.avatar)) }
-
+        viewModel.getRating(intent.getStringExtra("id"))
+        viewModel.getUser(intent.getStringExtra("id"))
     }
 
-
-    private fun setupGameInfo(gameOuters:ArrayList<GameOuter>){
+    private fun setupGameInfo(gameOuters: ArrayList<GameOuter>) {
 
         var win = 0
         var lose = 0
         var check = 0
 
 
-        for (game in gameOuters){
-            var is_owner = UserToken.getToken(context!!)!!.toInt() == game.user_owner.id
-            if (game.outer_point>-1) {
+        for (game in gameOuters) {
+            var is_owner = UserToken.getToken(this!!)!!.toInt() == game.user_owner.id
+            if (game.outer_point > -1) {
                 if (game.owner_point > game.outer_point) {
                     if (is_owner) {
                         win++
@@ -187,22 +185,29 @@ class ProfileFragment : Fragment() {
 
         total_point.text = kg.mvvmdordoi.ui.main.profile.Shared.rating_all.toString()
         getSummPoints(ratings).toString()
-        var total_quiz =todayFalse+todayTrue
+        var total_quiz = todayFalse + todayTrue
         today_point.text = todayPoint.toString()
         today_quiz.text = (total_quiz).toString()
-        if (total_quiz!=0) {
+        if (total_quiz != 0) {
             true_quiz.text =
-                (todayTrue).toString() + " (" +  String.format("%.1f",(todayTrue.toDouble() / total_quiz.toDouble() * 100)) + "%)"
+                (todayTrue).toString() + " (" + String.format(
+                    "%.1f",
+                    (todayTrue.toDouble() / total_quiz.toDouble() * 100)
+                ) + "%)"
             false_quiz.text =
-               (todayFalse).toString() + " (" + String.format("%.1f",(todayFalse.toDouble() / total_quiz.toDouble() * 100)) + "%)"
-        }else{
+                (todayFalse).toString() + " (" + String.format(
+                    "%.1f",
+                    (todayFalse.toDouble() / total_quiz.toDouble() * 100)
+                ) + "%)"
+        } else {
             true_quiz.text =
                 (todayTrue).toString()
             false_quiz.text =
-               (todayFalse).toString()
+                (todayFalse).toString()
         }
     }
-    private fun getSummPoints(ratings: ArrayList<Rating>):Int{
+
+    private fun getSummPoints(ratings: ArrayList<Rating>): Int {
 
         var sum = 0
         for (rating in ratings) {
@@ -222,72 +227,70 @@ class ProfileFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        Log.e("sadasd", "ONRESUME")
-        if (UserToken.hasToken(context!!)){
-            dont_auth.gone()
-            viewModel.getRating()
-            viewModel.getUser()
-        }
+
     }
 
-    fun getRatingsForChart(ratings:ArrayList<Rating>):ArrayList<Rating>{
-        var chart_ratings:ArrayList<Rating> = ArrayList()
+    fun getRatingsForChart(ratings: ArrayList<Rating>): ArrayList<Rating> {
+        var chart_ratings: ArrayList<Rating> = ArrayList()
 
 
         return chart_ratings
     }
 
-    fun compareText(s1:String,s2:String):String{
+    fun compareText(s1: String, s2: String): String {
 
-        return if (s1>s2){
+        return if (s1 > s2) {
             s1
-        }else{
+        } else {
             s2
         }
 
     }
 
-    private fun setupChart(ratings:ArrayList<Rating>) {
+    private fun setupChart(ratings: ArrayList<Rating>) {
 
-        var typeofCalendar = if (max_sixe==7){
+        var typeofCalendar = if (max_sixe == 7) {
             Calendar.DAY_OF_YEAR
-        }else if (max_sixe==30){
+        } else if (max_sixe == 30) {
             Calendar.MONTH
-        }else{
+        } else {
             Calendar.YEAR
         }
 
-        if (ratings.size>1) {
+        if (ratings.size > 1) {
 
-            date1.text = compareText(ratings[max(0,ratings.size-1-max_sixe)].created_at, getDateDot(-1*max_sixe,typeofCalendar))
+            date1.text = compareText(
+                ratings[max(0, ratings.size - 1 - max_sixe)].created_at,
+                getDateDot(-1 * max_sixe, typeofCalendar)
+            )
             date2.text = ratings[ratings.size - 1].created_at
         }
 
-        var step=1
-        step = if (max_sixe==7){
+        var step = 1
+        step = if (max_sixe == 7) {
             1
-        }else if (max_sixe==30){
+        } else if (max_sixe == 30) {
             3
-        }else{
+        } else {
             30
         }
 
 
-        if (ratings.size>0) {
+        if (ratings.size > 0) {
             Log.e("sds", "sdsdsd")
 
             val entries = ArrayList<Entry>()
 
-            var lastSum:Int = kg.mvvmdordoi.ui.main.profile.Shared.rating_all
+            var lastSum: Int = kg.mvvmdordoi.ui.main.profile.Shared.rating_all
 
-            var rat:ArrayList<Rating> = ArrayList()
+            var rat: ArrayList<Rating> = ArrayList()
 
-            for (i in ratings.size-1 downTo max(0,ratings.size-max_sixe)){
+            for (i in ratings.size - 1 downTo max(0, ratings.size - max_sixe)) {
                 var rating = ratings[i].copy()
-                Log.e("RATIGGGGG",rating.toString())
+                Log.e("RATIGGGGG", rating.toString())
                 var rattt = rating.rating
                 rating.rating = lastSum
-                lastSum-=rattt
+                lastSum -= rattt
                 rat.add(rating)
 
             }
@@ -301,33 +304,12 @@ class ProfileFragment : Fragment() {
             val dataSet = LineDataSet(entries, "")
             dataSet.setDrawFilled(true)
             dataSet.setFillAlpha(65)
-            dataSet.color = ContextCompat.getColor(context!!, R.color.colorPrimaryDark)
-            dataSet.fillColor = ContextCompat.getColor(context!!, R.color.colorPrimaryDarkTransparent)
-            dataSet.valueTextColor = ContextCompat.getColor(context!!, R.color.colorPrimaryDark)
+            dataSet.color = ContextCompat.getColor(this, R.color.colorPrimaryDark)
+            dataSet.fillColor =
+                ContextCompat.getColor(this, R.color.colorPrimaryDarkTransparent)
+            dataSet.valueTextColor = ContextCompat.getColor(this, R.color.colorPrimaryDark)
             dataSet.lineWidth = 2F
 
-            //****
-            // Controlling X axis
-//            val xAxis = chart.xAxis
-//            // Set the xAxis position to bottom. Default is top
-//            xAxis.position = XAxis.XAxisPosition.BOTTOM
-//            //Customizing x axis value
-//
-//            val formatter = IAxisValueFormatter { value, axis -> ratings[value.toInt()].created_at }
-//            xAxis.granularity = 1f // minimum axis-step (interval) is 1
-//            xAxis.valueFormatter = formatter
-////        xAxis.axisMaximum = max_sixe.toFloat()
-////        xAxis.labelCount = min(max_sixe,ratings.size)
-//
-//            //***
-//            // Controlling right side of y axis
-//            val yAxisRight = chart.axisRight
-//            yAxisRight.isEnabled = false
-//
-//            //***
-//            // Controlling left side of y axis
-//            val yAxisLeft = chart.axisLeft
-//            yAxisLeft.granularity = 1f
 
             // Setting Data
             val data = LineData(dataSet)
@@ -336,12 +318,17 @@ class ProfileFragment : Fragment() {
             chart.animateX(10)
 
             chart.xAxis.setDrawAxisLine(false)
-            chart.xAxis.isEnabled =false
+            chart.xAxis.isEnabled = false
             chart.description.isEnabled = false
             chart.legend.isEnabled = false
             //refresh
             chart.invalidate()
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        finish()
+        return super.onOptionsItemSelected(item)
     }
 
 }

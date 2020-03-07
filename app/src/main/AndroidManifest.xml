@@ -83,6 +83,8 @@
         <activity android:name=".ui.auth.confirm_code.ConfirmCodeActivity" />
         <activity android:name=".ui.auth.confirm_code.new_password.NewPasswordActivity" />
         <activity android:name=".ui.auth.redactorProfile.RedactorProfileActivity" />
+        <activity android:name=".ui.main.profile.ProfileActivity" />
+        <activity android:name=".utils.ImageActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

@@ -51,6 +51,7 @@ import kg.mvvmdordoi.ui.main.about_us.AboutUsActivity
 import kg.mvvmdordoi.ui.main.dayli_game.DayQuestionActivity
 import kg.mvvmdordoi.ui.main.forum.ForumFragment
 import kg.mvvmdordoi.ui.main.game.GameFragment
+import kg.mvvmdordoi.ui.main.profile.ProfileActivity
 import kg.mvvmdordoi.ui.main.profile.ProfileFragment
 import kg.mvvmdordoi.ui.main.rating_all.RatingFragment
 import kg.mvvmdordoi.ui.main.send_message.SendMessageActivity
@@ -146,6 +147,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         FirebaseApp.initializeApp(this)
 
         setContentView(R.layout.activity_main)
+
+
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         fragmentManager = supportFragmentManager

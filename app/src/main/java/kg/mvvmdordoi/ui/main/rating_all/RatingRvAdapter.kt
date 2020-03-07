@@ -18,6 +18,7 @@ import kg.mvvmdordoi.model.get.Game
 import kg.mvvmdordoi.model.get.GameOuter
 import kg.mvvmdordoi.model.get.Rating
 import kg.mvvmdordoi.model.get.RatingWithUser
+import kg.mvvmdordoi.ui.main.profile.ProfileActivity
 import kg.mvvmdordoi.ui.test.test_detail.GameQuestionActivity
 import kotlinx.android.synthetic.main.item_rating_all.view.*
 
@@ -57,13 +58,19 @@ class RatingRvAdapter(val context: Context) : RecyclerView.Adapter<RatingRvAdapt
             point.text = item.rating.toString()
 
             rating.text = "${position+1}"
+            name.setOnClickListener {
 
-           /* itemView.setOnClickListener {
-                val intent = Intent(App.activity, GameQuestionActivity::class.java)
-//                i ntent.putExtra("title",item.name)
-//                intent.putExtra("id",item.id)
-                App.activity!!.startActivity(intent)
-            }*/
+                context.startActivity(Intent(context, ProfileActivity::class.java).putExtra("id",item.user.id.toString()))
+
+            }
+
+
+            /* itemView.setOnClickListener {
+                 val intent = Intent(App.activity, GameQuestionActivity::class.java)
+ //                i ntent.putExtra("title",item.name)
+ //                intent.putExtra("id",item.id)
+                 App.activity!!.startActivity(intent)
+             }*/
 
         }
     }

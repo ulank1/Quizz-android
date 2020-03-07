@@ -2,6 +2,7 @@ package kg.mvvmdordoi.ui.main.dayli_game
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.widget.*
 import kotlin.collections.ArrayList
 import kg.mvvmdordoi.R
 import kg.mvvmdordoi.model.get.*
+import kg.mvvmdordoi.ui.main.profile.ProfileActivity
 import kg.mvvmdordoi.utils.extension.formatDateNotification
 import kg.mvvmdordoi.utils.extension.formatDateNotification1
 import kotlinx.android.synthetic.main.item_answer.view.*
@@ -53,6 +55,14 @@ class AnswerRvAdapter(
             itemView.time.text = formatDateNotification1(item.created_at)
 
             setLike(item,itemView)
+
+            name.setOnClickListener {
+
+                context.startActivity(Intent(context, ProfileActivity::class.java).putExtra("id",item.user.id.toString()))
+
+            }
+
+
             img_like.setOnClickListener {
 
                 listener.likeAnswerClick(item.id,1)

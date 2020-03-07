@@ -17,6 +17,7 @@ import kg.mvvmdordoi.model.get.Game
 import kg.mvvmdordoi.model.get.GameOuter
 import kg.mvvmdordoi.network.UserToken
 import kg.mvvmdordoi.ui.game.users.Shared
+import kg.mvvmdordoi.ui.main.profile.ProfileActivity
 import kg.mvvmdordoi.ui.test.test_detail.GameQuestionActivity
 import kg.mvvmdordoi.ui.test.test_detail.GameQuestionActivityInvite
 import kg.mvvmdordoi.utils.URL1
@@ -63,10 +64,27 @@ class GameRvAdapter(val context: Context) : RecyclerView.Adapter<GameRvAdapter.A
 
             var is_owner = true
 
+
+
             is_owner = UserToken.getToken(context) == item.user_owner.id.toString()
 
             var point_owner = item.owner_point
             var point_outer = item.outer_point
+
+            if (is_owner){
+                nameOuter.setOnClickListener {
+
+                    context.startActivity(Intent(context, ProfileActivity::class.java).putExtra("id",item.user_outer.id.toString()))
+
+                }
+            }else{
+
+                name.setOnClickListener {
+
+                    context.startActivity(Intent(context, ProfileActivity::class.java).putExtra("id",item.user_owner.id.toString()))
+
+                }
+            }
 
             if (point_outer > -1) {
 

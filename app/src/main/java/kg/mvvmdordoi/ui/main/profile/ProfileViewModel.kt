@@ -74,6 +74,44 @@ class ProfileViewModel() : BaseViewModel() {
         )
     }
 
+    fun getRating(id:String) {
+
+        subscription.add(
+            postApi.getRating(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { showProgress() }
+                .doOnTerminate { hideProgress() }
+                .subscribe(
+                    { result -> hideProgress()
+                        if (result.isSuccessful) {
+                            Log.e("RATINGS",result.body().toString())
+
+                            val rating:ArrayList<Rating> = (result.body() as ArrayList<Rating>?)!!
+
+                            for ((i,rat)in rating.withIndex()){
+                                if (rat.created_at=="all"){
+                                    Shared.rating_all = rat.rating
+                                    rating.removeAt(i)
+                                    break
+                                }
+                            }
+
+                            Log.e("RRRR",rating.toString())
+//                            rating.reverse()
+                            ratings.value = rating
+                        }else{
+                            Log.e("ERROR", result.errorBody()?.string())
+                        }
+                    },
+                    { hideProgress()
+                        Log.e("Errdasdasor",it.toString())
+                    }
+                )
+        )
+    }
+
+
     fun getRatingAll() {
 
         subscription.add(
@@ -146,6 +184,31 @@ class ProfileViewModel() : BaseViewModel() {
                 )
         )
     }
+
+    fun getUser(id:String) {
+
+        subscription.add(
+            postApi.getUser(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { showProgress() }
+                .doOnTerminate { hideProgress() }
+                .subscribe(
+                    { result -> hideProgress()
+                        if (result.isSuccessful) {
+                            Log.e("RATINGS",result.body().toString())
+                            user.value = result.body()!!
+                        }else{
+                            Log.e("ERROR", result.errorBody()?.string())
+                        }
+                    },
+                    { hideProgress()
+                        Log.e("Errdasdasor",it.toString())
+                    }
+                )
+        )
+    }
+
     fun getGameOuter() {
 
         subscription.add(
@@ -171,7 +234,6 @@ class ProfileViewModel() : BaseViewModel() {
                 )
         )
     }
-
 
 
 }

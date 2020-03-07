@@ -2,6 +2,7 @@ package kg.mvvmdordoi.ui.main.dayli_game
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -13,6 +14,7 @@ import kg.mvvmdordoi.App
 import kotlin.collections.ArrayList
 import kg.mvvmdordoi.R
 import kg.mvvmdordoi.model.get.*
+import kg.mvvmdordoi.ui.main.profile.ProfileActivity
 import kg.mvvmdordoi.utils.extension.formatDateNotification
 import kg.mvvmdordoi.utils.extension.formatDateNotification1
 import kg.mvvmdordoi.utils.extension.gone
@@ -73,6 +75,12 @@ class CommentRvAdapter(val context: Context,val listener: CommentClickListener) 
 
                 it.gone()
                 rv.visible()
+
+            }
+
+            name.setOnClickListener {
+
+                context.startActivity(Intent(context, ProfileActivity::class.java).putExtra("id",item.user.id.toString()))
 
             }
 
