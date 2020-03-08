@@ -153,15 +153,17 @@
     <string name="no_exit">Тестти бүтүрбөй чыгууга болбойт!</string>
     <string name="want_exit">Чыгууну каалайсызбы?</string>
     <string name="search_users">Оюнчу издөө ...</string>
-    <string name="answer">Жооп берүү</string>
+    <string name="answer">Комментарий жазуу</string>
     <string name="delete_friend">Достуктан өчүрүү</string>
     <string name="add_friend">Досторго кошуу</string>
     <string name="friends">Достор</string>
-    <string name="open">Жоопторду корсотүү</string>
+    <string name="open">Жоопторду көрсөтүү</string>
     <string name="topic_create">тема киргизүү</string>
     <string name="desc">Мазмуну</string>
     <string name="back">Артка</string>
     <string name="ssss">киргизүү</string>
+    <string name="my_topics">Менин темаларым</string>
+    <string name="delete">Өчүрүүнү каалайсызбы?</string>
     <string-array name="regions">
         <item>Бишкек шаары</item>
         <item>Ош шаары</item>

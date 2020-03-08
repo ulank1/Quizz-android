@@ -168,7 +168,7 @@
     <string name="no_exit">Вы не можете выйти, не завершив тест!</string>
     <string name="want_exit">Хотите выйти?</string>
     <string name="search_users">Поиск игрока ...</string>
-    <string name="answer">Ответить</string>
+    <string name="answer">Комментировать</string>
     <string name="delete_friend">Хотите удалить из друзей?</string>
     <string name="add_friend">Хотите добавить в друзья?</string>
     <string name="friends">Мои друзья</string>
@@ -177,5 +177,7 @@
     <string name="desc">Описание</string>
     <string name="back">Вернуться</string>
     <string name="ssss">создать</string>
+    <string name="my_topics">Мои темы</string>
+    <string name="delete">Хотите удалить?</string>
 
 </resources>

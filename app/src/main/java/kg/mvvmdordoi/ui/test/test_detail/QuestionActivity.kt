@@ -517,7 +517,7 @@ class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickLi
     }
 
     private fun setTrueAnswer(trueText: TextView, result: Boolean) {
-        trueText.setBackgroundResource(R.drawable.blue_stroke_1dp_circle)
+        trueText.setBackgroundResource(R.drawable.question_stroke_1dp_circle)
         if (result) {
             sum += 10
         } else {

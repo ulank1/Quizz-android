@@ -2,6 +2,7 @@ package kg.mvvmdordoi.ui.main.forum
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
@@ -13,7 +14,10 @@ import kg.mvvmdordoi.App
 import kg.mvvmdordoi.R
 import kg.mvvmdordoi.injection.ViewModelFactory
 import kg.mvvmdordoi.ui.main.dayli_game.CommentRvAdapter
+import kg.mvvmdordoi.ui.main.forum.topic.my_topic.MyTopicActivity
 import kotlinx.android.synthetic.main.activity_question_day.*
+import kotlinx.android.synthetic.main.activity_question_day.rv
+import kotlinx.android.synthetic.main.forum_fragment.*
 
 class ForumFragment : Fragment() {
 
@@ -40,6 +44,8 @@ class ForumFragment : Fragment() {
             }
 
         })
+
+        my_topic.setOnClickListener { startActivity(Intent(context,MyTopicActivity::class.java)) }
     }
 
     private fun setupRv() {

@@ -15,10 +15,7 @@ import kotlin.collections.ArrayList
 import kg.mvvmdordoi.R
 import kg.mvvmdordoi.model.get.*
 import kg.mvvmdordoi.ui.main.profile.ProfileActivity
-import kg.mvvmdordoi.utils.extension.formatDateNotification
-import kg.mvvmdordoi.utils.extension.formatDateNotification1
-import kg.mvvmdordoi.utils.extension.gone
-import kg.mvvmdordoi.utils.extension.visible
+import kg.mvvmdordoi.utils.extension.*
 import kotlinx.android.synthetic.main.item_comment.view.*
 
 
@@ -70,6 +67,13 @@ class CommentRvAdapter(val context: Context,val listener: CommentClickListener) 
             }else{
                 itemView.all.gone()
             }
+
+            if (!item.user.is_admin){
+                itemView.admin.invisible()
+            }else{
+                itemView.admin.visible()
+            }
+
 
             itemView.all.setOnClickListener {
 

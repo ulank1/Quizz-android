@@ -12,9 +12,11 @@ import kotlin.collections.ArrayList
 import kg.mvvmdordoi.R
 import kg.mvvmdordoi.model.get.*
 import kg.mvvmdordoi.ui.main.profile.ProfileActivity
-import kg.mvvmdordoi.utils.extension.formatDateNotification
-import kg.mvvmdordoi.utils.extension.formatDateNotification1
+import kg.mvvmdordoi.utils.extension.*
 import kotlinx.android.synthetic.main.item_answer.view.*
+import kotlinx.android.synthetic.main.item_answer.view.admin
+import kotlinx.android.synthetic.main.item_answer.view.time
+import kotlinx.android.synthetic.main.item_comment.view.*
 
 
 class AnswerRvAdapter(
@@ -62,6 +64,11 @@ class AnswerRvAdapter(
 
             }
 
+            if (!item.user.is_admin){
+                itemView.admin.invisible()
+            }else{
+                itemView.admin.visible()
+            }
 
             img_like.setOnClickListener {
 

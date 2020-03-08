@@ -1,5 +1,6 @@
 package kg.mvvmdordoi.model.get
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class User (
 
@@ -16,5 +17,6 @@ data class User (
 	@SerializedName("place") val place : String,
 	@SerializedName("password") val password : String,
 	@SerializedName("avatar") val avatar : String,
-	@SerializedName("is_notification") val is_notification : Boolean
-)
+	@SerializedName("is_notification") val is_notification : Boolean,
+	@SerializedName("is_admin") val is_admin : Boolean
+):Serializable

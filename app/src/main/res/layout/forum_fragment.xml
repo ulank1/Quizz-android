@@ -6,7 +6,27 @@
     android:background="#E9E9E9"
     tools:context=".ui.main.forum.ForumFragment">
 
+    <RelativeLayout
+        android:id="@+id/line"
+        android:layout_margin="2dp"
+        android:background="@drawable/yellow_red_stroke_1dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="@string/my_topics"
+            android:layout_centerInParent="true"
+            android:textColor="#000"
+            android:gravity="center"
+            android:id="@+id/my_topic"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
     <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/line"
         android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

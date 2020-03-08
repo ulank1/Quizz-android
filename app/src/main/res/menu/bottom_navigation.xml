@@ -12,7 +12,7 @@
     <item
         android:id="@+id/forum_nav"
         android:icon="@drawable/ic_forum"
-        android:title="форум"/>
+        android:title="Форум"/>
 
 
     <item

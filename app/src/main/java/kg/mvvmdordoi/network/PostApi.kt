@@ -72,23 +72,23 @@ interface PostApi {
     ): Observable<User>
 
     @Multipart
-    @POST("topic/")
+    @POST("topic_create/")
     fun addTopic(
         @Part("forum") forum: RequestBody,
         @Part("title") login: RequestBody,
         @Part avatar: MultipartBody.Part,
         @Part("description") description: RequestBody,
         @Part("user") user: RequestBody
-    ): Observable<Response<Topic>>
+    ): Observable<Response<Any>>
 
     @Multipart
-    @POST("topic/")
+    @POST("topic_create/")
     fun addTopic(
         @Part("forum") forum: RequestBody,
         @Part("title") login: RequestBody,
         @Part("description") description: RequestBody,
         @Part("user") user: RequestBody
-    ): Observable<Response<Topic>>
+    ): Observable<Response<Any>>
 
     @Multipart
     @POST("users/")
@@ -221,6 +221,12 @@ interface PostApi {
 
     @GET("topic/")
     fun getTopic(@Query("forum")forum: Int): Observable<Response<ArrayList<Topic>>>
+
+    @GET("topic/")
+    fun getMyTopic(@Query("user")user: String): Observable<Response<ArrayList<Topic>>>
+
+    @DELETE("topic/{id}/")
+    fun deleteMyTopic(@Path("id")id: Int): Observable<Response<ArrayList<Topic>>>
 
     @GET("topic/")
     fun getTopicSearch(@Query("forum")forum: Int,@Query("search") text: String): Observable<Response<ArrayList<Topic>>>

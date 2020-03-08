@@ -47,7 +47,7 @@ class ForumRvAdapter(val context: Context) : RecyclerView.Adapter<ForumRvAdapter
         fun bind(item: Forum, position: Int) = with(itemView) {
 
             itemView.title.text = item.title
-
+            Glide.with(context).load(item.image).into(itemView.image)
             itemView.setOnClickListener {
                 val intent = Intent(App.activity, TopicActivity::class.java)
                 intent.putExtra("forum",item.id)

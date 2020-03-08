@@ -2,6 +2,7 @@ package kg.mvvmdordoi.ui.main.forum.comment_forum
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
@@ -20,6 +21,8 @@ import kg.mvvmdordoi.model.get.Topic
 import kg.mvvmdordoi.ui.main.dayli_game.CommentClickListener
 import kg.mvvmdordoi.ui.main.dayli_game.CommentRvAdapter
 import kg.mvvmdordoi.ui.main.forum.ForumViewModel
+import kg.mvvmdordoi.ui.main.profile.ProfileActivity
+import kg.mvvmdordoi.utils.ImageActivity
 import kg.mvvmdordoi.utils.extension.gone
 import kg.mvvmdordoi.utils.extension.visible
 import kotlinx.android.synthetic.main.activity_comment_forum.*
@@ -52,9 +55,10 @@ class CommentForumActivity : AppCompatActivity(),CommentClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_comment_forum)
+        App.activity = this
         viewModel = ViewModelProviders.of(this, ViewModelFactory()).get(ForumViewModel::class.java)
         var topic = intent.getSerializableExtra("topic1") as Topic
-        title1.text = topic.title
+        title1.text = " : "+topic.title
         desc.text = topic.description
         Glide.with(this).load(topic.image).into(image)
         setupRv()
@@ -62,13 +66,22 @@ class CommentForumActivity : AppCompatActivity(),CommentClickListener {
         mAdView = findViewById(R.id.adView)
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
+        name1.text = topic.user.name
+        if (!topic.user.is_admin){
+            admin.gone()
+        }else{
+            admin.visible()
+        }
 
+        name1.setOnClickListener { startActivity(Intent(this,ProfileActivity::class.java).putExtra("id",topic.user.id.toString())) }
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.title = intent.getStringExtra("title")
 
         user.setOnClickListener { user.gone() }
 
         viewModel.getComments(intent.getIntExtra("topic",-1))
+
+        image.setOnClickListener { startActivity(Intent(this,ImageActivity::class.java).putExtra("image",topic.image)) }
 
         btn_send.setOnClickListener {
 
@@ -98,6 +111,13 @@ class CommentForumActivity : AppCompatActivity(),CommentClickListener {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         finish()
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        App.activity = this
+
     }
 
 }

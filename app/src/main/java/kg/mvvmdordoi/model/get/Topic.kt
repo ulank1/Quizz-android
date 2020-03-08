@@ -9,5 +9,5 @@ data class Topic (
 	@SerializedName("image") val image : String,
 	@SerializedName("description") val description : String,
 	@SerializedName("comment_count") val comment_count : Int,
-	@SerializedName("user") val user : Int
+	@SerializedName("user") val user : User
 ):Serializable

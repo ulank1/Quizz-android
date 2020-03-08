@@ -94,6 +94,58 @@ class ForumViewModel() : BaseViewModel() {
         )
     }
 
+    fun getMyTopic() {
+
+        subscription.add(
+            postApi.getMyTopic(UserToken.getToken(App.activity!!).toString())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { showProgress() }
+                .doOnTerminate { hideProgress() }
+                .subscribe(
+                    { result -> hideProgress()
+                        Log.e("EWW33",result.body().toString())
+                        if (result.isSuccessful) {
+                            topic.value = result.body()
+                        } else {
+                            var error = result.errorBody()!!.string()
+                            Log.e("Error",error)
+
+                        }
+                    },
+                    { hideProgress()
+                        Log.e("Error",it.toString())
+                    }
+                )
+        )
+    }
+
+    fun deleteMyTopic(id:Int) {
+
+        subscription.add(
+            postApi.deleteMyTopic(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { showProgress() }
+                .doOnTerminate { hideProgress() }
+                .subscribe(
+                    { result -> hideProgress()
+                        Log.e("Delete",result.body().toString())
+                        if (result.isSuccessful) {
+                            getMyTopic()
+                        } else {
+                            var error = result.errorBody()!!.string()
+                            Log.e("Error",error)
+
+                        }
+                    },
+                    { hideProgress()
+                        Log.e("DeleteError",it.toString())
+                    }
+                )
+        )
+    }
+
     fun getTopicSearch(id:Int,text:String) {
 
         subscription.add(

@@ -16,7 +16,7 @@
 
     <TextView
         android:gravity="center"
-        android:background="@drawable/red_stroke_1dp"
+        android:background="@drawable/topic_stroke_1dp"
         android:layout_marginTop="10dp"
         android:textSize="18sp"
         android:text="@string/topic_create"
@@ -29,6 +29,8 @@
 
 
     <TextView
+        android:textStyle="bold"
+        android:gravity="center"
         android:textSize="13sp"
         android:text="sultanskaya@1"
         android:layout_marginTop="10dp"
@@ -39,11 +41,12 @@
         android:layout_height="wrap_content"/>
 
     <ImageView
+        android:padding="1dp"
         android:src="@drawable/avatar_place_holder"
         android:text="+"
         android:textColor="@color/white"
         android:layout_toStartOf="@+id/btn_add"
-        android:background="@drawable/blue_stroke_1dp"
+        android:background="@drawable/topic_stroke_1dp"
         android:layout_marginTop="10dp"
         android:layout_marginStart="16dp"
         android:layout_toEndOf="@id/name"
@@ -62,7 +65,7 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="10dp"
         android:layout_marginStart="16dp"
-        android:background="@drawable/blue_5dp"
+        android:background="@drawable/topic_5dp"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:layout_width="wrap_content"
@@ -86,11 +89,11 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv"
-        android:layout_below="@+id/search"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/search"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp" />
 
 </RelativeLayout>

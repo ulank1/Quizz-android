@@ -20,15 +20,23 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_weight="1"
                 android:id="@+id/name"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ulan"
                 android:textColor="#000"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
+            <TextView
+                android:layout_weight="1"
+                android:textSize="17sp"
+                android:textColor="#43C548"
+                android:text=" (админ)"
+                android:id="@+id/admin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@id/name" />
             <TextView
                 android:text="222"
                 android:id="@+id/time"

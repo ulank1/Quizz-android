@@ -1,32 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:orientation="vertical"
     tools:context=".ui.main.forum.topic.TitleActivity">
 
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <EditText
+        android:inputType="text"
         android:hint="Тема"
         android:id="@+id/title1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <EditText
+        android:layout_below="@+id/title1"
+        android:inputType="textMultiLine"
         android:id="@+id/desc"
         android:hint="@string/desc"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <View
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+
 
     <Button
+        android:layout_marginTop="100dp"
+        android:layout_below="@+id/desc"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
         android:textAllCaps="false"
         android:paddingStart="30dp"
@@ -38,6 +45,6 @@
         android:id="@+id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
+    </RelativeLayout>
 
-
-</LinearLayout>
+</ScrollView>

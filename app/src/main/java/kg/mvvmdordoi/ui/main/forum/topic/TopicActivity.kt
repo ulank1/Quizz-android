@@ -165,4 +165,9 @@ class TopicActivity : ImagePickerHelper(),TextWatcher {
         return super.onOptionsItemSelected(item)
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        App.activity = this
+    }
 }
