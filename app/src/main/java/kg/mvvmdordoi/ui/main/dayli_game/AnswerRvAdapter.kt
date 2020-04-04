@@ -54,7 +54,7 @@ class AnswerRvAdapter(
             val img_like:ImageView = itemView.findViewById(R.id.img_like)
             name.text = item.user.name
             message.text = item.name+" "+item.message
-            itemView.time.text = formatDateNotification1(item.created_at)
+            itemView.time.text = formatDateForum(item.created_at)
 
             setLike(item,itemView)
 

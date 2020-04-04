@@ -117,6 +117,11 @@ class TopicActivity : ImagePickerHelper(),TextWatcher {
                 }else{
                     viewModel.addTopic(forum,title,description,user,intent.getIntExtra("forum",-1))
                 }
+
+                textTitle = ""
+                textDescription = ""
+                new_topic.setText("")
+                imagePath = null
             }
         }
 

@@ -54,7 +54,7 @@ class CommentRvAdapter(val context: Context,val listener: CommentClickListener) 
 
             name.text = item.user.name
             message.text = item.message
-            time.text = formatDateNotification1(item.created_at)
+            time.text = formatDateForum(item.created_at)
 
             if (item.answers!=null) {
                 Log.e("NUUUUKK",item.answers.toString())

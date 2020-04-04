@@ -237,9 +237,9 @@ class ProfileFragment : Fragment() {
         return chart_ratings
     }
 
-    fun compareText(s1:String,s2:String):String{
+    fun compareText(s1:String,s2:String,size:Int):String{
 
-        return if (s1>s2){
+        return if (size<max_sixe){
             s1
         }else{
             s2
@@ -259,7 +259,7 @@ class ProfileFragment : Fragment() {
 
         if (ratings.size>1) {
 
-            date1.text = compareText(ratings[max(0,ratings.size-1-max_sixe)].created_at, getDateDot(-1*max_sixe,typeofCalendar))
+            date1.text = compareText(ratings[max(0,ratings.size-1-max_sixe)].created_at, getDateDot(-1*max_sixe,Calendar.DAY_OF_YEAR),ratings.size)
             date2.text = ratings[ratings.size - 1].created_at
         }
 

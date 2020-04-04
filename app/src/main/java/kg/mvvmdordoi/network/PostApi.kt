@@ -320,7 +320,7 @@ interface PostApi {
     @GET("main_category/")
     fun getMainCategory(@Query("lang") lang: String): Observable<Response<List<Category>>>
 
-    @GET("category_lang/")
+    @GET("category/")
     fun getCategory(@Query("lang") lang: String): Observable<Response<List<Category>>>
 
     @FormUrlEncoded
