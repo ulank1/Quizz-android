@@ -138,9 +138,8 @@ class UsersActivity : AppCompatActivity(), TextWatcher,FriendListener {
 
         random.setOnClickListener {
             if (!users.isNullOrEmpty()) {
-                var rand = Math.random() * Math.min(users.size, 100)
 
-                var item = users[rand.toInt()]
+                var item:User = getUser()
 
                 Shared.id = item.id
                 Shared.name_outer = item.name
@@ -153,6 +152,23 @@ class UsersActivity : AppCompatActivity(), TextWatcher,FriendListener {
 
         my_friend.setOnClickListener { startActivity(Intent(this,MyFriendsActivity::class.java)) }
         hideKeyboardFrom(this, search)
+    }
+
+    private fun getUser(): User {
+
+        var item = getRandom()
+        var id:Int = UserToken.getToken(this)!!.toInt()
+
+        while (item.id==id){
+            item = getRandom()
+        }
+        return item
+    }
+
+    fun getRandom():User{
+        var rand = Math.random() * Math.min(users.size, 100)
+        var item = users[rand.toInt()]
+        return item
     }
 
     var isLastPage: Boolean = false

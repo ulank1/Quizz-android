@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#E9E9E9">
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -70,6 +70,7 @@
             </RelativeLayout>
 
             <android.support.v7.widget.RecyclerView
+                android:nestedScrollingEnabled="false"
                 android:id="@+id/rv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -78,7 +79,7 @@
 
         </RelativeLayout>
 
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 
     <RelativeLayout
         android:id="@+id/line_comment"
