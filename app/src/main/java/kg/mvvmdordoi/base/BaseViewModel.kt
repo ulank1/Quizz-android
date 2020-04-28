@@ -23,6 +23,7 @@ import kg.mvvmdordoi.ui.main.forum.ForumViewModel
 import kg.mvvmdordoi.ui.main.game.GameViewModel
 import kg.mvvmdordoi.ui.main.profile.ProfileViewModel
 import kg.mvvmdordoi.ui.notification.NotificationViewModel
+import kg.mvvmdordoi.ui.ort.OrtQuestionViewModel
 import kg.mvvmdordoi.ui.test.TestViewModel
 import kg.mvvmdordoi.ui.test.test_detail.QuestionViewModel
 import kg.mvvmdordoi.ui.university.UniversityViewModel
@@ -62,6 +63,7 @@ abstract class BaseViewModel:ViewModel(){
             is NotificationViewModel -> injector.inject(this)
             is ConfirmCodeViewModel -> injector.inject(this)
             is ForumViewModel -> injector.inject(this)
+            is OrtQuestionViewModel -> injector.inject(this)
         }
     }
 

@@ -213,6 +213,10 @@ interface PostApi {
     @GET("quiz/")
     fun getQuiz(@Query("test") category: Int): Observable<Response<List<Quiz>>>
 
+    @GET("math1/")
+    fun getQuizOrt(@Query("type_of_test") type: Int,
+                   @Query("category")category: Int): Observable<Response<List<Quiz>>>
+
     @GET("quote/")
     fun getQuote(@Query("lang")lang: String): Observable<Response<Quote>>
 

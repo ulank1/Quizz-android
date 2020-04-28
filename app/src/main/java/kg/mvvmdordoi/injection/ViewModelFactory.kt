@@ -16,6 +16,7 @@ import kg.mvvmdordoi.ui.main.forum.ForumViewModel
 import kg.mvvmdordoi.ui.main.game.GameViewModel
 import kg.mvvmdordoi.ui.main.profile.ProfileViewModel
 import kg.mvvmdordoi.ui.notification.NotificationViewModel
+import kg.mvvmdordoi.ui.ort.OrtQuestionViewModel
 import kg.mvvmdordoi.ui.test.TestViewModel
 import kg.mvvmdordoi.ui.test.test_detail.QuestionViewModel
 import kg.mvvmdordoi.ui.university.UniversityViewModel
@@ -90,6 +91,10 @@ class ViewModelFactory(): ViewModelProvider.Factory{
         if (modelClass.isAssignableFrom(ForumViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return ForumViewModel() as T
+        }
+        if (modelClass.isAssignableFrom(OrtQuestionViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return OrtQuestionViewModel() as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
 

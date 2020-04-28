@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-
         android:allowBackup="true"
         android:icon="@drawable/synakprofile"
         android:label="@string/app_name"
@@ -19,119 +18,157 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.main.forum.comment_forum.CommentForumActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".ui.main.forum.topic.TitleActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.main.forum.topic.TopicActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.main.forum.ForumActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.game.users.MyFriendsActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.test.RewardedActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.test.EmpActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.ort.OrtTestsActivity"></activity>
+        <activity
+            android:name=".ui.main.forum.comment_forum.CommentForumActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.forum.topic.TitleActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.forum.topic.TopicActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.forum.ForumActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.game.users.MyFriendsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.test.RewardedActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.test.EmpActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.test.TestAddActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_test_add" /> <!-- Include the AdActivity configChanges and theme. -->
+            android:label="@string/title_activity_test_add"
+            android:screenOrientation="portrait" /> <!-- Include the AdActivity configChanges and theme. -->
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-            android:theme="@android:style/Theme.Translucent"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.auth.confirm_code.PhoneActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.auth.login.AuthActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.game.preview.PreviewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent" />
+        <activity
+            android:name=".ui.auth.confirm_code.PhoneActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.test.test_detail.ContentActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.main.about_us.AboutUsActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.settings.SettingsActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.auth.login.AuthActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.game.preview.PreviewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.test.test_detail.ContentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.about_us.AboutUsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.test.test_detail.QuestionActivity"
-            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.test.TestActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.test.TestActivity"
+        <activity
+            android:name=".ui.auth.register.RegisterActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.auth.register.RegisterActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".post.PostListActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.game.category.CategoryActivity"
+        <activity
+            android:name=".post.PostListActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.test.GameTestActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.game.category.CategoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.test.GameTestActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.test.test_detail.GameQuestionActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.main.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.main.SplashScreen"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.auth.login.LoginActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.auth.login.LoginActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.game.users.UsersActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.info.InfoActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.university.UniversityInfoActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.university.UniversityListActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.info.InfoListActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.info.ort.OrtMainListActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.info.ort.OrtInfoActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.info.ort.OrtListActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.info.news.NewsInfoActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.info.news.NewsListActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.main.send_message.SendMessageActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.info.InfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.university.UniversityInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.university.UniversityListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.info.InfoListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.info.ort.OrtMainListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.info.ort.OrtInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.info.ort.OrtListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.info.news.NewsInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.info.news.NewsListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.send_message.SendMessageActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.test.test_detail.GameQuestionActivityInvite"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.notification.NotificationActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.auth.confirm_code.ConfirmCodeActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.auth.confirm_code.new_password.NewPasswordActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.auth.redactorProfile.RedactorProfileActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.main.profile.ProfileActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".utils.ImageActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.main.forum.topic.my_topic.MyTopicActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.notification.NotificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.auth.confirm_code.ConfirmCodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.auth.confirm_code.new_password.NewPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.auth.redactorProfile.RedactorProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.profile.ProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".utils.ImageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.main.forum.topic.my_topic.MyTopicActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.ort.OrtQuestionActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

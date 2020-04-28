@@ -18,6 +18,7 @@ import kg.mvvmdordoi.ui.main.forum.ForumViewModel
 import kg.mvvmdordoi.ui.main.game.GameViewModel
 import kg.mvvmdordoi.ui.main.profile.ProfileViewModel
 import kg.mvvmdordoi.ui.notification.NotificationViewModel
+import kg.mvvmdordoi.ui.ort.OrtQuestionViewModel
 import kg.mvvmdordoi.ui.test.TestViewModel
 import kg.mvvmdordoi.ui.test.test_detail.QuestionViewModel
 import kg.mvvmdordoi.ui.university.UniversityViewModel
@@ -56,6 +57,7 @@ interface ViewModelInjector {
     fun inject(NotificationViewModel: NotificationViewModel)
     fun inject(ConfirmCodeViewModel: ConfirmCodeViewModel)
     fun inject(ForumViewModel: ForumViewModel)
+    fun inject(OrtQuestionViewModel: OrtQuestionViewModel)
 
     @Component.Builder
     interface Builder {
