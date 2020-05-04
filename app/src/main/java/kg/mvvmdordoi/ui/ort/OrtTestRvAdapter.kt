@@ -19,6 +19,7 @@ import kg.mvvmdordoi.ui.test.test_detail.QuestionActivity
 class OrtTestRvAdapter(val context: Context) : RecyclerView.Adapter<OrtTestRvAdapter.AdvertViewHolder>() {
 
     private var data: ArrayList<OrtTest> = ArrayList()
+    private var isActive = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdvertViewHolder {
         return AdvertViewHolder(
@@ -36,6 +37,10 @@ class OrtTestRvAdapter(val context: Context) : RecyclerView.Adapter<OrtTestRvAda
         notifyDataSetChanged()
     }
 
+    fun hasActive(isActive:Boolean) {
+        this.isActive = isActive
+    }
+
 
 
     inner class AdvertViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -46,12 +51,8 @@ class OrtTestRvAdapter(val context: Context) : RecyclerView.Adapter<OrtTestRvAda
             name.text = item.name
 
             name.setOnClickListener {
-//                val intent = Intent(App.activity,QuestionActivity::class.java)
-//                intent.putExtra("title",item.name)
-//                intent.putExtra("title_category",title)
-//                intent.putExtra("id",item.id)
-//                intent.putExtra("desc",item.desc)
-//                App.activity!!.startActivity(intent)
+                Ort.typeOfTest = -1
+                context.startActivity(Intent(context,InfoOrtActivity::class.java))
             }
 
         }

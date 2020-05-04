@@ -161,6 +161,17 @@ interface PostApi {
     @GET("ort/")
     fun getOrt(@Query("lang") lang: String): Observable<Response<List<Info>>>
 
+    @GET("category_ort/")
+    fun getOrtCategory(@Query("lang") lang: String): Observable<Response<List<OrtTest>>>
+
+    @GET("desc_ort/")
+    fun getDesc(@Query("lang") lang: String,
+                @Query("category") category:Int): Observable<Response<List<DescOrt>>>
+
+    @GET("pay/")
+    fun getPay(@Query("is_used") is_used: Boolean,
+               @Query("user")user:String): Observable<Response<List<Pay>>>
+
     @GET("game_all/")
     fun getGameOuter(@Query("user_id")id:String): Observable<Response<List<GameOuter>>>
 

@@ -38,7 +38,7 @@ class CustomExpandableListAdapter internal constructor(private val context: Cont
     }
  
     override fun getChildrenCount(listPosition: Int): Int {
-        if(listPosition>=titleList.size-5)
+        if(listPosition>=titleList.size-6)
             return 0
         return this.dataList[this.titleList[listPosition].name]!!.size
     }

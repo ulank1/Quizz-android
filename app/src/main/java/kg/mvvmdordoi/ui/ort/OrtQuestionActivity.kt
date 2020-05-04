@@ -48,8 +48,9 @@ class OrtQuestionActivity : AppCompatActivity(), NumerationListener, View.OnClic
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        App.activity = this
 
-        setContentView(R.layout.activity_question)
+        setContentView(R.layout.activity_question_ort)
         setSupportActionBar(toolbar)
         ok.isEnabled = false
         back.setOnClickListener {
@@ -80,6 +81,7 @@ class OrtQuestionActivity : AppCompatActivity(), NumerationListener, View.OnClic
             quizzes = it as ArrayList<Quiz>
             currentPosition = 0
             setQuestion()
+            adapter.swapData(it)
         })
 
         viewModel.getTests(typeOfTest, intent.getIntExtra("category", 1))
@@ -140,7 +142,6 @@ class OrtQuestionActivity : AppCompatActivity(), NumerationListener, View.OnClic
             override fun onFinish() {
                 line_quiz.gone()
                 line_result.visible()
-                result.text = sum.toString()
                 setResultRV()
             }
         }
@@ -172,6 +173,12 @@ class OrtQuestionActivity : AppCompatActivity(), NumerationListener, View.OnClic
             Log.e("sadsa", "dssdsd")
             return@setOnTouchListener true
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        App.activity = this
+
     }
 
     override fun onClick(v: View?) {
@@ -256,22 +263,23 @@ class OrtQuestionActivity : AppCompatActivity(), NumerationListener, View.OnClic
 
         ortPoints[typeOfTest] = trues
         typeOfTest++
-
+        startActivity(Intent(this,InfoOrtActivity::class.java))
+        finish()
 
     }
 
     override fun onBackPressed() {
-        if (line_result.visibility == View.VISIBLE) {
-            finish()
-        } else {
-            if (mInterstitialAd.isLoaded) {
-                mInterstitialAd.show()
-                Handler().postDelayed(Runnable { finish() }, 6111)
-            } else {
-                Log.e("TAG", "The interstitial wasn't loaded yet.")
-            }
-//            toast(getString(R.string.no_exit))
-        }
+//        if (line_result.visibility == View.VISIBLE) {
+//            finish()
+//        } else {
+//            if (mInterstitialAd.isLoaded) {
+//                mInterstitialAd.show()
+//                Handler().postDelayed(Runnable { finish() }, 6111)
+//            } else {
+//                Log.e("TAG", "The interstitial wasn't loaded yet.")
+//            }
+////            toast(getString(R.string.no_exit))
+//        }
     }
 
     @SuppressLint("SetJavaScriptEnabled", "SetTextI18n")
@@ -404,7 +412,7 @@ class OrtQuestionActivity : AppCompatActivity(), NumerationListener, View.OnClic
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
 
         when (item!!.itemId) {
-            android.R.id.home -> finish()
+//            android.R.id.home -> finish()
         }
 
         return true

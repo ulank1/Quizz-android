@@ -11,8 +11,7 @@ import kg.mvvmdordoi.R
 import kg.mvvmdordoi.base.BaseViewModel
 import kg.mvvmdordoi.model.ApiResponse
 import kg.mvvmdordoi.model.Product
-import kg.mvvmdordoi.model.get.Quiz
-import kg.mvvmdordoi.model.get.Test
+import kg.mvvmdordoi.model.get.*
 import kg.mvvmdordoi.network.Lang
 import kg.mvvmdordoi.network.PostApi
 import kg.mvvmdordoi.network.UserToken
@@ -28,6 +27,9 @@ class OrtQuestionViewModel() : BaseViewModel() {
     var postList: ArrayList<Product> = ArrayList()
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
     val tests: MutableLiveData<List<Quiz>> = MutableLiveData()
+    val categories: MutableLiveData<List<OrtTest>> = MutableLiveData()
+    val pay: MutableLiveData<List<Pay>> = MutableLiveData()
+    val info: MutableLiveData<List<DescOrt>> = MutableLiveData()
 
     private var subscription: CompositeDisposable = CompositeDisposable()
 
@@ -61,6 +63,83 @@ class OrtQuestionViewModel() : BaseViewModel() {
                     },
                     { hideProgress()
                     Log.e("Error",it.toString())
+                    }
+                )
+        )
+    }
+
+    fun getOrt() {
+
+        subscription.add(
+            postApi.getOrtCategory(Lang.get(App.activity!!).toString())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { showProgress() }
+                .doOnTerminate { hideProgress() }
+                .subscribe(
+                    { result -> hideProgress()
+                        Log.e("EWW",result.toString())
+                        if (result.isSuccessful) {
+                            categories.value = result.body()
+                        } else {
+                            var error = result.errorBody()!!.string()
+                            Log.e("Error",error)
+
+                        }
+                    },
+                    { hideProgress()
+                    Log.e("Error",it.toString())
+                    }
+                )
+        )
+    }
+
+    fun getPay() {
+
+        subscription.add(
+            postApi.getPay(false,UserToken.getToken(App.activity!!).toString())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { showProgress() }
+                .doOnTerminate { hideProgress() }
+                .subscribe(
+                    { result -> hideProgress()
+                        Log.e("EWW",result.toString())
+                        if (result.isSuccessful) {
+                            pay.value = result.body()
+                        } else {
+                            var error = result.errorBody()!!.string()
+                            Log.e("Error",error)
+
+                        }
+                    },
+                    { hideProgress()
+                    Log.e("Error",it.toString())
+                    }
+                )
+        )
+    }
+    fun getInfo(category: Int) {
+
+        subscription.add(
+            postApi.getDesc(Lang.get(App.activity!!).toString(),category)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { showProgress() }
+                .doOnTerminate { hideProgress() }
+                .subscribe(
+                    { result -> hideProgress()
+                        Log.e("INFO",result.body().toString())
+                        if (result.isSuccessful) {
+                            info.value = result.body()
+                        } else {
+                            var error = result.errorBody()!!.string()
+                            Log.e("ErrorINFO",error)
+
+                        }
+                    },
+                    { hideProgress()
+                    Log.e("ErrorINFOD",it.toString())
                     }
                 )
         )

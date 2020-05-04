@@ -56,6 +56,7 @@ import kg.mvvmdordoi.ui.main.profile.ProfileFragment
 import kg.mvvmdordoi.ui.main.rating_all.RatingFragment
 import kg.mvvmdordoi.ui.main.send_message.SendMessageActivity
 import kg.mvvmdordoi.ui.notification.NotificationActivity
+import kg.mvvmdordoi.ui.ort.OrtTestsActivity
 import kg.mvvmdordoi.ui.settings.SettingsActivity
 import kg.mvvmdordoi.ui.test.EmpActivity
 import kg.mvvmdordoi.ui.test.RewardedActivity
@@ -160,7 +161,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 showAlert()
             }
         }
-        MobileAds.initialize(this,"ca-app-pub-7649587179327452~9914538335")
+        MobileAds.initialize(this, "ca-app-pub-7649587179327452~9914538335")
         var mAdView = findViewById<AdView>(R.id.adView)
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
@@ -219,8 +220,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (intent.getBooleanExtra("is_duel", false)) {
             bottomNavView.selectedItemId = R.id.second_bottom_nav
         }
-        if (intent.getBooleanExtra("is_news",false)){
-            startActivity(Intent(this,NewsListActivity::class.java))
+        if (intent.getBooleanExtra("is_news", false)) {
+            startActivity(Intent(this, NewsListActivity::class.java))
         }
 
         // get the listview
@@ -243,6 +244,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 startActivity(Intent(this@MainActivity, SendMessageActivity::class.java))
             } else if (groupPosition == mainCategory.size - 1) {
                 startActivity(Intent(this@MainActivity, AboutUsActivity::class.java))
+            } else if (groupPosition == mainCategory.size - 6) {
+                startActivity(Intent(this@MainActivity, OrtTestsActivity::class.java))
             }
 
             false
@@ -381,6 +384,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
         }
+        mainCategory.add(Category(-1, "Пробный тест", "", -1, null, R.drawable.podgotovka))
         mainCategory.add(
             Category(
                 -1,
