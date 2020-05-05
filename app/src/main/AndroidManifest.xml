@@ -18,7 +18,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.ort.CountActivity"></activity>
+        <activity android:name=".ui.ort.ResultActivity"></activity>
+        <activity android:name=".ui.ort.CountActivity" />
         <activity android:name=".ui.ort.OrtTestsActivity" />
         <activity
             android:name=".ui.main.forum.comment_forum.CommentForumActivity"
@@ -169,8 +170,9 @@
         <activity
             android:name=".ui.main.forum.topic.my_topic.MyTopicActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.ort.OrtQuestionActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ui.ort.OrtQuestionActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.ort.InfoOrtActivity" />
 
         <provider
