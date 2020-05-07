@@ -167,6 +167,10 @@ interface PostApi {
     @GET("desc_ort/")
     fun getDesc(@Query("lang") lang: String,
                 @Query("category") category:Int): Observable<Response<List<DescOrt>>>
+    @FormUrlEncoded
+    @PATCH("pay/{id}/")
+    fun putPay(@Path("id") id: Int,
+               @Field("is_used") boolean: Boolean): Observable<Response<Any>>
 
     @GET("pay/")
     fun getPay(@Query("is_used") is_used: Boolean,

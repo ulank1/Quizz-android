@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
+import android.view.MenuItem
 import kg.mvvmdordoi.App
 import kg.mvvmdordoi.R
 import kg.mvvmdordoi.injection.ViewModelFactory
@@ -24,7 +25,8 @@ class OrtTestsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ort_tests)
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "Пробный тест"
         App.activity = this
 
         viewModel =
@@ -43,8 +45,11 @@ class OrtTestsActivity : AppCompatActivity() {
 
             if (it != null) {
                 hasActive = it.isNotEmpty()
-                adapter.hasActive(hasActive)
-
+                if (hasActive) {
+                    adapter.hasActive(hasActive, it[0].id)
+                }else{
+                    adapter.hasActive(hasActive, 0)
+                }
                 text.text = "Оплаченные тесты: "+it.size
             }
 
@@ -61,5 +66,10 @@ class OrtTestsActivity : AppCompatActivity() {
         super.onResume()
         App.activity = this
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        finish()
+        return true
     }
 }

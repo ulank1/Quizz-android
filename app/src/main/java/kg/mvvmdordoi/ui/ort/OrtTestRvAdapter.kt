@@ -16,43 +16,56 @@ import kg.mvvmdordoi.model.get.Test
 import kg.mvvmdordoi.ui.test.test_detail.QuestionActivity
 
 
-class OrtTestRvAdapter(val context: Context) : RecyclerView.Adapter<OrtTestRvAdapter.AdvertViewHolder>() {
+class OrtTestRvAdapter(val context: Context) :
+    RecyclerView.Adapter<OrtTestRvAdapter.AdvertViewHolder>() {
 
     private var data: ArrayList<OrtTest> = ArrayList()
     private var isActive = false
+    private var payID = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdvertViewHolder {
         return AdvertViewHolder(
-                LayoutInflater.from(parent.context)
-                        .inflate(R.layout.item_test, parent, false)
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_test, parent, false)
         )
     }
 
     override fun getItemCount() = data.size
 
-    override fun onBindViewHolder(holder: AdvertViewHolder, position: Int) = holder.bind(data[position])
+    override fun onBindViewHolder(holder: AdvertViewHolder, position: Int) =
+        holder.bind(data[position])
 
     fun swapData(data: ArrayList<OrtTest>) {
         this.data = data
         notifyDataSetChanged()
     }
 
-    fun hasActive(isActive:Boolean) {
+    fun hasActive(isActive: Boolean, id: Int) {
         this.isActive = isActive
+        payID = id
     }
-
 
 
     inner class AdvertViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(item: OrtTest) = with(itemView) {
 
-            val name:TextView = itemView.findViewById(R.id.name)
+            val name: TextView = itemView.findViewById(R.id.name)
 
             name.text = item.name
 
             name.setOnClickListener {
-                Ort.typeOfTest = -1
-                context.startActivity(Intent(context,InfoOrtActivity::class.java))
+                if (isActive) {
+                    Ort.typeOfTest = -1
+                    Ort.text1 = item.text1
+                    Ort.text2 = item.text2
+                    Ort.text3 = item.text3
+                    context.startActivity(
+                        Intent(
+                            context,
+                            InfoOrtActivity::class.java
+                        ).putExtra("payID", payID)
+                    )
+                }
             }
 
         }

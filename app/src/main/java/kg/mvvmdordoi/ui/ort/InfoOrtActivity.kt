@@ -32,6 +32,7 @@ class InfoOrtActivity : AppCompatActivity() {
         viewModel =
             ViewModelProviders.of(this, ViewModelFactory()).get(OrtQuestionViewModel::class.java)
         if (Ort.typeOfTest == -1) {
+            viewModel.putPay(intent.getIntExtra("payID",0))
             viewModel.getInfo(5)
         } else {
             viewModel.getInfo(Ort.typeOfTest)
@@ -103,7 +104,6 @@ class InfoOrtActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
 
     }
 

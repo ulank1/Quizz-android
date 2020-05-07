@@ -16,13 +16,13 @@ class CountActivity : AppCompatActivity() {
         val timer = object: CountDownTimer(5000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
 
-                a--
                 count.text = a.toString()
+                a--
 
             }
 
             override fun onFinish() {
-
+                count.text = a.toString()
                 startActivity(Intent(this@CountActivity,OrtQuestionActivity::class.java))
                 finish()
             }

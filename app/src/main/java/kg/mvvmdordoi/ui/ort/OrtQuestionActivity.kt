@@ -44,7 +44,7 @@ class OrtQuestionActivity : AppCompatActivity(), NumerationListener, View.OnClic
     var currentPosition = 0
     private lateinit var quizzes: ArrayList<Quiz>
     private lateinit var viewModel: OrtQuestionViewModel
-    lateinit var adapter: NumerationRvAdapter
+    lateinit var adapter: NumerationOrtRvAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,12 +90,28 @@ class OrtQuestionActivity : AppCompatActivity(), NumerationListener, View.OnClic
 
         if (typeOfTest == 3) {
             content.visible()
-            content.setOnClickListener {
+            content1.setOnClickListener {
                 startActivity(
                     Intent(
                         this,
                         ContentActivity::class.java
-                    ).putExtra("desc", intent.getStringExtra("desc"))
+                    ).putExtra("desc", text1)
+                )
+            }
+            content2.setOnClickListener {
+                startActivity(
+                    Intent(
+                        this,
+                        ContentActivity::class.java
+                    ).putExtra("desc", text2)
+                )
+            }
+            content3.setOnClickListener {
+                startActivity(
+                    Intent(
+                        this,
+                        ContentActivity::class.java
+                    ).putExtra("desc", text3)
                 )
             }
         } else {
@@ -186,45 +202,39 @@ class OrtQuestionActivity : AppCompatActivity(), NumerationListener, View.OnClic
         if (v != null) {
             when (v.id) {
                 R.id.line_a -> {
-                    if (quiz.choosenPosition == null) {
+
 
                         quiz.choosenPosition = 1
 
                         setTrueAnswer(choose_a, quiz.choosenPosition == quiz.true_answer)
 
-                    }
+
                 }
                 R.id.line_b -> {
-                    if (quiz.choosenPosition == null) {
+
 
                         quiz.choosenPosition = 2
                         setTrueAnswer(choose_b, quiz.choosenPosition == quiz.true_answer)
 
-                    }
+
                 }
                 R.id.line_c -> {
-                    if (quiz.choosenPosition == null) {
 
                         quiz.choosenPosition = 3
                         setTrueAnswer(choose_c, quiz.choosenPosition == quiz.true_answer)
 
-                    }
                 }
                 R.id.line_d -> {
-                    if (quiz.choosenPosition == null) {
 
 
                         quiz.choosenPosition = 4
                         setTrueAnswer(choose_d, quiz.choosenPosition == quiz.true_answer)
 
-                    }
                 }
                 R.id.line_e -> {
-                    if (quiz.choosenPosition == null) {
                         quiz.choosenPosition = 5
                         setTrueAnswer(choose_e, quiz.choosenPosition == quiz.true_answer)
 
-                    }
                 }
                 R.id.btn_finish -> {
                     cT.cancel()
@@ -263,7 +273,12 @@ class OrtQuestionActivity : AppCompatActivity(), NumerationListener, View.OnClic
 
         ortPoints[typeOfTest] = trues
         typeOfTest++
-        startActivity(Intent(this,InfoOrtActivity::class.java))
+
+        if (typeOfTest==5){
+            startActivity(Intent(this, ResultActivity::class.java))
+        }else {
+            startActivity(Intent(this, InfoOrtActivity::class.java))
+        }
         finish()
 
     }
@@ -398,6 +413,12 @@ class OrtQuestionActivity : AppCompatActivity(), NumerationListener, View.OnClic
         line_d.setOnClickListener(this)
         line_e.setOnClickListener(this)
         ok.setOnClickListener(this)
+        test_number.setOnClickListener {
+            line_number.visible()
+        }
+        btn_close.setOnClickListener {
+            line_number.gone()
+        }
 
     }
 
@@ -405,7 +426,7 @@ class OrtQuestionActivity : AppCompatActivity(), NumerationListener, View.OnClic
     private fun setupRv() {
         val layoutManager = GridLayoutManager(this, 5)
         rv.layoutManager = layoutManager
-        adapter = NumerationRvAdapter(this, this)
+        adapter = NumerationOrtRvAdapter(this, this)
         rv.adapter = adapter
     }
 
@@ -419,6 +440,11 @@ class OrtQuestionActivity : AppCompatActivity(), NumerationListener, View.OnClic
     }
 
     private fun setTrueAnswer(trueText: TextView, result: Boolean) {
+        choose_a.setBackgroundResource(R.drawable.gray_stroke_1dp_circle)
+        choose_b.setBackgroundResource(R.drawable.gray_stroke_1dp_circle)
+        choose_c.setBackgroundResource(R.drawable.gray_stroke_1dp_circle)
+        choose_d.setBackgroundResource(R.drawable.gray_stroke_1dp_circle)
+        choose_e.setBackgroundResource(R.drawable.gray_stroke_1dp_circle)
         trueText.setBackgroundResource(R.drawable.question_stroke_1dp_circle)
         if (result) {
             sum += 10

@@ -139,10 +139,34 @@ class OrtQuestionViewModel() : BaseViewModel() {
                         }
                     },
                     { hideProgress()
-                    Log.e("ErrorINFOD",it.toString())
+                        Log.e("ErrorINFOD",it.toString())
                     }
                 )
         )
     }
 
+
+    fun putPay(id:Int) {
+
+        subscription.add(
+            postApi.putPay(id,true)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { showProgress() }
+                .doOnTerminate { hideProgress() }
+                .subscribe(
+                    { result -> hideProgress()
+                        Log.e("INFO",result.body().toString())
+                        if (result.isSuccessful) {
+                        } else {
+                            var error = result.errorBody()!!.string()
+                            Log.e("ErrorINFO",error)
+                        }
+                    },
+                    { hideProgress()
+                        Log.e("ErrorINFOD",it.toString())
+                    }
+                )
+        )
+    }
 }
