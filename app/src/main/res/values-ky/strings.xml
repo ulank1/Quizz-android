@@ -164,6 +164,8 @@
     <string name="ssss">киргизүү</string>
     <string name="my_topics">Менин темаларым</string>
     <string name="delete">Өчүрүүнү каалайсызбы?</string>
+    <string name="close">Жабуу</string>
+    <string name="payed">Вам открыт доступ к тестам:  </string>
     <string-array name="regions">
         <item>Бишкек шаары</item>
         <item>Ош шаары</item>

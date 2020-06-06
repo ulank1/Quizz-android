@@ -50,7 +50,7 @@ class OrtTestsActivity : AppCompatActivity() {
                 }else{
                     adapter.hasActive(hasActive, 0)
                 }
-                text.text = "Оплаченные тесты: "+it.size
+                text.text = getString(R.string.payed)+it.size
             }
 
         })

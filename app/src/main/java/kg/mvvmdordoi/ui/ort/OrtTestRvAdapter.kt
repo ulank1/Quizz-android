@@ -1,6 +1,8 @@
 package kg.mvvmdordoi.ui.ort
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.support.v7.widget.DialogTitle
 import android.support.v7.widget.RecyclerView
@@ -55,19 +57,35 @@ class OrtTestRvAdapter(val context: Context) :
 
             name.setOnClickListener {
                 if (isActive) {
-                    Ort.typeOfTest = -1
-                    Ort.text1 = item.text1
-                    Ort.text2 = item.text2
-                    Ort.text3 = item.text3
-                    context.startActivity(
-                        Intent(
-                            context,
-                            InfoOrtActivity::class.java
-                        ).putExtra("payID", payID)
-                    )
+
+                    val builder = AlertDialog.Builder(context)
+                    builder.setTitle("Вы готовы начать "+name.text+"?")
+                    //builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
+
+                    builder.setPositiveButton("yes") { dialog, which ->
+
+                        Ort.typeOfTest = -1
+                        Ort.text1 = item.text1
+                        Ort.text2 = item.text2
+                        Ort.text3 = item.text3
+                        context.startActivity(
+                            Intent(
+                                context,
+                                InfoOrtActivity::class.java
+                            ).putExtra("payID", payID)
+                        )
+                        dialog.cancel()
+                    }
+
+                    builder.setNegativeButton("no") { dialog, which ->
+                    }
+
+                    builder.show()
+
                 }
             }
 
         }
     }
+
 }

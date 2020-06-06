@@ -7,6 +7,7 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:textStyle="bold"
         android:layout_margin="8dp"
         android:textColor="#000"
         android:textSize="16sp"
@@ -14,10 +15,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv"
-        android:layout_marginStart="8dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="648dp"
+        android:layout_marginStart="8dp"
+        android:layout_weight="1" />
 
+    <Button
+        android:layout_margin="8dp"
+        android:textAllCaps="false"
+        android:background="@drawable/blue_5dp"
+        android:textStyle="bold"
+        android:autoLink="web"
+        android:text="Регистрация"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:id="@+id/link1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

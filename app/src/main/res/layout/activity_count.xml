@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFC107"
+    android:background="@color/white"
     tools:context=".ui.ort.CountActivity">
     
     
@@ -12,9 +12,8 @@
         android:id="@+id/count"
         android:gravity="center"
         android:text="5"
-        android:textColor="#000"
-        android:textSize="30sp"
-        android:background="@drawable/red_5dp_circle_black_stroke"
+        android:textColor="@color/colorAppBar"
+        android:textSize="80sp"
         android:layout_centerInParent="true"
         android:layout_width="120dp"
         android:layout_height="120dp"/>

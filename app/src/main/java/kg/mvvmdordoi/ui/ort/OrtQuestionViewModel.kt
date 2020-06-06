@@ -1,6 +1,7 @@
 package kg.mvvmdordoi.ui.ort
 
 import android.arch.lifecycle.MutableLiveData
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -158,6 +159,63 @@ class OrtQuestionViewModel() : BaseViewModel() {
                     { result -> hideProgress()
                         Log.e("INFO",result.body().toString())
                         if (result.isSuccessful) {
+                        } else {
+                            var error = result.errorBody()!!.string()
+                            Log.e("ErrorINFO",error)
+                        }
+                    },
+                    { hideProgress()
+                        Log.e("ErrorINFOD",it.toString())
+                    }
+                )
+        )
+    }
+    fun createHistory(id:Int,result:Int) {
+
+        subscription.add(
+            postApi.createHistory(id,result,Ort.ortPoints[0],Ort.ortPoints[1],Ort.ortPoints[2],Ort.ortPoints[3],Ort.ortPoints[4])
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { showProgress() }
+                .doOnTerminate { hideProgress() }
+                .subscribe(
+                    { result -> hideProgress()
+                        Log.e("INFO",result.body().toString())
+                        if (result.isSuccessful) {
+
+                            App.activity!!.startActivity(Intent(App.activity, ResultActivity::class.java))
+                            App.activity!!.finish()
+
+
+                        } else {
+                            var error = result.errorBody()!!.string()
+                            Log.e("ErrorINFO",error)
+                        }
+                    },
+                    { hideProgress()
+                        Log.e("ErrorINFOD",it.toString())
+                    }
+                )
+        )
+    }
+
+    fun getHistory(id:Int,result:Int) {
+
+        subscription.add(
+            postApi.createHistory(id,result,Ort.ortPoints[0],Ort.ortPoints[1],Ort.ortPoints[2],Ort.ortPoints[3],Ort.ortPoints[4])
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { showProgress() }
+                .doOnTerminate { hideProgress() }
+                .subscribe(
+                    { result -> hideProgress()
+                        Log.e("INFO",result.body().toString())
+                        if (result.isSuccessful) {
+
+                            App.activity!!.startActivity(Intent(App.activity, ResultActivity::class.java))
+                            App.activity!!.finish()
+
+
                         } else {
                             var error = result.errorBody()!!.string()
                             Log.e("ErrorINFO",error)

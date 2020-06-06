@@ -65,7 +65,7 @@ class CustomExpandableListAdapter internal constructor(private val context: Cont
         val listTitleTextView = convertView!!.findViewById<TextView>(R.id.listTitle)
         val image = convertView!!.findViewById<ImageView>(R.id.image)
         Log.e("saasasas12345",listPosition.toString()+" "+listTitle.res.toString()+" "+listTitle.image.toString())
-        if(listPosition>=titleList.size-5){
+        if(listPosition>=titleList.size-6){
             image.setImageResource(listTitle.res!!)
         }else{
             Glide.with(context).load(listTitle.image).into(image)

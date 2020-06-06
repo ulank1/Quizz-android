@@ -56,6 +56,8 @@ import kg.mvvmdordoi.ui.main.profile.ProfileFragment
 import kg.mvvmdordoi.ui.main.rating_all.RatingFragment
 import kg.mvvmdordoi.ui.main.send_message.SendMessageActivity
 import kg.mvvmdordoi.ui.notification.NotificationActivity
+import kg.mvvmdordoi.ui.ort.InfoOrtActivity
+import kg.mvvmdordoi.ui.ort.Ort
 import kg.mvvmdordoi.ui.ort.OrtTestsActivity
 import kg.mvvmdordoi.ui.settings.SettingsActivity
 import kg.mvvmdordoi.ui.test.EmpActivity
@@ -384,7 +386,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
         }
-        mainCategory.add(Category(-1, "Пробный тест", "", -1, null, R.drawable.podgotovka))
+        mainCategory.add(Category(-1, "Пробный тест", "", -1, null, R.drawable.ic_prompt_exam))
         mainCategory.add(
             Category(
                 -1,
@@ -488,10 +490,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
         if (id == R.id.action_logOut) {
-            var intent = Intent(this, SplashScreen::class.java)
-            startActivity(intent)
-            UserToken.clearToken(this)
-            finish()
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Хотите выйти с аккаунта?")
+            //builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
+
+            builder.setPositiveButton("yes") { dialog, which ->
+
+                var intent = Intent(this, SplashScreen::class.java)
+                startActivity(intent)
+                UserToken.clearToken(this)
+                finish()
+                dialog.cancel()
+
+            }
+
+            builder.setNegativeButton("no") { dialog, which ->
+            }
+
+            builder.show()
+
 //            startActivity(Intent(this, EmpActivity::class.java))
         } else if (id == R.id.action_lang) {
             //  Toast.makeText(this, "Язык", Toast.LENGTH_SHORT).show();

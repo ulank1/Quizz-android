@@ -179,5 +179,7 @@
     <string name="ssss">создать</string>
     <string name="my_topics">Мои темы</string>
     <string name="delete">Хотите удалить?</string>
+    <string name="close">Закрыть</string>
+    <string name="payed">Вам открыт доступ к тестам:  </string>
 
 </resources>

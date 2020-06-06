@@ -23,6 +23,7 @@ import android.os.Handler
 import android.util.Log
 import com.google.android.gms.ads.InterstitialAd
 import kg.mvvmdordoi.network.Lang
+import kg.mvvmdordoi.network.UserToken
 import kg.mvvmdordoi.ui.ort.Ort.*
 import kg.mvvmdordoi.ui.test.test_detail.ContentActivity
 import kg.mvvmdordoi.ui.test.test_detail.NumerationListener
@@ -31,6 +32,7 @@ import kg.mvvmdordoi.utils.URL1
 import kotlinx.android.synthetic.main.activity_question_ort.*
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.math.roundToInt
 
 
 class OrtQuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickListener {
@@ -204,36 +206,36 @@ class OrtQuestionActivity : AppCompatActivity(), NumerationListener, View.OnClic
                 R.id.line_a -> {
 
 
-                        quiz.choosenPosition = 1
+                    quiz.choosenPosition = 1
 
-                        setTrueAnswer(choose_a, quiz.choosenPosition == quiz.true_answer)
+                    setTrueAnswer(choose_a, quiz.choosenPosition == quiz.true_answer)
 
 
                 }
                 R.id.line_b -> {
 
 
-                        quiz.choosenPosition = 2
-                        setTrueAnswer(choose_b, quiz.choosenPosition == quiz.true_answer)
+                    quiz.choosenPosition = 2
+                    setTrueAnswer(choose_b, quiz.choosenPosition == quiz.true_answer)
 
 
                 }
                 R.id.line_c -> {
 
-                        quiz.choosenPosition = 3
-                        setTrueAnswer(choose_c, quiz.choosenPosition == quiz.true_answer)
+                    quiz.choosenPosition = 3
+                    setTrueAnswer(choose_c, quiz.choosenPosition == quiz.true_answer)
 
                 }
                 R.id.line_d -> {
 
 
-                        quiz.choosenPosition = 4
-                        setTrueAnswer(choose_d, quiz.choosenPosition == quiz.true_answer)
+                    quiz.choosenPosition = 4
+                    setTrueAnswer(choose_d, quiz.choosenPosition == quiz.true_answer)
 
                 }
                 R.id.line_e -> {
-                        quiz.choosenPosition = 5
-                        setTrueAnswer(choose_e, quiz.choosenPosition == quiz.true_answer)
+                    quiz.choosenPosition = 5
+                    setTrueAnswer(choose_e, quiz.choosenPosition == quiz.true_answer)
 
                 }
                 R.id.btn_finish -> {
@@ -270,16 +272,19 @@ class OrtQuestionActivity : AppCompatActivity(), NumerationListener, View.OnClic
                 trues++
             }
         }
-
+        Log.e("DDDEEERRRR", typeOfTest.toString())
         ortPoints[typeOfTest] = trues
         typeOfTest++
 
-        if (typeOfTest==5){
-            startActivity(Intent(this, ResultActivity::class.java))
-        }else {
+        if (typeOfTest == 5) {
+
+            var allPoints:Double = (ortPoints[0]+ortPoints[1]+ortPoints[2]+ortPoints[3]+ortPoints[4]).toDouble()
+            allPoints *= 1.63
+            viewModel.createHistory(UserToken.getToken(this)!!.toInt(),allPoints.roundToInt())
+        } else {
             startActivity(Intent(this, InfoOrtActivity::class.java))
+            finish()
         }
-        finish()
 
     }
 
@@ -300,17 +305,17 @@ class OrtQuestionActivity : AppCompatActivity(), NumerationListener, View.OnClic
     @SuppressLint("SetJavaScriptEnabled", "SetTextI18n")
     private fun setQuestion() {
 
-        if (quizzes.size-1==currentPosition){
+        if (quizzes.size - 1 == currentPosition) {
             btn_finish.visible()
             next.gone()
-        }else{
+        } else {
             next.gone()
             btn_finish.gone()
         }
 
-        if (currentPosition==0){
+        if (currentPosition == 0) {
             previous.gone()
-        }else{
+        } else {
             previous.visible()
         }
         test_number.text = getString(R.string.question) + (currentPosition + 1) + "/" + quizzes.size

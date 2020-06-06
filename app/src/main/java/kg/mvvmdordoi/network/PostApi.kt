@@ -10,6 +10,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
+import javax.annotation.PostConstruct
 
 /**
  * The interface which provides methods to get result of webservices
@@ -171,6 +172,17 @@ interface PostApi {
     @PATCH("pay/{id}/")
     fun putPay(@Path("id") id: Int,
                @Field("is_used") boolean: Boolean): Observable<Response<Any>>
+
+    @FormUrlEncoded
+    @POST("point_ort/")
+    fun createHistory(@Field("user") id: Int,
+                      @Field("point") point: Int,
+                      @Field("math1") math1: Int,
+                      @Field("math2") math2: Int,
+                      @Field("analog") analog: Int,
+                      @Field("understand") understand: Int,
+                      @Field("grammar") grammar: Int
+    ): Observable<Response<Any>>
 
     @GET("pay/")
     fun getPay(@Query("is_used") is_used: Boolean,

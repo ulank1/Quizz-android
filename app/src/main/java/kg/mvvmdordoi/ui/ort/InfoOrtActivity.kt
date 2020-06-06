@@ -20,19 +20,18 @@ import kotlinx.android.synthetic.main.activity_info_ort.*
 class InfoOrtActivity : AppCompatActivity() {
     lateinit var mAdView: AdView
     private lateinit var viewModel: OrtQuestionViewModel
-
+    var timer:CountDownTimer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_info_ort)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.title = getString(R.string.info)
         App.activity = this
 
         viewModel =
             ViewModelProviders.of(this, ViewModelFactory()).get(OrtQuestionViewModel::class.java)
         if (Ort.typeOfTest == -1) {
-            viewModel.putPay(intent.getIntExtra("payID",0))
+//            viewModel.putPay(intent.getIntExtra("payID",0))
             viewModel.getInfo(5)
         } else {
             viewModel.getInfo(Ort.typeOfTest)
@@ -43,7 +42,7 @@ class InfoOrtActivity : AppCompatActivity() {
         }else{
             time.visible()
             var a = Ort.restTimes[Ort.typeOfTest]*60
-            val timer = object: CountDownTimer((Ort.restTimes[Ort.typeOfTest]*60*1000).toLong(), 1000) {
+            timer = object: CountDownTimer((Ort.restTimes[Ort.typeOfTest]*60*1000).toLong(), 1000) {
                 override fun onTick(millisUntilFinished: Long) {
                     a--
                     String.format("%02d:%02d", a/60, a%60)
@@ -56,7 +55,7 @@ class InfoOrtActivity : AppCompatActivity() {
                     finish()
                 }
             }
-            timer.start()
+            timer!!.start()
         }
 
         viewModel.info.observe(this, Observer {
@@ -104,6 +103,15 @@ class InfoOrtActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+
+    }
+
+    override fun onDestroy() {
+        if (timer!=null){
+            timer!!.cancel()
+            timer = null
+        }
+        super.onDestroy()
 
     }
 
