@@ -13,57 +13,43 @@ import kg.mvvmdordoi.R
 import kg.mvvmdordoi.injection.ViewModelFactory
 import kg.mvvmdordoi.model.get.OrtTest
 import kg.mvvmdordoi.ui.test.TestRvAdapter
+import kg.mvvmdordoi.utils.extension.gone
 import kotlinx.android.synthetic.main.activity_ort_tests.*
 import kotlinx.android.synthetic.main.activity_test.*
 import kotlinx.android.synthetic.main.activity_test.rv
 
-class OrtTestsActivity : AppCompatActivity() {
+class OrtHistoryActivity : AppCompatActivity() {
     private lateinit var viewModel: OrtQuestionViewModel
-    private lateinit var adapter: OrtTestRvAdapter
-    private var hasActive = false
+    private lateinit var adapter: OrtHistoryRvAdapter
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ort_tests)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Пробный тест"
+        supportActionBar?.title = "История"
         App.activity = this
 
         viewModel =
             ViewModelProviders.of(this, ViewModelFactory()).get(OrtQuestionViewModel::class.java)
         setupRv()
-        viewModel.getOrt()
-        viewModel.categories.observe(this, Observer {
-
-            adapter.swapData(it as ArrayList<OrtTest>)
-
-        })
-
-        viewModel.getPay()
-
-        viewModel.pay.observe(this, Observer {
+        viewModel.getHitoryOrt()
+        viewModel.history.observe(this, Observer {
 
             if (it != null) {
-                hasActive = it.isNotEmpty()
-                if (hasActive) {
-                    adapter.hasActive(hasActive, it[0].id)
-                }else{
-                    adapter.hasActive(hasActive, 0)
-                }
-                text.text = getString(R.string.payed)+it.size
+                adapter.swapData(it)
             }
 
         })
 
-        link1.setOnClickListener { startActivity(Intent(this,InfoPayActivity::class.java)) }
-        history.setOnClickListener { startActivity(Intent(this,OrtHistoryActivity::class.java)) }
+        link1.gone()
+        history.gone()
     }
 
     private fun setupRv(){
         val layoutManager = GridLayoutManager(this,1)
         rv.layoutManager = layoutManager
-        adapter = OrtTestRvAdapter(this)
+        adapter = OrtHistoryRvAdapter(this)
         rv.adapter = adapter
     }
     override fun onResume() {

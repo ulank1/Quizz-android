@@ -29,8 +29,10 @@ class OrtQuestionViewModel() : BaseViewModel() {
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
     val tests: MutableLiveData<List<Quiz>> = MutableLiveData()
     val categories: MutableLiveData<List<OrtTest>> = MutableLiveData()
+    val history: MutableLiveData<ArrayList<HistoryOrt>> = MutableLiveData()
     val pay: MutableLiveData<List<Pay>> = MutableLiveData()
     val info: MutableLiveData<List<DescOrt>> = MutableLiveData()
+    val infoPay: MutableLiveData<ArrayList<InfoPay>> = MutableLiveData()
 
     private var subscription: CompositeDisposable = CompositeDisposable()
 
@@ -69,10 +71,10 @@ class OrtQuestionViewModel() : BaseViewModel() {
         )
     }
 
-    fun getOrt() {
+    fun getInfoPay() {
 
         subscription.add(
-            postApi.getOrtCategory(Lang.get(App.activity!!).toString())
+            postApi.getInfoPay(Lang.get(App.activity!!).toString())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { showProgress() }
@@ -81,7 +83,59 @@ class OrtQuestionViewModel() : BaseViewModel() {
                     { result -> hideProgress()
                         Log.e("EWW",result.toString())
                         if (result.isSuccessful) {
+                            infoPay.value = result.body()
+                        } else {
+                            var error = result.errorBody()!!.string()
+                            Log.e("Error",error)
+
+                        }
+                    },
+                    { hideProgress()
+                    Log.e("Error",it.toString())
+                    }
+                )
+        )
+    }
+
+    fun getOrt() {
+
+        subscription.add(
+            postApi.getOrtCategory(Lang.get(App.activity!!).toString(),UserToken.getToken(App.activity!!).toString())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { showProgress() }
+                .doOnTerminate { hideProgress() }
+                .subscribe(
+                    { result -> hideProgress()
+                        Log.e("EWW",result.body().toString())
+                        if (result.isSuccessful) {
                             categories.value = result.body()
+                        } else {
+                            var error = result.errorBody()!!.string()
+                            Log.e("Error",error)
+
+                        }
+                    },
+                    { hideProgress()
+                    Log.e("Error",it.toString())
+                    }
+                )
+        )
+    }
+
+    fun getHitoryOrt() {
+
+        subscription.add(
+            postApi.getHistoryOrt(UserToken.getToken(App.activity!!).toString())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe { showProgress() }
+                .doOnTerminate { hideProgress() }
+                .subscribe(
+                    { result -> hideProgress()
+                        Log.e("EWW",result.body().toString())
+                        if (result.isSuccessful) {
+                            history.value = result.body()
                         } else {
                             var error = result.errorBody()!!.string()
                             Log.e("Error",error)
@@ -173,7 +227,7 @@ class OrtQuestionViewModel() : BaseViewModel() {
     fun createHistory(id:Int,result:Int) {
 
         subscription.add(
-            postApi.createHistory(id,result,Ort.ortPoints[0],Ort.ortPoints[1],Ort.ortPoints[2],Ort.ortPoints[3],Ort.ortPoints[4])
+            postApi.createHistory(id,Ort.category,result,Ort.ortPoints[0],Ort.ortPoints[1],Ort.ortPoints[2],Ort.ortPoints[3],Ort.ortPoints[4])
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { showProgress() }
@@ -199,32 +253,4 @@ class OrtQuestionViewModel() : BaseViewModel() {
         )
     }
 
-    fun getHistory(id:Int,result:Int) {
-
-        subscription.add(
-            postApi.createHistory(id,result,Ort.ortPoints[0],Ort.ortPoints[1],Ort.ortPoints[2],Ort.ortPoints[3],Ort.ortPoints[4])
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe { showProgress() }
-                .doOnTerminate { hideProgress() }
-                .subscribe(
-                    { result -> hideProgress()
-                        Log.e("INFO",result.body().toString())
-                        if (result.isSuccessful) {
-
-                            App.activity!!.startActivity(Intent(App.activity, ResultActivity::class.java))
-                            App.activity!!.finish()
-
-
-                        } else {
-                            var error = result.errorBody()!!.string()
-                            Log.e("ErrorINFO",error)
-                        }
-                    },
-                    { hideProgress()
-                        Log.e("ErrorINFOD",it.toString())
-                    }
-                )
-        )
-    }
 }

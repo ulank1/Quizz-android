@@ -163,7 +163,10 @@ interface PostApi {
     fun getOrt(@Query("lang") lang: String): Observable<Response<List<Info>>>
 
     @GET("category_ort/")
-    fun getOrtCategory(@Query("lang") lang: String): Observable<Response<List<OrtTest>>>
+    fun getOrtCategory(@Query("lang") lang: String,@Query("user_id") user_id: String): Observable<Response<List<OrtTest>>>
+
+    @GET("point_ort/")
+    fun getHistoryOrt(@Query("user") user_id: String): Observable<Response<ArrayList<HistoryOrt>>>
 
     @GET("desc_ort/")
     fun getDesc(@Query("lang") lang: String,
@@ -176,6 +179,7 @@ interface PostApi {
     @FormUrlEncoded
     @POST("point_ort/")
     fun createHistory(@Field("user") id: Int,
+                      @Field("category") category: Int,
                       @Field("point") point: Int,
                       @Field("math1") math1: Int,
                       @Field("math2") math2: Int,
@@ -243,6 +247,9 @@ interface PostApi {
     @GET("math1/")
     fun getQuizOrt(@Query("type_of_test") type: Int,
                    @Query("category")category: Int): Observable<Response<List<Quiz>>>
+
+    @GET("pay_info/")
+    fun getInfoPay(@Query("lang")lang: String): Observable<Response<ArrayList<InfoPay>>>
 
     @GET("quote/")
     fun getQuote(@Query("lang")lang: String): Observable<Response<Quote>>

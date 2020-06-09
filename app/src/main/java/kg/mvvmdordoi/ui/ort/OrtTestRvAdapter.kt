@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Color
 import android.support.v7.widget.DialogTitle
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import kg.mvvmdordoi.R
 import kg.mvvmdordoi.model.get.OrtTest
 import kg.mvvmdordoi.model.get.Test
 import kg.mvvmdordoi.ui.test.test_detail.QuestionActivity
+import kg.mvvmdordoi.utils.extension.visible
 
 
 class OrtTestRvAdapter(val context: Context) :
@@ -52,8 +54,17 @@ class OrtTestRvAdapter(val context: Context) :
         fun bind(item: OrtTest) = with(itemView) {
 
             val name: TextView = itemView.findViewById(R.id.name)
-
+            val status: TextView = itemView.findViewById(R.id.status)
+            status.visible()
             name.text = item.name
+
+            if(item.status==0){
+                status.text = "Не пройден"
+                status.setTextColor(Color.GREEN)
+            }else{
+                status.text = "Пройден"
+                status.setTextColor(Color.RED)
+            }
 
             name.setOnClickListener {
                 if (isActive) {
@@ -63,7 +74,7 @@ class OrtTestRvAdapter(val context: Context) :
                     //builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
 
                     builder.setPositiveButton("yes") { dialog, which ->
-
+                        Ort.category = item.id
                         Ort.typeOfTest = -1
                         Ort.text1 = item.text1
                         Ort.text2 = item.text2

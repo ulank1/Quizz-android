@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class OrtTest (
 
 	@SerializedName("id") val id : Int,
+	@SerializedName("status") val status : Int,
 	@SerializedName("title") val name : String,
 	@SerializedName("text1") val text1 : String,
 	@SerializedName("text2") val text2 : String,

@@ -6,6 +6,7 @@ public class Ort {
     public static int[] restTimes = {0,3,10,3,3};
     public static int[] ortPoints = {0,0,0,0,0};
     public static int typeOfTest=0;
+    public static int category=0;
     public static String text1="";
     public static String text2="";
     public static String text3="";

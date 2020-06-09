@@ -86,7 +86,7 @@ class OrtQuestionActivity : AppCompatActivity(), NumerationListener, View.OnClic
             adapter.swapData(it)
         })
 
-        viewModel.getTests(typeOfTest, intent.getIntExtra("category", 1))
+        viewModel.getTests(typeOfTest, Ort.category)
 
         setOnclickListeners()
 
