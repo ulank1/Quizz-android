@@ -309,7 +309,7 @@ class OrtQuestionActivity : AppCompatActivity(), NumerationListener, View.OnClic
             btn_finish.visible()
             next.gone()
         } else {
-            next.gone()
+            next.visible()
             btn_finish.gone()
         }
 
@@ -417,6 +417,8 @@ class OrtQuestionActivity : AppCompatActivity(), NumerationListener, View.OnClic
         line_c.setOnClickListener(this)
         line_d.setOnClickListener(this)
         line_e.setOnClickListener(this)
+        next.setOnClickListener(this)
+        previous.setOnClickListener(this)
         ok.setOnClickListener(this)
         test_number.setOnClickListener {
             line_number.visible()
