@@ -29,7 +29,7 @@ class CountActivity : AppCompatActivity() {
         }
         //timer.start()
         startActivity(Intent(this@CountActivity,OrtQuestionActivity::class.java))
-
+        finish()
     }
 
     override fun onBackPressed() {

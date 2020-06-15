@@ -58,7 +58,7 @@ class CommentForumActivity : AppCompatActivity(),CommentClickListener {
         App.activity = this
         viewModel = ViewModelProviders.of(this, ViewModelFactory()).get(ForumViewModel::class.java)
         var topic = intent.getSerializableExtra("topic1") as Topic
-        title1.text = " : "+topic.title
+        title1.text = topic.title
         desc.text = topic.description
         Glide.with(this).load(topic.image).into(image)
         setupRv()

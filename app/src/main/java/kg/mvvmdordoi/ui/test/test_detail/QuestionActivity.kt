@@ -73,7 +73,9 @@ class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickLi
     }
 
     var currentPosition = 0
-    private lateinit var quizzes: ArrayList<Quiz>
+    companion object {
+        private var quizzes: ArrayList<Quiz>? = null
+    }
     private lateinit var viewModel: QuestionViewModel
     lateinit var adapter: NumerationRvAdapter
 
@@ -255,92 +257,93 @@ class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickLi
     }
 
     override fun onClick(v: View?) {
-        var quiz = quizzes[currentPosition]
-        if (v != null) {
-            when (v.id) {
-                R.id.line_a -> {
-                    if (quiz.choosenPosition == null) {
+        if (quizzes!=null) {
+            var quiz = quizzes!![currentPosition]
+            if (v != null) {
+                when (v.id) {
+                    R.id.line_a -> {
+                        if (quiz.choosenPosition == null) {
 
-                        quiz.choosenPosition = 1
+                            quiz.choosenPosition = 1
 
-                        setTrueAnswer(choose_a, quiz.choosenPosition == quiz.true_answer)
+                            setTrueAnswer(choose_a, quiz.choosenPosition == quiz.true_answer)
 
-                    }
-                }
-                R.id.line_b -> {
-                    if (quiz.choosenPosition == null) {
-
-                        quiz.choosenPosition = 2
-                        setTrueAnswer(choose_b, quiz.choosenPosition == quiz.true_answer)
-
-                    }
-                }
-                R.id.line_c -> {
-                    if (quiz.choosenPosition == null) {
-
-                        quiz.choosenPosition = 3
-                        setTrueAnswer(choose_c, quiz.choosenPosition == quiz.true_answer)
-
-                    }
-                }
-                R.id.line_d -> {
-                    if (quiz.choosenPosition == null) {
-
-
-                        quiz.choosenPosition = 4
-                        setTrueAnswer(choose_d, quiz.choosenPosition == quiz.true_answer)
-
-                    }
-                }
-                R.id.line_e -> {
-                    if (quiz.choosenPosition == null) {
-                        quiz.choosenPosition = 5
-                        setTrueAnswer(choose_e, quiz.choosenPosition == quiz.true_answer)
-
-                    }
-                }
-                R.id.next -> {
-                    if (currentPosition < quizzes.size - 1) {
-                        currentPosition++
-                        setQuestion()
-                        adapter.setChoosePosition(currentPosition)
-                    } else {
-                        if (mInterstitialAd.isLoaded) {
-                            mInterstitialAd.show()
-                        } else {
-                            Log.e("TAG", "The interstitial wasn't loaded yet.")
                         }
-
-
-
-                        Handler().postDelayed({
-                            line_quiz.gone()
-                            line_result.visible()
-                            sum = 0
-
-                            for (quizz in quizzes) {
-
-                                if (quizz.choosenPosition == quizz.true_answer) {
-                                    sum += 10
-                                } else {
-                                    sum -= 7
-                                }
-
-                            }
-                            result.text = sum.toString()
-                            setResultRV()
-                            cT.cancel()
-                            viewModel.getRating(sum, trues, quizzes.size - trues)
-
-                        }, 2000)
-
-
-
                     }
-                }
-                R.id.ok -> {
-                    setResult(Activity.RESULT_OK)
-                    finish()
+                    R.id.line_b -> {
+                        if (quiz.choosenPosition == null) {
+
+                            quiz.choosenPosition = 2
+                            setTrueAnswer(choose_b, quiz.choosenPosition == quiz.true_answer)
+
+                        }
+                    }
+                    R.id.line_c -> {
+                        if (quiz.choosenPosition == null) {
+
+                            quiz.choosenPosition = 3
+                            setTrueAnswer(choose_c, quiz.choosenPosition == quiz.true_answer)
+
+                        }
+                    }
+                    R.id.line_d -> {
+                        if (quiz.choosenPosition == null) {
+
+
+                            quiz.choosenPosition = 4
+                            setTrueAnswer(choose_d, quiz.choosenPosition == quiz.true_answer)
+
+                        }
+                    }
+                    R.id.line_e -> {
+                        if (quiz.choosenPosition == null) {
+                            quiz.choosenPosition = 5
+                            setTrueAnswer(choose_e, quiz.choosenPosition == quiz.true_answer)
+
+                        }
+                    }
+                    R.id.next -> {
+                        if (currentPosition < quizzes!!.size - 1) {
+                            currentPosition++
+                            setQuestion()
+                            adapter.setChoosePosition(currentPosition)
+                        } else {
+                            if (mInterstitialAd.isLoaded) {
+                                mInterstitialAd.show()
+                            } else {
+                                Log.e("TAG", "The interstitial wasn't loaded yet.")
+                            }
+
+
+
+                            Handler().postDelayed({
+                                line_quiz.gone()
+                                line_result.visible()
+                                sum = 0
+
+                                for (quizz in quizzes!!) {
+
+                                    if (quizz.choosenPosition == quizz.true_answer) {
+                                        sum += 10
+                                    } else {
+                                        sum -= 7
+                                    }
+
+                                }
+                                result.text = sum.toString()
+                                setResultRV()
+                                cT.cancel()
+                                viewModel.getRating(sum, trues, quizzes!!.size - trues)
+
+                            }, 2000)
+
+
+                        }
+                    }
+                    R.id.ok -> {
+                        setResult(Activity.RESULT_OK)
+                        finish()
+                    }
                 }
             }
         }
@@ -349,37 +352,38 @@ class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickLi
     var trues = 0
     @SuppressLint("SetTextI18n")
     private fun setResultRV() {
-        adapter.swapData(quizzes)
+        if (quizzes!=null) {
+            adapter.swapData(quizzes!!)
 
-        trues = 0
+            trues = 0
 
-        for (quiz in quizzes) {
+            for (quiz in quizzes!!) {
 
-            if (quiz.choosenPosition == quiz.true_answer) {
-                trues++
+                if (quiz.choosenPosition == quiz.true_answer) {
+                    trues++
+                }
+            }
+
+            true_quiz.text = getString(R.string.truesd) + trues + "/" + quizzes!!.size
+
+            var percent: Double = ((trues.toDouble() / quizzes!!.size.toDouble()).toDouble())
+
+            percent *= 100
+
+            if (percent > 80) {
+                image_status.setImageResource(R.drawable.happy)
+                text_status.text = getString(R.string.excelent)
+            } else if (percent > 60) {
+                image_status.setImageResource(R.drawable.wink)
+                text_status.text = getString(R.string.good)
+            } else if (percent > 40) {
+                image_status.setImageResource(R.drawable.sad)
+                text_status.text = getString(R.string.not_bad)
+            } else {
+                image_status.setImageResource(R.drawable.crying)
+                text_status.text = getString(R.string.bad)
             }
         }
-
-        true_quiz.text = getString(R.string.truesd) + trues + "/" + quizzes.size
-
-        var percent: Double = ((trues.toDouble() / quizzes.size.toDouble()).toDouble())
-
-        percent *= 100
-
-        if (percent > 80) {
-            image_status.setImageResource(R.drawable.happy)
-            text_status.text = getString(R.string.excelent)
-        } else if (percent > 60) {
-            image_status.setImageResource(R.drawable.wink)
-            text_status.text = getString(R.string.good)
-        } else if (percent > 40) {
-            image_status.setImageResource(R.drawable.sad)
-            text_status.text = getString(R.string.not_bad)
-        } else {
-            image_status.setImageResource(R.drawable.crying)
-            text_status.text = getString(R.string.bad)
-        }
-
 
     }
 
@@ -399,81 +403,82 @@ class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickLi
 
     @SuppressLint("SetJavaScriptEnabled", "SetTextI18n")
     private fun setQuestion() {
+        if (quizzes!=null) {
+            if (currentPosition == quizzes!!.size - 1) {
+                next.text = getString(R.string.comlete)
+            } else {
+                next.text = getString(R.string.dalee)
+            }
 
-        if (currentPosition == quizzes.size - 1) {
-            next.text = getString(R.string.comlete)
-        } else {
-            next.text = getString(R.string.dalee)
+            test_number.text =
+                getString(R.string.question) + (currentPosition + 1) + "/" + quizzes!!.size
+            choose_a.setBackgroundResource(R.drawable.gray_stroke_1dp_circle)
+            choose_b.setBackgroundResource(R.drawable.gray_stroke_1dp_circle)
+            choose_c.setBackgroundResource(R.drawable.gray_stroke_1dp_circle)
+            choose_d.setBackgroundResource(R.drawable.gray_stroke_1dp_circle)
+            choose_e.setBackgroundResource(R.drawable.gray_stroke_1dp_circle)
+
+            line_e.visible()
+            var quiz = quizzes!![currentPosition]
+
+            if (quiz.answer_e.isNullOrEmpty()) {
+                line_e.gone()
+            }
+            if (quiz.answer_d.isNullOrEmpty()) {
+                line_d.gone()
+            }
+            question.settings.javaScriptEnabled = true
+            a.settings.javaScriptEnabled = true
+            b.settings.javaScriptEnabled = true
+            c.settings.javaScriptEnabled = true
+            d.settings.javaScriptEnabled = true
+            e.settings.javaScriptEnabled = true
+
+            question.loadDataWithBaseURL(
+                null,
+                "<html><body>" + correctImage(quiz.question) + "</body></html>",
+                "text/html; charset=utf-8",
+                "UTF-8",
+                null
+            );
+            a.loadDataWithBaseURL(
+                null,
+                "<html><body>" + correctImage(quiz.answer_a) + "</body></html>",
+                "text/html; charset=utf-8",
+                "UTF-8",
+                null
+            );
+            b.loadDataWithBaseURL(
+                null,
+                "<html><body>" + correctImage(quiz.answer_b) + "</body></html>",
+                "text/html; charset=utf-8",
+                "UTF-8",
+                null
+            );
+            c.loadDataWithBaseURL(
+                null,
+                "<html><body>" + correctImage(quiz.answer_c) + "</body></html>",
+                "text/html; charset=utf-8",
+                "UTF-8",
+                null
+            );
+            d.loadDataWithBaseURL(
+                null,
+                "<html><body>" + correctImage(quiz.answer_d) + "</body></html>",
+                "text/html; charset=utf-8",
+                "UTF-8",
+                null
+            );
+            e.loadDataWithBaseURL(
+                null,
+                "<html><body>" + correctImage(quiz.answer_e) + "</body></html>",
+                "text/html; charset=utf-8",
+                "UTF-8",
+                null
+            );
+            //question.loadDataWithBaseURL("", "<html><body>"+quiz.question+"</body></html>", "text/html", "UTF-8", "")
+
         }
-
-        test_number.text = getString(R.string.question)  + (currentPosition + 1) + "/" + quizzes.size
-        choose_a.setBackgroundResource(R.drawable.gray_stroke_1dp_circle)
-        choose_b.setBackgroundResource(R.drawable.gray_stroke_1dp_circle)
-        choose_c.setBackgroundResource(R.drawable.gray_stroke_1dp_circle)
-        choose_d.setBackgroundResource(R.drawable.gray_stroke_1dp_circle)
-        choose_e.setBackgroundResource(R.drawable.gray_stroke_1dp_circle)
-
-        line_e.visible()
-        var quiz = quizzes[currentPosition]
-
-        if (quiz.answer_e.isNullOrEmpty()) {
-            line_e.gone()
-        }
-        if (quiz.answer_d.isNullOrEmpty()){
-            line_d.gone()
-        }
-        question.settings.javaScriptEnabled = true
-        a.settings.javaScriptEnabled = true
-        b.settings.javaScriptEnabled = true
-        c.settings.javaScriptEnabled = true
-        d.settings.javaScriptEnabled = true
-        e.settings.javaScriptEnabled = true
-
-        question.loadDataWithBaseURL(
-            null,
-            "<html><body>" + correctImage(quiz.question) + "</body></html>",
-            "text/html; charset=utf-8",
-            "UTF-8",
-            null
-        );
-        a.loadDataWithBaseURL(
-            null,
-            "<html><body>" + correctImage(quiz.answer_a) + "</body></html>",
-            "text/html; charset=utf-8",
-            "UTF-8",
-            null
-        );
-        b.loadDataWithBaseURL(
-            null,
-            "<html><body>" + correctImage(quiz.answer_b) + "</body></html>",
-            "text/html; charset=utf-8",
-            "UTF-8",
-            null
-        );
-        c.loadDataWithBaseURL(
-            null,
-            "<html><body>" + correctImage(quiz.answer_c) + "</body></html>",
-            "text/html; charset=utf-8",
-            "UTF-8",
-            null
-        );
-        d.loadDataWithBaseURL(
-            null,
-            "<html><body>" + correctImage(quiz.answer_d) + "</body></html>",
-            "text/html; charset=utf-8",
-            "UTF-8",
-            null
-        );
-        e.loadDataWithBaseURL(
-            null,
-            "<html><body>" + correctImage(quiz.answer_e) + "</body></html>",
-            "text/html; charset=utf-8",
-            "UTF-8",
-            null
-        );
-        //question.loadDataWithBaseURL("", "<html><body>"+quiz.question+"</body></html>", "text/html", "UTF-8", "")
-
-
     }
 
     private fun correctImage(data: String): String {

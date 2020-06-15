@@ -315,14 +315,14 @@
 
                 <ImageView
                     android:id="@+id/previous"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="16dp"
-                    android:src="@drawable/ic_previous" />
+                    android:background="@drawable/ic_previous" />
 
                 <Button
-
+                    android:layout_centerVertical="true"
                     android:id="@+id/btn_finish"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -335,8 +335,8 @@
 
                 <ImageView
                     android:id="@+id/next"
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="16dp"

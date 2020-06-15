@@ -57,8 +57,8 @@ class NumerationOrtRvAdapter(val context: Context, val listener: NumerationListe
 
 
             name.setOnClickListener {
-               /* setChoosePosition(position)
-                listener.clickNumeration(position)*/
+                setChoosePosition(position)
+                listener.clickNumeration(position)
             }
 
         }

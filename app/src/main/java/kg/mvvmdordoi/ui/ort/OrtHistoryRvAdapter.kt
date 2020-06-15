@@ -1,24 +1,15 @@
 package kg.mvvmdordoi.ui.ort
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
 import android.content.Context
-import android.content.DialogInterface
-import android.content.Intent
-import android.graphics.Color
-import android.support.v7.widget.DialogTitle
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
-import kg.mvvmdordoi.App
 import kotlin.collections.ArrayList
 import kg.mvvmdordoi.R
 import kg.mvvmdordoi.model.get.HistoryOrt
-import kg.mvvmdordoi.model.get.OrtTest
-import kg.mvvmdordoi.model.get.Test
-import kg.mvvmdordoi.ui.test.test_detail.QuestionActivity
+import kg.mvvmdordoi.utils.extension.formatDateForum2
 import kotlinx.android.synthetic.main.item_history_ort.view.*
 
 
@@ -61,6 +52,8 @@ class OrtHistoryRvAdapter(val context: Context) :
             true4.text = "${item.understand}/30"
             true5.text = "${item.grammar}/30"
             result.text = item.point.toString()
+            title1.text = item.category.title
+            date.text = formatDateForum2(item.created_at)
         }
     }
 

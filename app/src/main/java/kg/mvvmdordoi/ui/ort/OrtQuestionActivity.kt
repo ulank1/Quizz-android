@@ -143,7 +143,7 @@ class OrtQuestionActivity : AppCompatActivity(), NumerationListener, View.OnClic
 
     }
 
-    lateinit var cT: CountDownTimer
+     var cT: CountDownTimer? = null
 
     private fun setTime(millis: Long) {
         cT = object : CountDownTimer(millis * 1000, 1000) {
@@ -163,7 +163,7 @@ class OrtQuestionActivity : AppCompatActivity(), NumerationListener, View.OnClic
                 setResultRV()
             }
         }
-        cT.start()
+        cT!!.start()
     }
 
     fun setEditWeb() {
@@ -239,7 +239,8 @@ class OrtQuestionActivity : AppCompatActivity(), NumerationListener, View.OnClic
 
                 }
                 R.id.btn_finish -> {
-                    cT.cancel()
+                    cT!!.cancel()
+                    cT=null
                     setResultRV()
                 }
                 R.id.ok -> {
@@ -304,7 +305,7 @@ class OrtQuestionActivity : AppCompatActivity(), NumerationListener, View.OnClic
 
     @SuppressLint("SetJavaScriptEnabled", "SetTextI18n")
     private fun setQuestion() {
-
+        Log.e("DDDDD",currentPosition.toString())
         if (quizzes.size - 1 == currentPosition) {
             btn_finish.visible()
             next.gone()
@@ -396,6 +397,14 @@ class OrtQuestionActivity : AppCompatActivity(), NumerationListener, View.OnClic
         //question.loadDataWithBaseURL("", "<html><body>"+quiz.question+"</body></html>", "text/html", "UTF-8", "")
 
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (cT!=null){
+            cT!!.cancel()
+            cT=null
+        }
     }
 
     private fun correctImage(data: String): String {

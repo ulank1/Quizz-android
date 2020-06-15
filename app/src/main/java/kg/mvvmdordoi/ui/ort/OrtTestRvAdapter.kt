@@ -17,6 +17,7 @@ import kg.mvvmdordoi.R
 import kg.mvvmdordoi.model.get.OrtTest
 import kg.mvvmdordoi.model.get.Test
 import kg.mvvmdordoi.ui.test.test_detail.QuestionActivity
+import kg.mvvmdordoi.utils.extension.gone
 import kg.mvvmdordoi.utils.extension.visible
 
 
@@ -54,16 +55,13 @@ class OrtTestRvAdapter(val context: Context) :
         fun bind(item: OrtTest) = with(itemView) {
 
             val name: TextView = itemView.findViewById(R.id.name)
-            val status: TextView = itemView.findViewById(R.id.status)
-            status.visible()
+            val status: ImageView = itemView.findViewById(R.id.status)
             name.text = item.name
 
             if(item.status==0){
-                status.text = "Не пройден"
-                status.setTextColor(Color.GREEN)
+                status.gone()
             }else{
-                status.text = "Пройден"
-                status.setTextColor(Color.RED)
+               status.visible()
             }
 
             name.setOnClickListener {

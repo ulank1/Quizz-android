@@ -131,6 +131,17 @@ fun formatDateForum(date:String):String{
 
     return sdf1.format(date2)
 }
+@SuppressLint("SimpleDateFormat")
+fun formatDateForum2(date:String):String{
+
+    var date1 = date.substring(0,date.indexOf("."))
+    Log.e("DATEEEE",date1)
+    val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+    var date2 = sdf.parse(date1)
+    val sdf1 = SimpleDateFormat("dd.MMM.yyyy")
+
+    return sdf1.format(date2)
+}
 
 @SuppressLint("SimpleDateFormat")
 fun getDateDot(num:Int,typeOfClendar:Int):String{

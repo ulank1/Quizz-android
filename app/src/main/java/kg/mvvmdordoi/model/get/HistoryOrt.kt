@@ -2,7 +2,7 @@ package kg.mvvmdordoi.model.get
 
 data class HistoryOrt(
     val analog: Int,
-    val category: Any,
+    val category: CategoryOrtX,
     val created_at: String,
     val grammar: Int,
     val id: Int,

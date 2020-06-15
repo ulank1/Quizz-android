@@ -12,6 +12,8 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import kg.mvvmdordoi.R
 import kg.mvvmdordoi.model.get.Category
+import kg.mvvmdordoi.utils.extension.gone
+import kg.mvvmdordoi.utils.extension.visible
 
 import java.util.HashMap
  
@@ -63,8 +65,15 @@ class CustomExpandableListAdapter internal constructor(private val context: Cont
             convertView = layoutInflater.inflate(R.layout.list_group, null)
         }
         val listTitleTextView = convertView!!.findViewById<TextView>(R.id.listTitle)
+        val text_new = convertView!!.findViewById<TextView>(R.id.text_new)
         val image = convertView!!.findViewById<ImageView>(R.id.image)
         Log.e("saasasas12345",listPosition.toString()+" "+listTitle.res.toString()+" "+listTitle.image.toString())
+        if(listPosition==titleList.size-6){
+            text_new.visible()
+        }else{
+            text_new.gone()
+        }
+
         if(listPosition>=titleList.size-6){
             image.setImageResource(listTitle.res!!)
         }else{

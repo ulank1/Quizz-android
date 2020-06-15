@@ -27,7 +27,7 @@ class OrtTestsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ort_tests)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Пробный тест"
+        supportActionBar?.title = getString(R.string.test_test)
         App.activity = this
 
         viewModel =
@@ -51,7 +51,7 @@ class OrtTestsActivity : AppCompatActivity() {
                 }else{
                     adapter.hasActive(hasActive, 0)
                 }
-                text.text = getString(R.string.payed)+it.size
+                text.text = getString(R.string.payed)+" "+it.size
             }
 
         })

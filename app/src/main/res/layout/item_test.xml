@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:layout_margin="5dp"
+    android:elevation="5dp">
 
     <TextView
+        android:layout_toStartOf="@id/status"
         android:layout_marginStart="20dp"
         android:elevation="2dp"
         android:textStyle="bold"
@@ -17,16 +21,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <TextView
+    <ImageView
         android:visibility="gone"
-        android:layout_marginStart="30dp"
+        android:src="@drawable/ic_tick"
+        android:layout_marginEnd="30dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
         android:text="пройден"
         android:id="@+id/status"
-        android:layout_below="@id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_width="30dp"
+        android:layout_height="30dp"/>
 
     <View
+        android:visibility="gone"
         android:layout_below="@id/status"
         android:background="#888"
         android:layout_width="match_parent"

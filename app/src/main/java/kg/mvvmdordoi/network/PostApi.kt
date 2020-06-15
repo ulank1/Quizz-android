@@ -165,7 +165,7 @@ interface PostApi {
     @GET("category_ort/")
     fun getOrtCategory(@Query("lang") lang: String,@Query("user_id") user_id: String): Observable<Response<List<OrtTest>>>
 
-    @GET("point_ort/")
+    @GET("point_ort_get/")
     fun getHistoryOrt(@Query("user") user_id: String): Observable<Response<ArrayList<HistoryOrt>>>
 
     @GET("desc_ort/")

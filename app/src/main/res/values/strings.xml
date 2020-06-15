@@ -181,5 +181,17 @@
     <string name="delete">Хотите удалить?</string>
     <string name="close">Закрыть</string>
     <string name="payed">Вам открыт доступ к тестам:  </string>
+    <string name="more220">Поздравляем, вы получили золотой сертификат!</string>
+    <string name="more200">Поздравляем, вы получили отличный балл!</string>
+    <string name="more150">Поздравляем!</string>
+    <string name="more110">Поздравляем, вы набрали проходной балл!</string>
+    <string name="more0">Сожалеем вы не набрали проходной балл, вам стоит больше трудиться!</string>
+    <string name="test_test">Пробный тест</string>
+    <string name="trues">Правильные</string>
+    <string name="analog">Окшоштуктар жана сүйлөмдөрү толуктоо</string>
+    <string name="understand">Окуу жана түшүнүү</string>
+    <string name="grammar">Кыргыз тилинин практикалык грамматикасы</string>
+    <string name="how_test">Как пройти тест?</string>
+    <string name="history">История</string>
 
 </resources>
