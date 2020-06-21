@@ -193,5 +193,6 @@
     <string name="grammar">Кыргыз тилинин практикалык грамматикасы</string>
     <string name="how_test">Как пройти тест?</string>
     <string name="history">История</string>
+    <string name="ready_to_start">Вы готовы начать</string>
 
 </resources>

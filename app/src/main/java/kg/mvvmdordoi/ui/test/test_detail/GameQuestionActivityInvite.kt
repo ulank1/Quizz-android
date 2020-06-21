@@ -174,10 +174,12 @@ class GameQuestionActivityInvite : AppCompatActivity(), NumerationListener, View
         name1.text = Shared.gameOuter.user_owner.name
 
         //Log.e("ImageII", Shared.gameOuter.user_owner.avatar)
+        try {
+            Glide.with(this).load(URL1 + Shared.gameOuter.user_owner.avatar).into(image11)
+            Glide.with(this).load(URL1 + Shared.gameOuter.user_outer.avatar).into(image21)
+        }catch (e:Exception){
 
-        Glide.with(this).load(URL1 + Shared.gameOuter.user_owner.avatar).into(image11)
-        Glide.with(this).load(URL1 + Shared.gameOuter.user_outer.avatar).into(image21)
-
+        }
         btn_start.setOnClickListener {
             line_preview.gone()
             viewModel.getTestsGameInvite(Shared.gameOuter.quiz)

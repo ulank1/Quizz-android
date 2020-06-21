@@ -308,6 +308,7 @@
             </LinearLayout>
 
             <RelativeLayout
+                android:layout_marginBottom="30dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp">
@@ -346,6 +347,9 @@
         </LinearLayout>
 
         <RelativeLayout
+            android:padding="5dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/black_stroke_1dp_circle"
             android:id="@+id/line_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -355,6 +359,7 @@
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv"
+                android:layout_below="@id/btn_close"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#fff"

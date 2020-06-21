@@ -328,14 +328,14 @@ class OrtQuestionActivity : AppCompatActivity(), NumerationListener, View.OnClic
 
         line_e.visible()
         var quiz = quizzes[currentPosition]
-
+        Log.e("Current",currentPosition.toString()+" "+quiz.choosenPosition)
         if (quiz.choosenPosition != null) {
             when {
-                quiz.choosenPosition == 0 -> setChooseAnswer(choose_a)
-                quiz.choosenPosition == 1 -> setChooseAnswer(choose_b)
-                quiz.choosenPosition == 2 -> setChooseAnswer(choose_c)
-                quiz.choosenPosition == 3 -> setChooseAnswer(choose_d)
-                quiz.choosenPosition == 4 -> setChooseAnswer(choose_e)
+                quiz.choosenPosition == 1 -> setChooseAnswer(choose_a)
+                quiz.choosenPosition == 2 -> setChooseAnswer(choose_b)
+                quiz.choosenPosition == 3 -> setChooseAnswer(choose_c)
+                quiz.choosenPosition == 4 -> setChooseAnswer(choose_d)
+                quiz.choosenPosition == 5 -> setChooseAnswer(choose_e)
             }
         }
 

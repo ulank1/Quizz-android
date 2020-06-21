@@ -68,7 +68,7 @@ class OrtTestRvAdapter(val context: Context) :
                 if (isActive) {
 
                     val builder = AlertDialog.Builder(context)
-                    builder.setTitle("Вы готовы начать "+name.text+"?")
+                    builder.setTitle(context.getString(R.string.ready_to_start)+name.text+"?")
                     //builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
 
                     builder.setPositiveButton("yes") { dialog, which ->

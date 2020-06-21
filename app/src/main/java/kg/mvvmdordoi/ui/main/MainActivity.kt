@@ -386,7 +386,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
         }
-        mainCategory.add(Category(-1, "Пробный тест", "", -1, null, R.drawable.ic_prompt_exam))
+//        mainCategory.add(Category(-1, "Пробный тест", "", -1, null, R.drawable.ic_prompt_exam))
         mainCategory.add(
             Category(
                 -1,

@@ -60,6 +60,7 @@ import kotlinx.android.synthetic.main.activity_question.test_number
 import kotlinx.android.synthetic.main.activity_question.time
 import kotlinx.android.synthetic.main.activity_question.toolbar
 import kotlinx.android.synthetic.main.activity_question_owner.*
+import java.lang.Exception
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -257,95 +258,99 @@ class QuestionActivity : AppCompatActivity(), NumerationListener, View.OnClickLi
     }
 
     override fun onClick(v: View?) {
-        if (quizzes!=null) {
-            var quiz = quizzes!![currentPosition]
-            if (v != null) {
-                when (v.id) {
-                    R.id.line_a -> {
-                        if (quiz.choosenPosition == null) {
+        try {
+            if (quizzes != null) {
+                var quiz = quizzes!![currentPosition]
+                if (v != null) {
+                    when (v.id) {
+                        R.id.line_a -> {
+                            if (quiz.choosenPosition == null) {
 
-                            quiz.choosenPosition = 1
+                                quiz.choosenPosition = 1
 
-                            setTrueAnswer(choose_a, quiz.choosenPosition == quiz.true_answer)
+                                setTrueAnswer(choose_a, quiz.choosenPosition == quiz.true_answer)
 
-                        }
-                    }
-                    R.id.line_b -> {
-                        if (quiz.choosenPosition == null) {
-
-                            quiz.choosenPosition = 2
-                            setTrueAnswer(choose_b, quiz.choosenPosition == quiz.true_answer)
-
-                        }
-                    }
-                    R.id.line_c -> {
-                        if (quiz.choosenPosition == null) {
-
-                            quiz.choosenPosition = 3
-                            setTrueAnswer(choose_c, quiz.choosenPosition == quiz.true_answer)
-
-                        }
-                    }
-                    R.id.line_d -> {
-                        if (quiz.choosenPosition == null) {
-
-
-                            quiz.choosenPosition = 4
-                            setTrueAnswer(choose_d, quiz.choosenPosition == quiz.true_answer)
-
-                        }
-                    }
-                    R.id.line_e -> {
-                        if (quiz.choosenPosition == null) {
-                            quiz.choosenPosition = 5
-                            setTrueAnswer(choose_e, quiz.choosenPosition == quiz.true_answer)
-
-                        }
-                    }
-                    R.id.next -> {
-                        if (currentPosition < quizzes!!.size - 1) {
-                            currentPosition++
-                            setQuestion()
-                            adapter.setChoosePosition(currentPosition)
-                        } else {
-                            if (mInterstitialAd.isLoaded) {
-                                mInterstitialAd.show()
-                            } else {
-                                Log.e("TAG", "The interstitial wasn't loaded yet.")
                             }
-
-
-
-                            Handler().postDelayed({
-                                line_quiz.gone()
-                                line_result.visible()
-                                sum = 0
-
-                                for (quizz in quizzes!!) {
-
-                                    if (quizz.choosenPosition == quizz.true_answer) {
-                                        sum += 10
-                                    } else {
-                                        sum -= 7
-                                    }
-
-                                }
-                                result.text = sum.toString()
-                                setResultRV()
-                                cT.cancel()
-                                viewModel.getRating(sum, trues, quizzes!!.size - trues)
-
-                            }, 2000)
-
-
                         }
-                    }
-                    R.id.ok -> {
-                        setResult(Activity.RESULT_OK)
-                        finish()
+                        R.id.line_b -> {
+                            if (quiz.choosenPosition == null) {
+
+                                quiz.choosenPosition = 2
+                                setTrueAnswer(choose_b, quiz.choosenPosition == quiz.true_answer)
+
+                            }
+                        }
+                        R.id.line_c -> {
+                            if (quiz.choosenPosition == null) {
+
+                                quiz.choosenPosition = 3
+                                setTrueAnswer(choose_c, quiz.choosenPosition == quiz.true_answer)
+
+                            }
+                        }
+                        R.id.line_d -> {
+                            if (quiz.choosenPosition == null) {
+
+
+                                quiz.choosenPosition = 4
+                                setTrueAnswer(choose_d, quiz.choosenPosition == quiz.true_answer)
+
+                            }
+                        }
+                        R.id.line_e -> {
+                            if (quiz.choosenPosition == null) {
+                                quiz.choosenPosition = 5
+                                setTrueAnswer(choose_e, quiz.choosenPosition == quiz.true_answer)
+
+                            }
+                        }
+                        R.id.next -> {
+                            if (currentPosition < quizzes!!.size - 1) {
+                                currentPosition++
+                                setQuestion()
+                                adapter.setChoosePosition(currentPosition)
+                            } else {
+                                if (mInterstitialAd.isLoaded) {
+                                    mInterstitialAd.show()
+                                } else {
+                                    Log.e("TAG", "The interstitial wasn't loaded yet.")
+                                }
+
+
+
+                                Handler().postDelayed({
+                                    line_quiz.gone()
+                                    line_result.visible()
+                                    sum = 0
+
+                                    for (quizz in quizzes!!) {
+
+                                        if (quizz.choosenPosition == quizz.true_answer) {
+                                            sum += 10
+                                        } else {
+                                            sum -= 7
+                                        }
+
+                                    }
+                                    result.text = sum.toString()
+                                    setResultRV()
+                                    cT.cancel()
+                                    viewModel.getRating(sum, trues, quizzes!!.size - trues)
+
+                                }, 2000)
+
+
+                            }
+                        }
+                        R.id.ok -> {
+                            setResult(Activity.RESULT_OK)
+                            finish()
+                        }
                     }
                 }
             }
+        }catch (e:Exception){
+
         }
     }
 
